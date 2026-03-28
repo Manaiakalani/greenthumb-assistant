@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <rect width="32" height="32" rx="8" fill="#2c7a4a"/>
+  <g transform="translate(6,4)" fill="none" stroke="#f5f5f0" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Leaf shape -->
+    <path d="M10 22 C10 22 3 18 3 10 C3 4 8 2 14 2 C14 8 12 14 10 22Z" fill="#f5f5f0" fill-opacity="0.2"/>
+    <path d="M10 22 C10 22 3 18 3 10 C3 4 8 2 14 2 C14 8 12 14 10 22Z"/>
+    <!-- Leaf vein -->
+    <path d="M10 22 C10 18 9 12 8.5 6"/>
+    <path d="M8.5 10 L5.5 8"/>
+    <path d="M9 14 L6 12.5"/>
+  </g>
+</svg>

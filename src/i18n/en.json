@@ -1,0 +1,196 @@
+{
+  "common": {
+    "appName": "Grasswise",
+    "cancel": "Cancel",
+    "save": "Save",
+    "delete": "Delete",
+    "notSet": "Not set",
+    "done": "done",
+    "getStarted": "Get Started",
+    "setUp": "Set Up",
+    "back": "Back",
+    "loading": "Loading…",
+    "zone": "Zone {{zone}}",
+    "achievementUnlocked": "{{emoji}} Achievement Unlocked!",
+    "editProfile": "Edit profile",
+    "switchToLight": "Switch to light mode",
+    "switchToDark": "Switch to dark mode"
+  },
+
+  "nav": {
+    "home": "Home",
+    "plan": "Plan",
+    "journal": "Journal",
+    "photos": "Photos",
+    "tools": "Tools",
+    "badges": "Badges",
+    "mainNavigation": "Main navigation"
+  },
+
+  "dashboard": {
+    "setupPrompt": {
+      "title": "Set up your lawn profile",
+      "description": "Get personalized care recommendations for your area."
+    },
+    "lawnPlan": {
+      "title": "My Lawn Plan",
+      "description": "View your full-year soil & fertilizer schedule."
+    }
+  },
+
+  "journal": {
+    "title": "Lawn Journal",
+    "subtitle": "Track every mow, water, and treatment.",
+    "streakLabel": "{{count}}d streak",
+    "logActivity": "Log Activity",
+    "activityLabel": "Activity",
+    "dateLabel": "Date",
+    "notesLabel": "Notes (optional)",
+    "notesPlaceholder": "e.g. Set mower to 3.5 inches…",
+    "emptyTitle": "No entries yet",
+    "emptyDescription": "Tap \"Log Activity\" to start tracking your lawn care.",
+    "entryRemoved": "Entry removed",
+    "loggedFor": "Logged for {{date}}",
+    "deleteEntry": "Delete entry"
+  },
+
+  "photos": {
+    "title": "Photo Timeline",
+    "subtitle": "Capture your lawn's progress over time.",
+    "addPhoto": "Add Photo",
+    "processing": "Processing…",
+    "dateLabel": "Date",
+    "noteLabel": "Note (optional)",
+    "notePlaceholder": "e.g. After first mow",
+    "emptyTitle": "No photos yet",
+    "emptyDescription": "Snap a photo of your lawn to start tracking its progress.",
+    "photoSaved": "📸 Photo saved!",
+    "photoRemoved": "Photo removed",
+    "couldNotProcess": "Could not process image",
+    "preview": "Preview",
+    "deletePhoto": "Delete photo"
+  },
+
+  "profile": {
+    "backToDashboard": "Back to Dashboard",
+    "title": "Your Lawn Profile",
+    "subtitle": "Customize your profile so Grasswise can give you the most accurate recommendations.",
+    "summary": {
+      "title": "Profile Summary",
+      "name": "Name",
+      "location": "Location",
+      "usdaZone": "USDA Zone",
+      "region": "Region",
+      "grassType": "Grass Type",
+      "lawnSize": "Lawn Size",
+      "badges": "Badges ({{earned}}/{{total}})",
+      "autoSave": "Changes are saved automatically."
+    },
+    "personal": {
+      "title": "Personal",
+      "yourName": "Your Name",
+      "namePlaceholder": "e.g. Alex",
+      "locationLabel": "Location",
+      "locationPlaceholder": "e.g. Charlotte, NC",
+      "detectLocation": "Detect my location",
+      "detectTooltip": "Auto-detect location, zone, and region",
+      "detectHelp": "Tap detect to auto-fill your location, zone, and region."
+    },
+    "climate": {
+      "title": "Climate & Zone",
+      "usdaZone": "USDA Hardiness Zone",
+      "climateRegion": "Climate Region",
+      "selectZone": "Select zone",
+      "selectRegion": "Select region",
+      "zoneHint": "Changing your zone will suggest a matching climate region automatically."
+    },
+    "lawn": {
+      "title": "Lawn Details",
+      "grassType": "Grass Type",
+      "lawnSize": "Lawn Size",
+      "selectGrass": "Select grass",
+      "selectSize": "Select size"
+    },
+    "toasts": {
+      "locationDetected": "Location detected!",
+      "locationFailed": "Could not detect location",
+      "locationFailedDesc": "Please enable location permissions or enter manually."
+    }
+  },
+
+  "soilPlan": {
+    "backToTools": "Back to Tools",
+    "title": "My Lawn Plan",
+    "subtitle": "Your year-round soil & fertilizer schedule for <strong>{{region}}</strong> · Zone {{zone}} · {{year}}",
+    "setupPrompt": {
+      "title": "Set your location first",
+      "description": "Your plan is customized by zone. Detect your location for best results."
+    },
+    "planSummary": "Plan Summary",
+    "progressLabel": "{{completed}}/{{total}} done",
+    "applicationSchedule": "{{year}} Application Schedule",
+    "less": "Less",
+    "instructions": "Instructions",
+    "markedComplete": "Marked complete!",
+    "markIncomplete": "Mark \"{{title}}\" incomplete",
+    "markComplete": "Mark \"{{title}}\" complete",
+    "grassTypeNote": "🌿 {{grassType}} — This plan is optimized for your grass type in {{region}} (Zone {{zone}}).",
+    "endOfSeason": "End of Season! 🎉",
+    "winterTips": "Winter Lawn Care Tips"
+  },
+
+  "weeklyGoals": {
+    "title": "Weekly Goals",
+    "cta": "Set targets like \"Mow 1×, Water 3×\" to stay on track.",
+    "setGoals": "Set Goals",
+    "setWeeklyGoals": "Set Weekly Goals",
+    "saveGoals": "Save Goals",
+    "goalsSaved": "Weekly goals set! 🎯",
+    "complete": "✓ Complete!",
+    "editGoals": "Edit goals",
+    "decreaseTarget": "Decrease target",
+    "increaseTarget": "Increase target"
+  },
+
+  "exportBackup": {
+    "title": "Data & Backup",
+    "description": "All your data is stored locally on this device. Export a backup or restore from a previous one.",
+    "journalEntries": "Journal entries",
+    "photos": "Photos",
+    "achievements": "Achievements",
+    "export": "Export",
+    "restore": "Restore",
+    "confirmRestore": {
+      "title": "Replace all data?",
+      "description": "This will overwrite your current profile, journal, photos, and achievements with the backup file. This cannot be undone.",
+      "confirm": "Yes, Restore"
+    },
+    "toasts": {
+      "exported": "Backup downloaded! 📦",
+      "exportedDesc": "Keep this file safe — you can restore it later.",
+      "exportFailed": "Export failed",
+      "restored": "Backup restored! 🎉",
+      "restoredDesc": "Data from {{date}} has been loaded.",
+      "invalidFile": "Invalid backup file",
+      "invalidFileDesc": "This doesn't look like a Grasswise backup.",
+      "restoreFailed": "Restore failed",
+      "restoreFailedDesc": "The file could not be parsed.",
+      "readFailed": "Could not read file"
+    }
+  },
+
+  "lawnHealth": {
+    "title": "Lawn Health Score",
+    "consistency": "Consistency",
+    "variety": "Variety",
+    "recency": "Recency",
+    "engagement": "Engagement"
+  },
+
+  "progressCharts": {
+    "title": "Activity Trends",
+    "period": "Last 6 months",
+    "emptyTitle": "No activity data yet",
+    "emptyDescription": "Start logging activities to see trends here."
+  }
+}

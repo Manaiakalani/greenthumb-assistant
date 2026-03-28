@@ -1,16 +1,11 @@
 import { motion } from "framer-motion";
-import { Calendar, Scissors, Sprout, Droplets } from "lucide-react";
+import type { QuickStatItem } from "@/types/lawn";
+import { useProfile } from "@/context/ProfileContext";
+import { getSeasonalStats } from "@/data/stats";
 
-interface QuickStatProps {
-  icon: React.ElementType;
-  label: string;
-  value: string;
-  sub?: string;
-}
-
-function QuickStat({ icon: Icon, label, value, sub }: QuickStatProps) {
+function QuickStat({ icon: Icon, label, value, sub }: QuickStatItem) {
   return (
-    <div className="flex flex-col items-center gap-1 p-3 rounded-xl bg-card border border-border shadow-card">
+    <div className="flex flex-col items-center gap-1.5 p-4 rounded-xl bg-card border border-primary/15 shadow-card">
       <Icon className="h-4 w-4 text-primary mb-0.5" />
       <span className="text-lg font-display font-bold text-foreground">{value}</span>
       <span className="text-[11px] text-muted-foreground leading-tight text-center">{label}</span>
@@ -20,17 +15,19 @@ function QuickStat({ icon: Icon, label, value, sub }: QuickStatProps) {
 }
 
 export function QuickStats() {
+  const { profile } = useProfile();
+  const stats = getSeasonalStats(profile.region, new Date().getMonth());
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: 0.15 }}
-      className="grid grid-cols-4 gap-2"
+      className="grid grid-cols-2 sm:grid-cols-4 gap-3"
     >
-      <QuickStat icon={Scissors} label="Last Mow" value="3d" sub="ago" />
-      <QuickStat icon={Sprout} label="Last Feed" value="18d" sub="ago" />
-      <QuickStat icon={Droplets} label="Last Rain" value="1d" sub="ago" />
-      <QuickStat icon={Calendar} label="Season" value="Mid" sub="Spring" />
+      {stats.map((stat) => (
+        <QuickStat key={stat.label} {...stat} />
+      ))}
     </motion.div>
   );
 }

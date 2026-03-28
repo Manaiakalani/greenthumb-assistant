@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { LucideIcon } from "lucide-react";
-
-type ActionStatus = "safe" | "caution" | "danger";
+import type { LucideIcon } from "lucide-react";
+import type { ActionStatus } from "@/types/lawn";
 
 interface ActionCardProps {
   icon: LucideIcon;
@@ -33,7 +32,7 @@ export function ActionCard({ icon: Icon, title, description, status, statusLabel
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4 }}
       className={cn(
-        "rounded-xl border p-5 shadow-card transition-shadow hover:shadow-card-hover",
+        "rounded-xl border p-6 shadow-card transition-shadow hover:shadow-card-hover",
         statusStyles[status],
         className
       )}
@@ -43,7 +42,7 @@ export function ActionCard({ icon: Icon, title, description, status, statusLabel
           <Icon className="h-5 w-5 text-primary" />
         </div>
         <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-1">
+          <div className="flex items-center gap-2 mb-1.5">
             <h3 className="font-display text-base font-semibold text-foreground">{title}</h3>
             <span className="flex items-center gap-1.5 text-xs font-medium text-muted-foreground">
               <span className={cn("h-2 w-2 rounded-full", statusDotStyles[status])} />

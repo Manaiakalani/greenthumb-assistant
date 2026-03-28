@@ -1,0 +1,397 @@
+import { useCallback, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import {
+  ArrowLeft, Globe, Leaf, Loader2, LocateFixed, MapPin,
+  Ruler, Sprout, Trophy, Wheat, User, Maximize,
+} from "lucide-react";
+import { toast } from "sonner";
+import { detectLocation } from "@/lib/geolocation";
+import { useProfile } from "@/context/ProfileContext";
+import { AppHeader } from "@/components/AppHeader";
+import { BottomNav } from "@/components/BottomNav";
+import { CollectorCardModal } from "@/components/CollectorCardModal";
+import { NotificationSettings } from "@/components/NotificationSettings";
+import { ExportBackup } from "@/components/ExportBackup";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { checkAchievements, ACHIEVEMENTS } from "@/lib/achievements";
+import { useEarnedBadges } from "@/hooks/useEarnedBadges";
+import { useGrassStore } from "@/stores/useGrassStore";
+import { haptic } from "@/lib/haptics";
+import {
+  USDA_ZONES,
+  CLIMATE_REGIONS,
+  GRASS_TYPES,
+  LAWN_SIZES,
+  suggestRegion,
+  type USDAZone,
+  type ClimateRegion,
+  type LawnSize,
+} from "@/types/profile";
+
+const Profile = () => {
+  const { profile, updateProfile } = useProfile();
+  const navigate = useNavigate();
+
+  const handleZoneChange = useCallback(
+    (zone: USDAZone) => {
+      const region = suggestRegion(zone);
+      const grassOptions = GRASS_TYPES[region];
+      const grassType = (grassOptions as readonly string[]).includes(profile.grassType)
+        ? profile.grassType
+        : grassOptions[0];
+      updateProfile({ zone, region, grassType });
+    },
+    [profile.grassType, updateProfile],
+  );
+
+  const handleRegionChange = useCallback(
+    (region: ClimateRegion) => {
+      const grassOptions = GRASS_TYPES[region];
+      const grassType = (grassOptions as readonly string[]).includes(profile.grassType)
+        ? profile.grassType
+        : grassOptions[0];
+      updateProfile({ region, grassType });
+    },
+    [profile.grassType, updateProfile],
+  );
+
+  const [detecting, setDetecting] = useState(false);
+
+  const handleDetectLocation = useCallback(async () => {
+    setDetecting(true);
+    try {
+      const geo = await detectLocation();
+      const location = geo.state ? `${geo.city}, ${geo.state}` : geo.city;
+      const grassOptions = GRASS_TYPES[geo.region];
+      const grassType = (grassOptions as readonly string[]).includes(profile.grassType)
+        ? profile.grassType
+        : grassOptions[0];
+      updateProfile({
+        location,
+        zone: geo.zone,
+        region: geo.region,
+        grassType,
+        latitude: geo.latitude,
+        longitude: geo.longitude,
+      });
+      toast.success("Location detected!", {
+        description: `${location} · Zone ${geo.zone} · ${geo.region}`,
+      });
+      haptic("success");
+
+      // Check achievements for location detection
+      const { journal, photos } = useGrassStore.getState();
+      const newAch = checkAchievements({
+        journal,
+        photos,
+        profile: { ...profile, location, zone: geo.zone, region: geo.region, grassType },
+        locationDetected: true,
+      });
+      for (const id of newAch) {
+        const ach = ACHIEVEMENTS.find((a) => a.id === id);
+        if (ach) toast(`${ach.emoji} Achievement Unlocked!`, { description: ach.title });
+      }
+    } catch {
+      toast.error("Could not detect location", {
+        description: "Please enable location permissions or enter manually.",
+      });
+    } finally {
+      setDetecting(false);
+    }
+  }, [profile, updateProfile]);
+
+  const grassOptions = GRASS_TYPES[profile.region] ?? GRASS_TYPES["Transition Zone"];
+  const { earned: badgesEarned, total: badgesTotal } = useEarnedBadges();
+
+  return (
+    <div className="min-h-screen bg-background pb-20">
+      <AppHeader />
+
+      <main id="main-content" className="max-w-2xl mx-auto px-4 pb-12">
+        {/* Back button */}
+        <motion.div
+          initial={{ opacity: 0, x: -8 }}
+          animate={{ opacity: 1, x: 0 }}
+          className="mt-4 mb-6"
+        >
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => navigate("/")}
+            className="gap-1.5 text-muted-foreground hover:text-foreground"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Dashboard
+          </Button>
+        </motion.div>
+
+        {/* Page title */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="mb-8"
+        >
+          <h1 className="font-display text-2xl font-bold text-foreground">
+            Your Lawn Profile
+          </h1>
+          <p className="text-sm text-muted-foreground mt-1">
+            Customize your profile so Grasswise can give you the most
+            accurate recommendations.
+          </p>
+        </motion.div>
+
+        {/* Profile form */}
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="space-y-8"
+        >
+          {/* Summary card — at the top */}
+          <div className="rounded-xl border border-primary/20 bg-primary/5 p-6 shadow-card">
+            <h2 className="font-display text-base font-semibold text-foreground mb-4 flex items-center gap-2">
+              <Ruler className="h-4 w-4 text-primary" />
+              Profile Summary
+            </h2>
+            <div className="grid grid-cols-2 gap-5 text-sm">
+              {[
+                { icon: User, label: "Name", value: profile.name || "Not set" },
+                { icon: MapPin, label: "Location", value: profile.location || "Not set" },
+                { icon: Globe, label: "USDA Zone", value: `Zone ${profile.zone}` },
+                { icon: Leaf, label: "Region", value: profile.region },
+                { icon: Wheat, label: "Grass Type", value: profile.grassType },
+                { icon: Maximize, label: "Lawn Size", value: profile.lawnSize },
+              ].map(({ icon: Icon, label, value }) => (
+                <div key={label} className="flex items-center gap-2.5">
+                  <div className="rounded-lg bg-primary/10 p-1.5 shrink-0">
+                    <Icon className="h-4 w-4 text-primary" />
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-muted-foreground text-xs">{label}</p>
+                    <p className="font-medium text-foreground truncate">{value}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+            {/* Earned badges showcase */}
+            {badgesEarned.length > 0 && (
+              <div className="mt-4 pt-3 border-t border-primary/10">
+                <div className="flex items-center gap-2 mb-2">
+                  <Trophy className="h-3.5 w-3.5 text-primary" />
+                  <span className="text-xs font-medium text-foreground">
+                    Badges ({badgesEarned.length}/{badgesTotal})
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {badgesEarned.slice(0, 8).map((a) => (
+                    <div
+                      key={a.id}
+                      title={a.title}
+                      className="h-8 w-8 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-base"
+                    >
+                      {a.emoji}
+                    </div>
+                  ))}
+                  {badgesEarned.length > 8 && (
+                    <div className="h-8 px-2 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center text-[10px] font-medium text-muted-foreground">
+                      +{badgesEarned.length - 8}
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            <div className="mt-4 pt-3 border-t border-primary/10 flex items-center justify-between">
+              <p className="text-xs text-muted-foreground">
+                Changes are saved automatically.
+              </p>
+              <CollectorCardModal />
+            </div>
+          </div>
+
+          {/* Personal */}
+          <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card space-y-5">
+            <h2 className="font-display text-base font-semibold text-foreground flex items-center gap-2">
+              <Sprout className="h-4 w-4 text-primary" />
+              Personal
+            </h2>
+
+            <div className="space-y-2">
+              <Label htmlFor="name">Your Name</Label>
+              <Input
+                id="name"
+                placeholder="e.g. Alex"
+                maxLength={40}
+                value={profile.name}
+                onChange={(e) => updateProfile({ name: e.target.value })}
+              />
+            </div>
+
+            <div className="space-y-2">
+              <Label htmlFor="location">Location</Label>
+              <div className="flex gap-2">
+                <div className="relative flex-1">
+                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <Input
+                    id="location"
+                    className="pl-9"
+                    placeholder="e.g. Charlotte, NC"
+                    maxLength={60}
+                    value={profile.location}
+                    onChange={(e) => updateProfile({ location: e.target.value })}
+                  />
+                </div>
+                <Button
+                  variant="outline"
+                  size="icon"
+                  onClick={handleDetectLocation}
+                  disabled={detecting}
+                  className="shrink-0"
+                  aria-label="Detect my location"
+                  title="Auto-detect location, zone, and region"
+                >
+                  {detecting ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    <LocateFixed className="h-4 w-4" />
+                  )}
+                </Button>
+              </div>
+              <p className="text-xs text-muted-foreground">
+                Tap detect to auto-fill your location, zone, and region.
+              </p>
+            </div>
+          </div>
+
+          {/* Climate & Zone */}
+          <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card space-y-5">
+            <h2 className="font-display text-base font-semibold text-foreground flex items-center gap-2">
+              <Globe className="h-4 w-4 text-primary" />
+              Climate & Zone
+            </h2>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label>USDA Hardiness Zone</Label>
+                <Select
+                  value={profile.zone}
+                  onValueChange={(val) => handleZoneChange(val as USDAZone)}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select zone" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {USDA_ZONES.map((z) => (
+                      <SelectItem key={z} value={z}>
+                        Zone {z}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label>Climate Region</Label>
+                <Select
+                  value={profile.region}
+                  onValueChange={(val) =>
+                    handleRegionChange(val as ClimateRegion)
+                  }
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select region" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {CLIMATE_REGIONS.map((r) => (
+                      <SelectItem key={r} value={r}>
+                        {r}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+
+            <p className="text-xs text-muted-foreground">
+              Changing your zone will suggest a matching climate region
+              automatically.
+            </p>
+          </div>
+
+          {/* Lawn details */}
+          <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card space-y-5">
+            <h2 className="font-display text-base font-semibold text-foreground flex items-center gap-2">
+              <Leaf className="h-4 w-4 text-primary" />
+              Lawn Details
+            </h2>
+
+            <div className="grid grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label>Grass Type</Label>
+                <Select
+                  value={profile.grassType}
+                  onValueChange={(val) => updateProfile({ grassType: val })}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select grass" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {grassOptions.map((g) => (
+                      <SelectItem key={g} value={g}>
+                        {g}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="space-y-2">
+                <Label>Lawn Size</Label>
+                <Select
+                  value={profile.lawnSize}
+                  onValueChange={(val) =>
+                    updateProfile({ lawnSize: val as LawnSize })
+                  }
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Select size" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {LAWN_SIZES.map((s) => (
+                      <SelectItem key={s} value={s}>
+                        {s}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            </div>
+          </div>
+
+          {/* Notifications */}
+          <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card">
+            <NotificationSettings />
+          </div>
+
+          {/* Export & Backup */}
+          <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card">
+            <ExportBackup />
+          </div>
+        </motion.div>
+      </main>
+      <BottomNav />
+    </div>
+  );
+};
+
+export default Profile;

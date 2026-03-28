@@ -1,147 +1,187 @@
-import { motion } from "framer-motion";
-import { Scissors, Flower2, Droplets, AlertTriangle, ArrowUp, Leaf } from "lucide-react";
+import { useCallback, useEffect, useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  MapPin,
+  ClipboardList,
+  ChevronRight,
+} from "lucide-react";
+import { useQuery } from "@tanstack/react-query";
+import { useProfile } from "@/context/ProfileContext";
+import { fetchWeather } from "@/lib/weather";
 import { AppHeader } from "@/components/AppHeader";
-import { LawnStatusBadge } from "@/components/LawnStatusBadge";
-import { ActionCard } from "@/components/ActionCard";
+import { HeroSection } from "@/components/HeroSection";
+import { QuickStats } from "@/components/QuickStats";
+import { ActionsSection } from "@/components/ActionsSection";
 import { SeasonalTimeline } from "@/components/SeasonalTimeline";
 import { WeatherCard } from "@/components/WeatherCard";
-import { QuickStats } from "@/components/QuickStats";
-import heroLawn from "@/assets/hero-lawn.jpg";
+import { LawnProfile } from "@/components/LawnProfile";
+import { CommunityStats } from "@/components/CommunityStats";
+import { OnboardingModal } from "@/components/OnboardingModal";
+import { BottomNav } from "@/components/BottomNav";
+import { InstallBanner } from "@/components/InstallBanner";
+import { LawnHealthScore } from "@/components/LawnHealthScore";
+import { SmartReminders } from "@/components/SmartReminders";
+import { Skeleton } from "@/components/ui/skeleton";
+
+const ONBOARDING_KEY = "grasswise-onboarding-done";
+
+function DashboardSkeleton() {
+  return (
+    <div className="space-y-6 animate-pulse">
+      <Skeleton className="h-24 rounded-xl" />
+      <div className="grid grid-cols-3 gap-3">
+        <Skeleton className="h-20 rounded-xl" />
+        <Skeleton className="h-20 rounded-xl" />
+        <Skeleton className="h-20 rounded-xl" />
+      </div>
+      <Skeleton className="h-48 rounded-xl" />
+      <Skeleton className="h-32 rounded-xl" />
+    </div>
+  );
+}
 
 const Index = () => {
+  const { profile, hasCompletedSetup } = useProfile();
+  const navigate = useNavigate();
+
+  // Fetch weather for SmartReminders
+  const { data: weather } = useQuery({
+    queryKey: ["weather", profile.latitude, profile.longitude, profile.location],
+    queryFn: () =>
+      fetchWeather({
+        latitude: profile.latitude,
+        longitude: profile.longitude,
+        location: profile.location || undefined,
+      }),
+    enabled: !!(profile.latitude != null || profile.location),
+    staleTime: 15 * 60 * 1000,
+    retry: 1,
+  });
+
+  // Onboarding modal
+  const [showOnboarding, setShowOnboarding] = useState(
+    () => localStorage.getItem(ONBOARDING_KEY) !== "true",
+  );
+
+  const handleOnboardingComplete = useCallback(() => {
+    localStorage.setItem(ONBOARDING_KEY, "true");
+    setShowOnboarding(false);
+  }, []);
+
+  // Skeleton for first render
+  const [ready, setReady] = useState(false);
+  useEffect(() => {
+    setReady(true);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pb-20">
       <AppHeader />
 
-      <main className="max-w-2xl mx-auto px-4 pb-12">
-        {/* Hero Section */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
-          className="relative rounded-2xl overflow-hidden mt-4 mb-6"
-        >
-          <img
-            src={heroLawn}
-            alt="Lush green lawn in morning sunlight"
-            className="w-full h-44 object-cover"
+      {/* Onboarding overlay */}
+      <AnimatePresence>
+        {showOnboarding && (
+          <OnboardingModal
+            onComplete={handleOnboardingComplete}
+            onGoToProfile={() => navigate("/profile")}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-foreground/20 to-transparent" />
-          <div className="absolute bottom-0 left-0 right-0 p-5">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-primary-foreground/80 text-sm font-body mb-0.5">Good morning 👋</p>
-                <h1 className="font-display text-2xl font-bold text-primary-foreground">
-                  Your Lawn Today
-                </h1>
-              </div>
-              <LawnStatusBadge status="healthy" label="Healthy" className="bg-lawn-healthy/20 text-primary-foreground backdrop-blur-sm" />
+        )}
+      </AnimatePresence>
+
+      <main id="main-content" className="max-w-2xl mx-auto px-4">
+        {!ready ? (
+          <div className="mt-6"><DashboardSkeleton /></div>
+        ) : (
+          <>
+            <HeroSection />
+
+            <InstallBanner />
+
+            {/* First-time setup prompt */}
+            {!hasCompletedSetup && (
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mb-6 rounded-xl border border-primary/30 bg-primary/5 p-4 flex items-center gap-3"
+              >
+                <div className="rounded-lg bg-primary/10 p-2">
+                  <MapPin className="h-5 w-5 text-primary" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-medium text-foreground">
+                    Set up your lawn profile
+                  </p>
+                  <p className="text-xs text-muted-foreground">
+                    Get personalized care recommendations for your area.
+                  </p>
+                </div>
+                <Link
+                  to="/profile"
+                  className="shrink-0 rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+                >
+                  Get Started
+                </Link>
+              </motion.div>
+            )}
+
+            <QuickStats />
+
+            <div className="mt-6">
+              <LawnHealthScore />
             </div>
-          </div>
-        </motion.div>
 
-        {/* Quick Stats */}
-        <QuickStats />
-
-        {/* Action Cards */}
-        <div className="mt-6 space-y-3">
-          <motion.h2
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="font-display text-lg font-semibold text-foreground"
-          >
-            Today's Actions
-          </motion.h2>
-
-          <ActionCard
-            icon={Scissors}
-            title="Mow Your Lawn"
-            status="safe"
-            statusLabel="Safe to Mow"
-            description="Conditions are ideal for mowing. Cut to 3 inches — your Tall Fescue is in active spring growth."
-            detail="Alternate your mowing direction from last time"
-          />
-
-          <ActionCard
-            icon={Flower2}
-            title="Fertilization"
-            status="caution"
-            statusLabel="Wait 5 More Days"
-            description="Your spring fertilization window opens soon. Hold off until soil temps consistently hit 55°F."
-            detail="Consider a slow-release nitrogen fertilizer"
-          />
-
-          <ActionCard
-            icon={Droplets}
-            title="Watering"
-            status="safe"
-            statusLabel="Not Needed Today"
-            description="Rain yesterday provided sufficient moisture. Your lawn received about 0.5 inches — that's perfect."
-          />
-
-          <ActionCard
-            icon={AlertTriangle}
-            title="Weed Alert"
-            status="danger"
-            statusLabel="Action Needed"
-            description="Pre-emergent herbicide window is closing. Apply within the next week to prevent crabgrass."
-            detail="Soil temperature approaching 58°F threshold"
-          />
-        </div>
-
-        {/* Seasonal Timeline */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3, duration: 0.5 }}
-          className="mt-8 rounded-xl border border-border bg-card p-5 shadow-card"
-        >
-          <SeasonalTimeline />
-        </motion.div>
-
-        {/* Weather */}
-        <div className="mt-4">
-          <WeatherCard />
-        </div>
-
-        {/* Lawn Profile Summary */}
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.5 }}
-          className="mt-4 rounded-xl border border-border bg-card p-5 shadow-card"
-        >
-          <h3 className="font-display text-base font-semibold text-foreground mb-3">Your Lawn</h3>
-          <div className="grid grid-cols-2 gap-3 text-sm">
-            <div>
-              <p className="text-muted-foreground text-xs">Grass Type</p>
-              <p className="font-medium text-foreground flex items-center gap-1">
-                <Leaf className="h-3.5 w-3.5 text-primary" />
-                Tall Fescue
-              </p>
+            <div className="mt-6">
+              <WeatherCard />
             </div>
-            <div>
-              <p className="text-muted-foreground text-xs">Climate Zone</p>
-              <p className="font-medium text-foreground">USDA Zone 7</p>
+
+            <div className="mt-6">
+              <SmartReminders weather={weather} />
             </div>
-            <div>
-              <p className="text-muted-foreground text-xs">Region</p>
-              <p className="font-medium text-foreground">Transition Zone</p>
-            </div>
-            <div>
-              <p className="text-muted-foreground text-xs">Lawn Size</p>
-              <p className="font-medium text-foreground">Medium</p>
-            </div>
-          </div>
-          <div className="mt-3 pt-3 border-t border-border">
-            <p className="text-xs text-muted-foreground flex items-center gap-1">
-              <ArrowUp className="h-3 w-3" />
-              Your lawn is in active spring growth — the best time of year for cool-season grass!
-            </p>
-          </div>
-        </motion.div>
+
+            <ActionsSection />
+
+            {/* Lawn Plan CTA */}
+            <Link to="/plan">
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.25 }}
+                className="mt-4 rounded-xl border border-primary/20 bg-gradient-to-r from-primary/5 via-card to-card p-4 shadow-card flex items-center gap-3 hover:border-primary/40 transition-colors group"
+              >
+                <div className="rounded-lg bg-primary/15 p-2.5">
+                  <ClipboardList className="h-5 w-5 text-primary" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <h3 className="text-sm font-display font-semibold text-foreground">
+                    My Lawn Plan
+                  </h3>
+                  <p className="text-xs text-muted-foreground">
+                    View your full-year soil & fertilizer schedule.
+                  </p>
+                </div>
+                <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+              </motion.div>
+            </Link>
+
+            <CommunityStats />
+
+            <LawnProfile />
+
+            {/* Seasonal Timeline */}
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3, duration: 0.5 }}
+              className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
+            >
+              <SeasonalTimeline />
+            </motion.div>
+          </>
+        )}
       </main>
+
+      <BottomNav />
     </div>
   );
 };

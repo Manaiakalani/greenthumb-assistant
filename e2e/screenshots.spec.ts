@@ -10,19 +10,20 @@ test.describe('Feature Screenshots', () => {
     await page.emulateMedia({ colorScheme });
     // Navigate to app first so localStorage is accessible
     await page.goto('/');
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState('load');
+    await page.waitForTimeout(500);
     // Dismiss onboarding
     await page.evaluate(() => localStorage.setItem('grasswise-onboarding-done', 'true'));
     // Reload so the setting takes effect
     await page.reload();
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState('load');
     await page.waitForTimeout(500);
   }
 
   async function go(page: import('@playwright/test').Page, path: string) {
     await page.goto(path);
-    await page.waitForLoadState('networkidle');
-    await page.waitForTimeout(800);
+    await page.waitForLoadState('load');
+    await page.waitForTimeout(1000);
   }
 
   async function applyThemeClass(page: import('@playwright/test').Page, mode: 'light' | 'dark') {

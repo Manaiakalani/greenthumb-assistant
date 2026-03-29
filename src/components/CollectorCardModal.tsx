@@ -113,7 +113,7 @@ export function CollectorCardModal() {
         </Button>
       </DialogTrigger>
 
-      <DialogContent className="sm:max-w-[500px] p-0 bg-transparent border-0 shadow-none overflow-visible [&>button]:text-white [&>button]:hover:text-white/80">
+      <DialogContent className="sm:max-w-[500px] p-0 border-0 shadow-none overflow-visible bg-card/95 backdrop-blur-sm rounded-xl [&>button]:text-foreground [&>button]:hover:text-foreground/80">
         <DialogHeader className="sr-only">
           <DialogTitle>Lawn Care Collector's Card</DialogTitle>
           <DialogDescription>
@@ -121,7 +121,7 @@ export function CollectorCardModal() {
           </DialogDescription>
         </DialogHeader>
 
-        <div className="flex flex-col items-center gap-4 py-2">
+        <div className="flex flex-col items-center gap-4 py-4 px-2">
           {/* The card */}
           <CollectorCard ref={cardRef} profile={profile} earnedBadges={earnedBadges} />
 
@@ -130,7 +130,7 @@ export function CollectorCardModal() {
             <Button
               onClick={handleDownload}
               disabled={busy}
-              className="gap-2 bg-green-800 hover:bg-green-700 text-white"
+              className="gap-2 bg-primary hover:bg-primary/90 text-primary-foreground"
               size="sm"
             >
               {busy ? (
@@ -144,25 +144,25 @@ export function CollectorCardModal() {
               onClick={handleShare}
               disabled={busy}
               variant="outline"
-              className="gap-2 border-white/20 text-white hover:bg-white/10"
+              className="gap-2"
               size="sm"
             >
-              <Share2 className="h-4 w-4" />
+              <Share2 className="h-4 w-4" aria-hidden="true" />
               Share
             </Button>
             <Button
               onClick={handleCopyCaption}
               variant="outline"
-              className="gap-2 border-white/20 text-white hover:bg-white/10"
+              className="gap-2"
               size="sm"
             >
-              <Copy className="h-4 w-4" />
+              <Copy className="h-4 w-4" aria-hidden="true" />
               Copy Caption
             </Button>
           </div>
 
           {/* Share hint */}
-          <p className="text-[10px] text-white/50 text-center">
+          <p className="text-[10px] text-muted-foreground text-center">
             Share your {rarity} card on social media! 🌱
           </p>
         </div>

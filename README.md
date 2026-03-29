@@ -6,6 +6,100 @@ Grasswise is a progressive web app that delivers **personalized, season-aware la
 
 ---
 
+## 📸 Screenshots
+
+<table>
+  <tr>
+    <td align="center" width="33%">
+      <img src="screenshots/dashboard-light.png" alt="Dashboard — Light Mode" width="260" /><br />
+      <sub><b>Dashboard</b> — Light</sub>
+    </td>
+    <td align="center" width="33%">
+      <img src="screenshots/dashboard-dark.png" alt="Dashboard — Dark Mode" width="260" /><br />
+      <sub><b>Dashboard</b> — Dark</sub>
+    </td>
+    <td align="center" width="33%">
+      <img src="screenshots/soil-plan-light.png" alt="Soil Plan" width="260" /><br />
+      <sub><b>Soil & Fertilizer Plan</b></sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="screenshots/tools-light.png" alt="Tools — Light Mode" width="260" /><br />
+      <sub><b>Lawn Tools</b> — Light</sub>
+    </td>
+    <td align="center">
+      <img src="screenshots/tools-dark.png" alt="Tools — Dark Mode" width="260" /><br />
+      <sub><b>Lawn Tools</b> — Dark</sub>
+    </td>
+    <td align="center">
+      <img src="screenshots/pest-identifier-light.png" alt="Pest Identifier" width="260" /><br />
+      <sub><b>Pest & Disease ID</b></sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="screenshots/tutorials-light.png" alt="Guided Tutorials" width="260" /><br />
+      <sub><b>Guided Tutorials</b></sub>
+    </td>
+    <td align="center">
+      <img src="screenshots/monthly-checklist-light.png" alt="Monthly Checklist" width="260" /><br />
+      <sub><b>Monthly Checklist</b></sub>
+    </td>
+    <td align="center">
+      <img src="screenshots/mowing-guide-light.png" alt="Mowing Height Guide" width="260" /><br />
+      <sub><b>Mowing Height Guide</b></sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="screenshots/cost-tracker-light.png" alt="Cost Tracker" width="260" /><br />
+      <sub><b>Cost Tracker</b></sub>
+    </td>
+    <td align="center">
+      <img src="screenshots/weather-alerts-light.png" alt="Weather & Alerts" width="260" /><br />
+      <sub><b>Weather & Alerts</b></sub>
+    </td>
+    <td align="center">
+      <img src="screenshots/charts-light.png" alt="Data Charts" width="260" /><br />
+      <sub><b>Data Visualizations</b></sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center">
+      <img src="screenshots/journal-light.png" alt="Lawn Journal" width="260" /><br />
+      <sub><b>Lawn Journal</b></sub>
+    </td>
+    <td align="center">
+      <img src="screenshots/achievements-light.png" alt="Achievements" width="260" /><br />
+      <sub><b>Achievements & Badges</b></sub>
+    </td>
+    <td align="center">
+      <img src="screenshots/soil-plan-dark.png" alt="Soil Plan — Dark Mode" width="260" /><br />
+      <sub><b>Soil Plan</b> — Dark</sub>
+    </td>
+  </tr>
+</table>
+
+<details>
+<summary>🌙 <b>More Dark Mode Screenshots</b></summary>
+<br />
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="screenshots/pest-identifier-dark.png" alt="Pest ID — Dark Mode" width="300" /><br />
+      <sub><b>Pest Identifier</b> — Dark</sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="screenshots/soil-plan-dark.png" alt="Soil Plan — Dark Mode" width="300" /><br />
+      <sub><b>Soil Plan</b> — Dark</sub>
+    </td>
+  </tr>
+</table>
+</details>
+
+---
+
 ## ✨ Features
 
 ### Core

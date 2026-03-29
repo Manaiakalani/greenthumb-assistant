@@ -6,7 +6,6 @@ import { onCLS, onINP, onLCP, onFCP, onTTFB, type Metric } from "web-vitals";
  */
 function logMetric(metric: Metric) {
   if (import.meta.env.DEV) {
-    // eslint-disable-next-line no-console
     console.debug(
       `[web-vitals] ${metric.name}: ${Math.round(metric.value * 100) / 100}`,
       metric.rating,

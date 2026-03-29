@@ -3,7 +3,7 @@ import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import {
   Cloud, CloudDrizzle, CloudFog, CloudLightning, CloudRain, CloudSun,
-  Droplets, Moon, Snowflake, Sun, Thermometer, Wind, MapPin, LocateFixed,
+  Droplets, Moon, Snowflake, Sun, Thermometer, Wind, LocateFixed,
   type LucideIcon,
 } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";

@@ -9,7 +9,7 @@ import {
   loadWeeklyGoals,
   saveWeeklyGoals,
 } from "@/lib/journal";
-import { loadEarned, saveEarned, EARNED_KEY } from "@/lib/achievements";
+import { loadEarned, saveEarned } from "@/lib/achievements";
 
 // ---------------------------------------------------------------------------
 // Store types

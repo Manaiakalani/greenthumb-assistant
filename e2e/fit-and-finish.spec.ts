@@ -409,7 +409,7 @@ test.describe("Page routes", () => {
     { path: "/privacy", text: /privacy|policy/i },
   ];
 
-  for (const { path, text } of routes) {
+  for (const { path } of routes) {
     test(`${path} page loads without error`, async ({ page }) => {
       let crashed = false;
       page.on("pageerror", () => { crashed = true; });

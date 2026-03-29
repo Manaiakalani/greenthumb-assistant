@@ -5,7 +5,6 @@ import {
   addJournalEntry,
   deleteJournalEntry,
   loadPhotos,
-  savePhotos,
   addPhoto,
   deletePhoto,
   calculateStreak,

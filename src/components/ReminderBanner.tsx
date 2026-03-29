@@ -8,7 +8,6 @@ import {
   getUpcomingReminders,
   dismissReminder,
   requestNotificationPermission,
-  type PlanReminder,
 } from "@/lib/planReminders";
 
 export function ReminderBanner() {

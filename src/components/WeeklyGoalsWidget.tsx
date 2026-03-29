@@ -78,7 +78,7 @@ export function WeeklyGoalsWidget({ entries }: WeeklyGoalsWidgetProps) {
     setEditing(false);
     haptic("success");
     toast.success("Weekly goals set! 🎯");
-  }, [draftGoals, weekStart]);
+  }, [draftGoals, weekStart, storeSetGoals]);
 
   // If no goals are set and not editing, show a CTA
   if (!goals && !editing) {

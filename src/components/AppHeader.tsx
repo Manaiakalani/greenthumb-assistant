@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useSyncExternalStore } from "react";
 import { motion } from "motion/react";
 import { Leaf, Moon, Sun, User } from "lucide-react";
 import { Link } from "react-router-dom";
@@ -25,8 +25,11 @@ function GrasswiseLogo({ className }: { className?: string }) {
 function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
   const { t } = useTranslation();
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  const mounted = useSyncExternalStore(
+    () => () => {},
+    () => true,
+    () => false,
+  );
 
   if (!mounted) return <div className="w-7 h-7" />;
 

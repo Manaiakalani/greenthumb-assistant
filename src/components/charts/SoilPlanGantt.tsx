@@ -43,8 +43,16 @@ interface GanttRow {
   dateRange: string;
 }
 
-// Custom bar shape for horizontal offset rendering
-const GanttBar = (props: any) => {
+interface GanttBarProps {
+  x?: number;
+  y?: number;
+  width?: number;
+  height?: number;
+  payload?: GanttRow;
+}
+
+// Custom bar shape for future horizontal offset rendering
+const _GanttBar = (props: GanttBarProps) => {
   const { x, y, width, height, payload } = props;
   if (!payload) return null;
 
@@ -153,8 +161,8 @@ const SoilPlanGanttInner: React.FC<SoilPlanGanttProps> = ({ region }) => {
               borderColor: "hsl(var(--border))",
               borderRadius: 8,
             }}
-            formatter={(_: any, __: any, props: any) => {
-              const row = props.payload;
+            formatter={(_value: unknown, _name: unknown, entry: { payload: GanttRow }) => {
+              const row = entry.payload;
               const emoji = CATEGORY_META[row.category as PlanApplication["category"]]?.emoji ?? "";
               return [`${emoji} ${row.dateRange}`, row.name];
             }}

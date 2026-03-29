@@ -5,6 +5,7 @@ import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { useProfile } from "@/context/ProfileContext";
 import { useGrassStore } from "@/stores/useGrassStore";
+import { formatShortDate } from "@/lib/dateFormat";
 
 /**
  * Export / Import (restore) all Grasswise data as JSON.
@@ -46,7 +47,9 @@ export function ExportBackup() {
         description: "Keep this file safe — you can restore it later.",
       });
     } catch {
-      toast.error("Export failed");
+      toast.error("Export failed", {
+        description: "Check available storage and try again.",
+      });
     } finally {
       setExporting(false);
     }
@@ -61,7 +64,7 @@ export function ExportBackup() {
       setPendingFile(reader.result as string);
       setConfirmRestore(true);
     };
-    reader.onerror = () => toast.error("Could not read file");
+    reader.onerror = () => toast.error("Could not read file. Select a valid Grasswise .json backup.");
     reader.readAsText(file);
     // Reset input so the same file can be selected again
     e.target.value = "";
@@ -74,25 +77,25 @@ export function ExportBackup() {
 
       // Basic validation
       if (!data.version || !data.exportedAt) {
-        toast.error("Invalid backup file", { description: "This doesn't look like a Grasswise backup." });
+        toast.error("Invalid backup file", { description: "This doesn't look like a Grasswise backup. Export one from the app first." });
         return;
       }
 
       // Schema validation — ensure expected data shapes
       if (data.profile && typeof data.profile !== "object") {
-        toast.error("Invalid backup", { description: "Profile data is malformed." });
+        toast.error("Invalid backup", { description: "Profile data is malformed. Try a different backup file." });
         return;
       }
       if (data.journal !== undefined && !Array.isArray(data.journal)) {
-        toast.error("Invalid backup", { description: "Journal data is malformed." });
+        toast.error("Invalid backup", { description: "Journal data is malformed. Try a different backup file." });
         return;
       }
       if (data.photos !== undefined && !Array.isArray(data.photos)) {
-        toast.error("Invalid backup", { description: "Photos data is malformed." });
+        toast.error("Invalid backup", { description: "Photos data is malformed. Try a different backup file." });
         return;
       }
       if (data.achievements !== undefined && !Array.isArray(data.achievements)) {
-        toast.error("Invalid backup", { description: "Achievements data is malformed." });
+        toast.error("Invalid backup", { description: "Achievements data is malformed. Try a different backup file." });
         return;
       }
 
@@ -108,13 +111,13 @@ export function ExportBackup() {
       });
 
       toast.success("Backup restored! 🎉", {
-        description: `Data from ${new Date(data.exportedAt).toLocaleDateString()} has been loaded.`,
+        description: `Data from ${formatShortDate(data.exportedAt)} has been loaded.`,
       });
 
       // Reload to reflect restored data
       setTimeout(() => window.location.reload(), 1200);
     } catch {
-      toast.error("Restore failed", { description: "The file could not be parsed." });
+      toast.error("Restore failed", { description: "The file could not be parsed. Re-export a backup and try again." });
     } finally {
       setPendingFile(null);
       setConfirmRestore(false);
@@ -132,7 +135,7 @@ export function ExportBackup() {
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-2">
-        <HardDrive className="h-5 w-5 text-primary" />
+        <HardDrive className="h-5 w-5 text-primary" aria-hidden="true" />
         <h3 className="font-display text-lg font-semibold text-foreground">
           Data & Backup
         </h3>
@@ -167,11 +170,11 @@ export function ExportBackup() {
           className="gap-2 border-primary/20 hover:bg-primary/5"
         >
           {exporting ? (
-            <Loader2 className="h-4 w-4 animate-spin" />
+            <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
           ) : (
-            <Download className="h-4 w-4" />
+            <Download className="h-4 w-4" aria-hidden="true" />
           )}
-          Export
+          Download Backup
         </Button>
 
         <input
@@ -186,8 +189,8 @@ export function ExportBackup() {
           variant="outline"
           className="gap-2 border-primary/20 hover:bg-primary/5"
         >
-          <Upload className="h-4 w-4" />
-          Restore
+          <Upload className="h-4 w-4" aria-hidden="true" />
+          Restore Backup
         </Button>
       </div>
 
@@ -202,7 +205,7 @@ export function ExportBackup() {
           >
             <div className="rounded-lg border border-amber-500/30 bg-amber-500/5 p-4 space-y-3">
               <div className="flex items-start gap-2">
-                <AlertTriangle className="h-4 w-4 text-amber-500 mt-0.5 shrink-0" />
+                <AlertTriangle className="h-4 w-4 text-amber-500 mt-0.5 shrink-0" aria-hidden="true" />
                 <div>
                   <p className="text-sm font-medium text-foreground">Replace all data?</p>
                   <p className="text-xs text-muted-foreground mt-1">

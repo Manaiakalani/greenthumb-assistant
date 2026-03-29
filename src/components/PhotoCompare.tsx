@@ -1,13 +1,10 @@
 import { useCallback, useRef, useState } from "react";
 import { ArrowLeftRight, ImageIcon } from "lucide-react";
 import { useGrassStore } from "@/stores/useGrassStore";
+import { formatShortDate } from "@/lib/dateFormat";
 
 const formatDate = (iso: string) =>
-  new Date(iso + "T12:00:00").toLocaleDateString("en-US", {
-    month: "short",
-    day: "numeric",
-    year: "numeric",
-  });
+  formatShortDate(new Date(iso + "T12:00:00"));
 
 export const PhotoCompare = () => {
   const photos = useGrassStore((s) => s.photos);
@@ -55,7 +52,7 @@ export const PhotoCompare = () => {
   if (photos.length < 2) {
     return (
       <div className="rounded-xl border border-border bg-card p-6 shadow-card text-center">
-        <ImageIcon className="h-8 w-8 text-muted-foreground/40 mx-auto mb-2" />
+        <ImageIcon aria-hidden="true" className="h-8 w-8 text-muted-foreground/40 mx-auto mb-2" />
         <p className="text-sm text-muted-foreground">
           Add at least 2 photos to compare lawn progress
         </p>
@@ -79,6 +76,7 @@ export const PhotoCompare = () => {
           </label>
           <select
             id="before-select"
+            name="before-photo"
             value={beforeId}
             onChange={(e) => setBeforeId(e.target.value)}
             className="w-full rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground"
@@ -100,6 +98,7 @@ export const PhotoCompare = () => {
           </label>
           <select
             id="after-select"
+            name="after-photo"
             value={afterId}
             onChange={(e) => setAfterId(e.target.value)}
             className="w-full rounded-lg border border-border bg-card px-3 py-2 text-sm text-foreground"
@@ -122,12 +121,24 @@ export const PhotoCompare = () => {
           onPointerDown={onPointerDown}
           onPointerMove={onPointerMove}
           onPointerUp={onPointerUp}
+          role="slider"
+          aria-label="Photo comparison slider"
+          aria-valuemin={0}
+          aria-valuemax={100}
+          aria-valuenow={Math.round(position)}
+          tabIndex={0}
+          onKeyDown={(e) => {
+            if (e.key === 'ArrowLeft') { e.preventDefault(); setPosition((p) => Math.max(0, p - 2)); }
+            if (e.key === 'ArrowRight') { e.preventDefault(); setPosition((p) => Math.min(100, p + 2)); }
+          }}
         >
           {/* After image (full width, bottom layer) */}
           <img
             src={afterPhoto.photo}
             alt={afterPhoto.note || "After"}
             className="absolute inset-0 w-full h-full object-cover"
+            width={800}
+            height={600}
             draggable={false}
           />
 
@@ -136,6 +147,8 @@ export const PhotoCompare = () => {
             src={beforePhoto.photo}
             alt={beforePhoto.note || "Before"}
             className="absolute inset-0 w-full h-full object-cover"
+            width={800}
+            height={600}
             style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
             draggable={false}
           />
@@ -152,7 +165,7 @@ export const PhotoCompare = () => {
             style={{ left: `${position}%` }}
           >
             <div className="w-10 h-10 rounded-full bg-white shadow-lg flex items-center justify-center">
-              <ArrowLeftRight className="h-5 w-5 text-gray-700" />
+              <ArrowLeftRight aria-hidden="true" className="h-5 w-5 text-gray-700" />
             </div>
           </div>
 

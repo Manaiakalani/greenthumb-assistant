@@ -37,10 +37,10 @@ export const LawnProfile = React.memo(function LawnProfile() {
 
       <div className="grid grid-cols-2 gap-4 text-sm">
         {fields.map(({ label, value, icon }) => (
-          <div key={label}>
+          <div key={label} className="min-w-0">
             <p className="text-muted-foreground text-xs">{label}</p>
-            <p className="font-medium text-foreground flex items-center gap-1">
-              {icon && <Leaf aria-hidden="true" className="h-3.5 w-3.5 text-primary" />}
+            <p className="font-medium text-foreground flex items-center gap-1 truncate">
+              {icon && <Leaf aria-hidden="true" className="h-3.5 w-3.5 text-primary shrink-0" />}
               {value}
             </p>
           </div>

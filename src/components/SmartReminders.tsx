@@ -40,7 +40,7 @@ export function SmartReminders({ weather }: { weather?: WeatherData | null }) {
               className={`flex items-start gap-3 p-3 rounded-lg border ${PRIORITY_STYLES[reminder.priority]}`}
             >
               <span className="text-lg shrink-0 mt-0.5">{reminder.emoji}</span>
-              <p className="text-xs text-foreground/80 leading-relaxed flex-1">
+              <p className="text-xs text-foreground/80 leading-relaxed flex-1 min-w-0 break-words">
                 {reminder.message}
               </p>
             </motion.div>

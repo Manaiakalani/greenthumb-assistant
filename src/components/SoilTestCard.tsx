@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { safeGetItem, safeSetItem } from "@/lib/safeStorage";
 import type { NutrientLevel, SoilTestResults } from "@/types/profile";
+import { formatShortDate } from "@/lib/dateFormat";
 
 const STORAGE_KEY = "grasswise-soil-test";
 
@@ -69,6 +70,7 @@ function NutrientToggle({
             key={level}
             type="button"
             onClick={() => onChange(level)}
+            aria-pressed={value === level}
             className={`flex-1 px-2 py-1.5 text-xs font-medium capitalize transition-colors ${
               value === level
                 ? level === "low"
@@ -139,7 +141,7 @@ export function SoilTestCard() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <FlaskConical className="h-5 w-5 text-primary" />
+          <FlaskConical aria-hidden="true" className="h-5 w-5 text-primary" />
           <h3 className="font-display text-lg font-semibold text-foreground">
             Soil Test Results
           </h3>
@@ -151,7 +153,7 @@ export function SoilTestCard() {
             onClick={() => setEditing(true)}
             className="text-xs"
           >
-            Update
+            Edit Results
           </Button>
         )}
       </div>
@@ -179,6 +181,7 @@ export function SoilTestCard() {
                 <input
                   type="range"
                   id="soil-ph"
+                  name="soil-ph"
                   min={4}
                   max={9}
                   step={0.1}
@@ -196,6 +199,9 @@ export function SoilTestCard() {
                     const v = parseFloat(e.target.value);
                     if (!isNaN(v) && v >= 4 && v <= 9) setPh(v);
                   }}
+                  aria-label="pH level number input"
+                  name="soil-ph-number"
+                  autoComplete="off"
                   className="w-20 text-center text-sm"
                 />
               </div>
@@ -237,7 +243,9 @@ export function SoilTestCard() {
                 min={0}
                 max={100}
                 step={0.1}
-                placeholder="e.g. 3.5"
+                placeholder="e.g. 3.5…"
+                name="organic-matter"
+                autoComplete="off"
                 value={organicMatter}
                 onChange={(e) => setOrganicMatter(e.target.value)}
                 className="w-32 text-sm"
@@ -255,6 +263,8 @@ export function SoilTestCard() {
               <Input
                 id="test-date"
                 type="date"
+                name="test-date"
+                autoComplete="off"
                 value={testDate}
                 onChange={(e) => setTestDate(e.target.value)}
                 className="w-44 text-sm"
@@ -291,8 +301,9 @@ export function SoilTestCard() {
                 initial={{ opacity: 0, scale: 0.95 }}
                 animate={{ opacity: 1, scale: 1 }}
                 className="flex items-center gap-2 rounded-lg bg-green-500/10 border border-green-500/20 p-2.5 text-xs text-green-600"
+                aria-live="polite"
               >
-                <Check className="h-3.5 w-3.5" />
+                <Check aria-hidden="true" className="h-3.5 w-3.5" />
                 Results saved
               </motion.div>
             )}
@@ -305,7 +316,7 @@ export function SoilTestCard() {
                 <span className="text-[10px] uppercase tracking-wider opacity-70">
                   pH
                 </span>
-                <p className="text-xl font-display font-bold">{saved.ph}</p>
+                <p className="text-xl font-display font-bold tabular-nums">{saved.ph}</p>
               </div>
               {(
                 [
@@ -341,7 +352,7 @@ export function SoilTestCard() {
               <span>
                 Tested:{" "}
                 <strong>
-                  {new Date(saved.testDate).toLocaleDateString()}
+                  {formatShortDate(saved.testDate)}
                 </strong>
               </span>
             </div>
@@ -354,7 +365,7 @@ export function SoilTestCard() {
                 className="rounded-lg border border-primary/15 bg-primary/5 p-3 space-y-2"
               >
                 <div className="flex items-center gap-1.5">
-                  <Leaf className="h-3.5 w-3.5 text-primary" />
+                  <Leaf aria-hidden="true" className="h-3.5 w-3.5 text-primary" />
                   <span className="text-xs font-semibold text-foreground">
                     Recommendations
                   </span>
@@ -383,7 +394,7 @@ export function SoilTestCard() {
         transition={{ delay: 0.2 }}
         className="flex items-start gap-2 rounded-lg border border-border bg-muted/30 p-3"
       >
-        <Info className="h-3.5 w-3.5 text-muted-foreground mt-0.5 shrink-0" />
+        <Info aria-hidden="true" className="h-3.5 w-3.5 text-muted-foreground mt-0.5 shrink-0" />
         <p className="text-[11px] text-muted-foreground">
           Test every 2–3 years, ideally in fall. Your local extension office can
           provide lab-grade soil analysis.

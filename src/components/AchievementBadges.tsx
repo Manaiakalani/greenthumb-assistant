@@ -2,9 +2,10 @@ import { motion } from "motion/react";
 import { Trophy, Lock } from "lucide-react";
 import { ACHIEVEMENTS } from "@/lib/achievements";
 import { useEarnedBadges } from "@/hooks/useEarnedBadges";
+import { formatShortDate } from "@/lib/dateFormat";
 
 export function AchievementBadges() {
-  const { earned, earnedIds, total } = useEarnedBadges();
+  const { earned, earnedIds, earnedMap, total } = useEarnedBadges();
   const unlocked = earned.length;
 
   const categories = ["milestone", "streak", "seasonal", "explorer"] as const;
@@ -19,7 +20,7 @@ export function AchievementBadges() {
     <div className="space-y-5">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <Trophy className="h-5 w-5 text-primary" />
+          <Trophy className="h-5 w-5 text-primary" aria-hidden="true" />
           <h3 className="font-display text-lg font-semibold text-foreground">
             Achievements
           </h3>
@@ -32,10 +33,11 @@ export function AchievementBadges() {
       {/* Progress bar */}
       <div className="h-2 rounded-full bg-secondary overflow-hidden">
         <motion.div
-          initial={{ width: 0 }}
-          animate={{ width: `${(unlocked / total) * 100}%` }}
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
-          className="h-full rounded-full bg-primary"
+          className="h-full rounded-full bg-primary origin-left"
+          style={{ width: `${(unlocked / total) * 100}%` }}
         />
       </div>
 
@@ -64,14 +66,11 @@ export function AchievementBadges() {
                     <p className={`text-[11px] font-medium leading-tight ${earnedIds.has(achievement.id) ? "text-foreground" : "text-muted-foreground"}`}>
                       {achievement.title}
                     </p>
-                    {earnedIds.has(achievement.id) && (() => {
-                      const earnedEntry = earned.find((e) => e.id === achievement.id);
-                      return earnedEntry ? (
-                        <p className="text-[9px] text-muted-foreground mt-0.5">
-                          {new Date(earnedEntry.earnedAt).toLocaleDateString()}
-                        </p>
-                      ) : null;
-                    })()}
+                    {earnedIds.has(achievement.id) && earnedMap.has(achievement.id) && (
+                      <p className="text-[9px] text-muted-foreground mt-0.5">
+                        {formatShortDate(earnedMap.get(achievement.id)!.earnedAt)}
+                      </p>
+                    )}
                     {!earnedIds.has(achievement.id) && (
                       <p className="text-[9px] text-muted-foreground mt-0.5">
                         {achievement.description}

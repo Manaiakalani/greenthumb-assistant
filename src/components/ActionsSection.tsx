@@ -22,9 +22,13 @@ export function ActionsSection() {
         Today's Actions
       </motion.h2>
 
-      {actions.map((action) => (
-        <ActionCard key={action.title} {...action} />
-      ))}
+      {actions.length === 0 ? (
+        <p className="text-sm text-muted-foreground">No actions for this time of year. Check back next season!</p>
+      ) : (
+        actions.map((action) => (
+          <ActionCard key={action.title} {...action} />
+        ))
+      )}
     </div>
   );
 }

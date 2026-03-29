@@ -14,6 +14,7 @@ import { checkAchievements, ACHIEVEMENTS } from "@/lib/achievements";
 import { useProfile } from "@/context/ProfileContext";
 import { haptic } from "@/lib/haptics";
 import { useGrassStore } from "@/stores/useGrassStore";
+import { formatShortDateNoYear, formatMonthYear } from "@/lib/dateFormat";
 
 const Photos = () => {
   const { profile } = useProfile();
@@ -38,7 +39,7 @@ const Photos = () => {
       setPreview(compressed);
       setShowForm(true);
     } catch {
-      toast.error("Could not process image");
+      toast.error("Could not process image. Try a different file format (JPG or PNG).");
     } finally {
       setUploading(false);
     }
@@ -92,7 +93,7 @@ const Photos = () => {
           {/* Header */}
           <div className="mt-4 mb-6">
             <h1 className="font-display text-2xl font-bold text-foreground flex items-center gap-2">
-              <Camera className="h-6 w-6 text-primary" />
+              <Camera aria-hidden="true" className="h-6 w-6 text-primary" />
               Photo Timeline
             </h1>
             <p className="text-sm text-muted-foreground mt-1">
@@ -104,7 +105,7 @@ const Photos = () => {
           {photos.length >= 2 && (
             <div className="mb-6">
               <h2 className="font-display text-lg font-semibold text-foreground mb-3 flex items-center gap-2">
-                <ArrowLeftRight className="h-5 w-5 text-primary" />
+              <ArrowLeftRight aria-hidden="true" className="h-5 w-5 text-primary" />
                 Progress Comparison
               </h2>
               <PhotoCompare />
@@ -129,7 +130,7 @@ const Photos = () => {
                   disabled={uploading}
                   className="w-full gap-2 bg-primary mb-6"
                 >
-                  <Plus className="h-4 w-4" />
+                  <Plus aria-hidden="true" className="h-4 w-4" />
                   {uploading ? "Processing…" : "Add Photo"}
                 </Button>
               </motion.div>
@@ -143,25 +144,28 @@ const Photos = () => {
               >
                 {preview && (
                   <div className="relative rounded-lg overflow-hidden">
-                    <img src={preview} alt="Preview" className="w-full h-48 object-cover" decoding="async" />
+                    <img src={preview} alt="Preview" className="w-full h-48 object-cover" width={400} height={192} decoding="async" />
                     <button
                       onClick={() => { setPreview(null); setShowForm(false); }}
                       className="absolute top-2 right-2 p-1 rounded-full bg-black/50 text-white hover:bg-black/70"
+                      aria-label="Remove selected photo preview"
                     >
-                      <X className="h-4 w-4" />
+                      <X aria-hidden="true" className="h-4 w-4" />
                     </button>
                   </div>
                 )}
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-1.5">
                     <Label htmlFor="photo-date">Date</Label>
-                    <Input id="photo-date" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+                    <Input id="photo-date" type="date" name="photo-date" autoComplete="off" value={date} onChange={(e) => setDate(e.target.value)} />
                   </div>
                   <div className="space-y-1.5">
                     <Label htmlFor="photo-note">Note (optional)</Label>
                     <Input
                       id="photo-note"
-                      placeholder="e.g. After first mow"
+                      name="photo-note"
+                      autoComplete="off"
+                      placeholder="e.g. After first mow…"
                       value={note}
                       onChange={(e) => setNote(e.target.value)}
                     />
@@ -172,8 +176,8 @@ const Photos = () => {
                     Cancel
                   </Button>
                   <Button size="sm" onClick={handleSave} className="flex-1 bg-primary gap-1">
-                    <Camera className="h-3.5 w-3.5" />
-                    Save
+                    <Camera aria-hidden="true" className="h-3.5 w-3.5" />
+                    Save Photo
                   </Button>
                 </div>
               </motion.div>
@@ -183,7 +187,7 @@ const Photos = () => {
           {/* Photo grid */}
           {photos.length === 0 ? (
             <div className="text-center py-16">
-              <ImageIcon className="h-10 w-10 text-muted-foreground/40 mx-auto mb-3" />
+              <ImageIcon aria-hidden="true" className="h-10 w-10 text-muted-foreground/40 mx-auto mb-3" />
               <p className="text-sm text-muted-foreground">No photos yet</p>
               <p className="text-xs text-muted-foreground mt-1">
                 Snap a photo of your lawn to start tracking its progress.
@@ -193,7 +197,7 @@ const Photos = () => {
             <div className="space-y-6">
               {grouped.map(([monthKey, monthPhotos]) => {
                 const [year, month] = monthKey.split("-");
-                const monthName = new Date(+year, +month - 1).toLocaleString("default", { month: "long", year: "numeric" });
+                const monthName = formatMonthYear(new Date(+year, +month - 1));
                 return (
                   <div key={monthKey}>
                     <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
@@ -208,7 +212,7 @@ const Photos = () => {
                           transition={{ delay: i * 0.05 }}
                           role="button"
                           tabIndex={0}
-                          className="relative group rounded-lg overflow-hidden aspect-square cursor-pointer"
+                          className="relative group rounded-lg overflow-hidden aspect-square cursor-pointer focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
                           onClick={() => setLightbox(photo.photo)}
                           onKeyDown={(e) => {
                             if (e.key === 'Enter' || e.key === ' ') {
@@ -222,12 +226,14 @@ const Photos = () => {
                             src={photo.photo}
                             alt={photo.note || "Lawn photo"}
                             className="w-full h-full object-cover"
+                            width={300}
+                            height={300}
                             loading="lazy"
                             decoding="async"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent sm:opacity-0 sm:group-hover:opacity-100 transition-opacity flex items-end p-2">
                             <span className="text-[10px] text-white truncate">
-                              {new Date(photo.date + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                              {formatShortDateNoYear(new Date(photo.date + "T12:00:00"))}
                               {photo.note && ` · ${photo.note}`}
                             </span>
                           </div>
@@ -236,7 +242,7 @@ const Photos = () => {
                             className="absolute top-1.5 right-1.5 p-1.5 rounded-full bg-black/40 text-white sm:opacity-0 sm:group-hover:opacity-100 focus-visible:opacity-100 transition-opacity hover:bg-black/60 min-w-[28px] min-h-[28px] flex items-center justify-center"
                             aria-label="Delete photo"
                           >
-                            <Trash2 className="h-3.5 w-3.5" />
+                            <Trash2 aria-hidden="true" className="h-3.5 w-3.5" />
                           </button>
                         </motion.div>
                       ))}
@@ -269,6 +275,8 @@ const Photos = () => {
                   exit={{ scale: 0.8 }}
                   src={lightbox}
                   alt="Lawn photo"
+                  width={800}
+                  height={600}
                   className="max-w-full max-h-[80vh] rounded-xl shadow-2xl"
                 />
                 <button
@@ -276,7 +284,7 @@ const Photos = () => {
                   onClick={() => setLightbox(null)}
                   aria-label="Close lightbox"
                 >
-                  <X className="h-6 w-6" />
+                  <X aria-hidden="true" className="h-6 w-6" />
                 </button>
               </motion.div>
             )}

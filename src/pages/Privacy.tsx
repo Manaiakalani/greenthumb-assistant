@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Shield, MapPin, HardDrive, Cloud, ArrowLeft } from "lucide-react";
 import { AppHeader } from "@/components/AppHeader";
 import { BottomNav } from "@/components/BottomNav";
+import { formatLongDate } from "@/lib/dateFormat";
 
 export default function Privacy() {
   return (
@@ -28,7 +29,7 @@ export default function Privacy() {
           </div>
 
           <p className="text-sm text-muted-foreground mb-8">
-            Last updated: {new Date().toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
+            Last updated: {formatLongDate(new Date())}
           </p>
 
           <div className="space-y-8">

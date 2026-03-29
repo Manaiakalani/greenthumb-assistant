@@ -55,7 +55,7 @@ export function CollectorCardModal() {
       URL.revokeObjectURL(url);
       toast.success("Card downloaded!");
     } catch {
-      toast.error("Could not export card image.");
+      toast.error("Could not export card image. Try again or use a different browser.");
     } finally {
       setBusy(false);
     }
@@ -88,7 +88,7 @@ export function CollectorCardModal() {
     } catch (err: unknown) {
       // User cancelled share is not an error
       if (err instanceof Error && err.name === "AbortError") return;
-      toast.error("Could not share card.");
+      toast.error("Could not share card. Try downloading the image instead.");
     } finally {
       setBusy(false);
     }
@@ -108,7 +108,7 @@ export function CollectorCardModal() {
           variant="outline"
           className="gap-2 border-primary/20 bg-primary/5 hover:bg-primary/10 text-primary"
         >
-          <Sparkles className="h-4 w-4" />
+          <Sparkles className="h-4 w-4" aria-hidden="true" />
           Generate Collector Card
         </Button>
       </DialogTrigger>
@@ -134,9 +134,9 @@ export function CollectorCardModal() {
               size="sm"
             >
               {busy ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
+                <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
               ) : (
-                <Download className="h-4 w-4" />
+                <Download className="h-4 w-4" aria-hidden="true" />
               )}
               Download
             </Button>
@@ -157,7 +157,7 @@ export function CollectorCardModal() {
               size="sm"
             >
               <Copy className="h-4 w-4" />
-              Caption
+              Copy Caption
             </Button>
           </div>
 

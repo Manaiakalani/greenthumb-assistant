@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Target, Plus, Minus, Check, ChevronDown, ChevronUp } from "lucide-react";
 import { toast } from "sonner";
@@ -24,7 +24,7 @@ interface WeeklyGoalsWidgetProps {
 }
 
 export function WeeklyGoalsWidget({ entries }: WeeklyGoalsWidgetProps) {
-  const weekStart = useMemo(() => getWeekStart(), []);
+  const [weekStart] = useState(getWeekStart);
 
   const stored = useGrassStore((s) => s.weeklyGoals);
   const storeSetGoals = useGrassStore((s) => s.setWeeklyGoals);
@@ -89,7 +89,7 @@ export function WeeklyGoalsWidget({ entries }: WeeklyGoalsWidgetProps) {
         className="mb-6 rounded-xl border border-dashed border-primary/25 bg-primary/5 p-4 flex items-center gap-3"
       >
         <div className="rounded-lg bg-primary/10 p-2 shrink-0">
-          <Target className="h-5 w-5 text-primary" />
+          <Target aria-hidden="true" className="h-5 w-5 text-primary" />
         </div>
         <div className="flex-1 min-w-0">
           <p className="text-sm font-medium text-foreground">Weekly Goals</p>
@@ -103,7 +103,7 @@ export function WeeklyGoalsWidget({ entries }: WeeklyGoalsWidgetProps) {
           onClick={startEditing}
           className="shrink-0 gap-1 border-primary/20"
         >
-          <Target className="h-3.5 w-3.5" />
+          <Target aria-hidden="true" className="h-3.5 w-3.5" />
           Set Goals
         </Button>
       </motion.div>
@@ -119,7 +119,7 @@ export function WeeklyGoalsWidget({ entries }: WeeklyGoalsWidgetProps) {
         className="mb-6 rounded-xl border border-primary/20 bg-card p-5 shadow-card space-y-4"
       >
         <div className="flex items-center gap-2">
-          <Target className="h-5 w-5 text-primary" />
+          <Target aria-hidden="true" className="h-5 w-5 text-primary" />
           <h3 className="text-sm font-semibold text-foreground">Set Weekly Goals</h3>
         </div>
 
@@ -167,9 +167,9 @@ export function WeeklyGoalsWidget({ entries }: WeeklyGoalsWidgetProps) {
                     className="h-7 w-7 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-primary/5 transition-colors"
                     aria-label="Decrease target"
                   >
-                    <Minus className="h-3.5 w-3.5" />
+                    <Minus aria-hidden="true" className="h-3.5 w-3.5" />
                   </button>
-                  <span className="text-sm font-bold text-foreground w-6 text-center">
+                  <span className="text-sm font-bold text-foreground w-6 text-center tabular-nums">
                     {goal.target}×
                   </span>
                   <button
@@ -177,7 +177,7 @@ export function WeeklyGoalsWidget({ entries }: WeeklyGoalsWidgetProps) {
                     className="h-7 w-7 rounded-full border border-border flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-primary/5 transition-colors"
                     aria-label="Increase target"
                   >
-                    <Plus className="h-3.5 w-3.5" />
+                    <Plus aria-hidden="true" className="h-3.5 w-3.5" />
                   </button>
                 </div>
               </div>
@@ -195,7 +195,7 @@ export function WeeklyGoalsWidget({ entries }: WeeklyGoalsWidgetProps) {
             Cancel
           </Button>
           <Button size="sm" onClick={saveGoals} className="flex-1 bg-primary gap-1">
-            <Check className="h-3.5 w-3.5" />
+            <Check aria-hidden="true" className="h-3.5 w-3.5" />
             Save Goals
           </Button>
         </div>
@@ -204,7 +204,7 @@ export function WeeklyGoalsWidget({ entries }: WeeklyGoalsWidgetProps) {
   }
 
   // Progress display
-  const allComplete = goals!.every(
+  const allComplete = goals!.length > 0 && goals!.every(
     (g) => (progress[g.activity] ?? 0) >= g.target,
   );
 
@@ -215,12 +215,12 @@ export function WeeklyGoalsWidget({ entries }: WeeklyGoalsWidgetProps) {
       className="mb-6 rounded-xl border border-primary/15 bg-card p-4 shadow-card"
     >
       <button
-        onClick={() => setCollapsed(!collapsed)}
+        onClick={() => setCollapsed((prev) => !prev)}
         className="w-full flex items-center justify-between"
         aria-expanded={!collapsed}
       >
         <div className="flex items-center gap-2">
-          <Target className="h-4 w-4 text-primary" />
+          <Target aria-hidden="true" className="h-4 w-4 text-primary" />
           <h3 className="text-sm font-semibold text-foreground">Weekly Goals</h3>
           {allComplete && (
             <span className="text-xs px-2 py-0.5 rounded-full bg-green-500/10 text-green-600 dark:text-green-400 font-medium">
@@ -229,9 +229,9 @@ export function WeeklyGoalsWidget({ entries }: WeeklyGoalsWidgetProps) {
           )}
         </div>
         {collapsed ? (
-          <ChevronDown className="h-4 w-4 text-muted-foreground" />
+          <ChevronDown aria-hidden="true" className="h-4 w-4 text-muted-foreground" />
         ) : (
-          <ChevronUp className="h-4 w-4 text-muted-foreground" />
+          <ChevronUp aria-hidden="true" className="h-4 w-4 text-muted-foreground" />
         )}
       </button>
 
@@ -258,7 +258,7 @@ export function WeeklyGoalsWidget({ entries }: WeeklyGoalsWidgetProps) {
                           {meta.label.replace(/ed$/, "").replace(/d$/, "")}
                         </span>
                         <span
-                          className={`text-xs font-bold ${
+                          className={`text-xs font-bold tabular-nums ${
                             done ? "text-green-600 dark:text-green-400" : "text-muted-foreground"
                           }`}
                         >
@@ -267,17 +267,18 @@ export function WeeklyGoalsWidget({ entries }: WeeklyGoalsWidgetProps) {
                       </div>
                       <div className="h-2 rounded-full bg-secondary overflow-hidden">
                         <motion.div
-                          initial={{ width: 0 }}
-                          animate={{ width: `${pct}%` }}
+                          initial={{ scaleX: 0 }}
+                          animate={{ scaleX: 1 }}
                           transition={{ duration: 0.6, ease: "easeOut" }}
-                          className={`h-full rounded-full ${
+                          className={`h-full rounded-full origin-left ${
                             done ? "bg-green-500" : "bg-primary"
                           }`}
+                          style={{ width: `${pct}%` }}
                         />
                       </div>
                     </div>
                     {done && (
-                      <Check className="h-4 w-4 text-green-500 shrink-0" />
+                      <Check aria-hidden="true" className="h-4 w-4 text-green-500 shrink-0" />
                     )}
                   </div>
                 );

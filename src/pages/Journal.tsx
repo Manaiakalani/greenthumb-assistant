@@ -19,6 +19,7 @@ import { calculateStreak } from "@/lib/journal";
 import { checkAchievements, ACHIEVEMENTS } from "@/lib/achievements";
 import { useProfile } from "@/context/ProfileContext";
 import { haptic } from "@/lib/haptics";
+import { formatShortDate, formatShortDateNoYear, formatMonthYear } from "@/lib/dateFormat";
 import { WeeklyGoalsWidget } from "@/components/WeeklyGoalsWidget";
 import { ActivityHeatmap } from "@/components/ActivityHeatmap";
 import { useGrassStore } from "@/stores/useGrassStore";
@@ -46,7 +47,7 @@ const Journal = () => {
 
     const meta = ACTIVITY_META[activity];
     toast.success(`${meta.emoji} ${meta.label}!`, {
-      description: `Logged for ${new Date(date).toLocaleDateString()}`,
+      description: `Logged for ${formatShortDate(date)}`,
     });
 
     // Check achievements
@@ -89,7 +90,7 @@ const Journal = () => {
           <div className="mt-4 mb-6 flex items-center justify-between">
             <div>
               <h1 className="font-display text-2xl font-bold text-foreground flex items-center gap-2">
-                <BookOpen className="h-6 w-6 text-primary" />
+                <BookOpen aria-hidden="true" className="h-6 w-6 text-primary" />
                 Lawn Journal
               </h1>
               <p className="text-sm text-muted-foreground mt-1">
@@ -98,7 +99,7 @@ const Journal = () => {
             </div>
             {streak > 0 && (
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/20">
-                <Flame className="h-4 w-4 text-orange-500" />
+                <Flame aria-hidden="true" className="h-4 w-4 text-orange-500" />
                 <span className="text-sm font-bold text-orange-600 dark:text-orange-400">
                   {streak}d streak
                 </span>
@@ -122,7 +123,7 @@ const Journal = () => {
                   onClick={() => { setShowForm(true); haptic("light"); }}
                   className="w-full gap-2 bg-primary mb-6"
                 >
-                  <Plus className="h-4 w-4" />
+                  <Plus aria-hidden="true" className="h-4 w-4" />
                   Log Activity
                 </Button>
               </motion.div>
@@ -155,6 +156,8 @@ const Journal = () => {
                     <Input
                       id="journal-date"
                       type="date"
+                      name="journal-date"
+                      autoComplete="off"
                       value={date}
                       onChange={(e) => setDate(e.target.value)}
                     />
@@ -164,6 +167,8 @@ const Journal = () => {
                   <Label htmlFor="journal-notes">Notes (optional)</Label>
                   <Input
                     id="journal-notes"
+                    name="journal-notes"
+                    autoComplete="off"
                     placeholder="e.g. Set mower to 3.5 inches…"
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
@@ -175,8 +180,8 @@ const Journal = () => {
                     Cancel
                   </Button>
                   <Button size="sm" onClick={handleAdd} className="flex-1 bg-primary gap-1">
-                    <Plus className="h-3.5 w-3.5" />
-                    Save
+                    <Plus aria-hidden="true" className="h-3.5 w-3.5" />
+                    Save Entry
                   </Button>
                 </div>
               </motion.div>
@@ -186,7 +191,7 @@ const Journal = () => {
           {/* Entries list */}
           {entries.length === 0 ? (
             <div className="text-center py-16">
-              <BookOpen className="h-10 w-10 text-muted-foreground/40 mx-auto mb-3" />
+              <BookOpen aria-hidden="true" className="h-10 w-10 text-muted-foreground/40 mx-auto mb-3" />
               <p className="text-sm text-muted-foreground">No entries yet</p>
               <p className="text-xs text-muted-foreground mt-1">
                 Tap "Log Activity" to start tracking your lawn care.
@@ -196,11 +201,11 @@ const Journal = () => {
             <div className="space-y-6">
               {grouped.map(([monthKey, monthEntries]) => {
                 const [year, month] = monthKey.split("-");
-                const monthName = new Date(+year, +month - 1).toLocaleString("default", { month: "long", year: "numeric" });
+                const monthName = formatMonthYear(new Date(+year, +month - 1));
                 return (
                   <div key={monthKey}>
                     <div className="flex items-center gap-2 mb-3">
-                      <Calendar className="h-3.5 w-3.5 text-muted-foreground" />
+                      <Calendar aria-hidden="true" className="h-3.5 w-3.5 text-muted-foreground" />
                       <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
                         {monthName}
                       </h3>
@@ -233,14 +238,14 @@ const Journal = () => {
                               )}
                             </div>
                             <span className="text-[11px] text-muted-foreground shrink-0">
-                              {new Date(entry.date + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" })}
+                              {formatShortDateNoYear(new Date(entry.date + "T12:00:00"))}
                             </span>
                             <button
                               onClick={() => handleDelete(entry.id)}
-                              className="sm:opacity-0 sm:group-hover:opacity-100 text-muted-foreground hover:text-destructive transition-all p-1.5 rounded-md min-w-[28px] min-h-[28px] flex items-center justify-center"
+                              className="sm:opacity-0 sm:group-hover:opacity-100 text-muted-foreground hover:text-destructive transition-[opacity,color] p-1.5 rounded-md min-w-[28px] min-h-[28px] flex items-center justify-center"
                               aria-label="Delete entry"
                             >
-                              <Trash2 className="h-4 w-4 sm:h-3.5 sm:w-3.5" />
+                              <Trash2 aria-hidden="true" className="h-4 w-4 sm:h-3.5 sm:w-3.5" />
                             </button>
                           </motion.div>
                         );

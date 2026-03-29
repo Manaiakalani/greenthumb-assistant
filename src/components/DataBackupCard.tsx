@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import {
   AlertTriangle,
@@ -21,6 +21,8 @@ import {
   formatBytes,
   type GrasswiseBackup,
 } from "@/lib/dataExport";
+import { safeGetRaw, safeSetItem } from "@/lib/safeStorage";
+import { formatShortDate } from "@/lib/dateFormat";
 
 const LAST_BACKUP_KEY = "grasswise-last-backup";
 
@@ -31,8 +33,9 @@ export function DataBackupCard() {
   const achievements = useGrassStore((s) => s.achievements);
 
   const [exporting, setExporting] = useState(false);
-  const [sizeEstimate, setSizeEstimate] = useState<string | null>(null);
-  const [lastBackup, setLastBackup] = useState<string | null>(null);
+  const [lastBackup, setLastBackup] = useState<string | null>(
+    () => safeGetRaw(LAST_BACKUP_KEY),
+  );
 
   const [confirmRestore, setConfirmRestore] = useState(false);
   const [pendingBackup, setPendingBackup] = useState<GrasswiseBackup | null>(null);
@@ -40,17 +43,14 @@ export function DataBackupCard() {
 
   const fileRef = useRef<HTMLInputElement>(null);
 
-  // Compute size estimate and last-backup date on mount / data change
-  useEffect(() => {
+  // Derive size estimate from current data — no effect needed
+  const sizeEstimate = useMemo(() => {
     try {
       const data = exportAllData();
-      setSizeEstimate(formatBytes(estimateBackupSize(data)));
+      return formatBytes(estimateBackupSize(data));
     } catch {
-      setSizeEstimate(null);
+      return null;
     }
-
-    const stored = localStorage.getItem(LAST_BACKUP_KEY);
-    if (stored) setLastBackup(stored);
   }, [journal.length, photos.length, achievements.length]);
 
   // ---- Export ----
@@ -61,14 +61,16 @@ export function DataBackupCard() {
       downloadBackup(data);
 
       const now = new Date().toISOString();
-      localStorage.setItem(LAST_BACKUP_KEY, now);
+      safeSetItem(LAST_BACKUP_KEY, now);
       setLastBackup(now);
 
       toast.success("Backup downloaded! 📦", {
         description: "Keep this file safe — you can restore it later.",
       });
     } catch {
-      toast.error("Export failed");
+      toast.error("Export failed", {
+        description: "Check available storage and try again.",
+      });
     } finally {
       setExporting(false);
     }
@@ -89,7 +91,7 @@ export function DataBackupCard() {
         setConfirmRestore(true);
       } catch (err) {
         toast.error("Invalid backup file", {
-          description: err instanceof Error ? err.message : "Could not read file.",
+          description: err instanceof Error ? err.message : "Could not read file. Select a Grasswise .json backup.",
         });
       } finally {
         setImporting(false);
@@ -103,9 +105,7 @@ export function DataBackupCard() {
     try {
       restoreBackup(pendingBackup, updateProfile);
 
-      const dateLabel = new Date(
-        pendingBackup.exportDate ?? pendingBackup.exportDate,
-      ).toLocaleDateString();
+      const dateLabel = formatShortDate(pendingBackup.exportDate);
 
       toast.success("Backup restored! 🎉", {
         description: `Data from ${dateLabel} has been loaded.`,
@@ -115,7 +115,7 @@ export function DataBackupCard() {
       setTimeout(() => window.location.reload(), 1200);
     } catch {
       toast.error("Restore failed", {
-        description: "Something went wrong while restoring the backup.",
+        description: "Something went wrong. Export a fresh backup and try again.",
       });
     } finally {
       setPendingBackup(null);
@@ -132,7 +132,7 @@ export function DataBackupCard() {
     <div className="space-y-4">
       {/* Header */}
       <div className="flex items-center gap-2">
-        <HardDrive className="h-5 w-5 text-primary" />
+        <HardDrive aria-hidden="true" className="h-5 w-5 text-primary" />
         <h3 className="font-display text-lg font-semibold text-foreground">
           Data &amp; Backup
         </h3>
@@ -167,8 +167,8 @@ export function DataBackupCard() {
         {sizeEstimate && <span>Estimated backup size: {sizeEstimate}</span>}
         {lastBackup && (
           <span className="flex items-center gap-1">
-            <CheckCircle2 className="h-3 w-3 text-green-500" />
-            Last backup: {new Date(lastBackup).toLocaleDateString()}
+            <CheckCircle2 aria-hidden="true" className="h-3 w-3 text-green-500" />
+            Last backup: {formatShortDate(lastBackup)}
           </span>
         )}
       </div>
@@ -182,9 +182,9 @@ export function DataBackupCard() {
           className="gap-2 border-primary/20 hover:bg-primary/5"
         >
           {exporting ? (
-            <Loader2 className="h-4 w-4 animate-spin" />
+            <Loader2 aria-hidden="true" className="h-4 w-4 animate-spin" />
           ) : (
-            <Download className="h-4 w-4" />
+            <Download aria-hidden="true" className="h-4 w-4" />
           )}
           Download Backup
         </Button>
@@ -203,11 +203,11 @@ export function DataBackupCard() {
           className="gap-2 border-primary/20 hover:bg-primary/5"
         >
           {importing ? (
-            <Loader2 className="h-4 w-4 animate-spin" />
+            <Loader2 aria-hidden="true" className="h-4 w-4 animate-spin" />
           ) : (
-            <Upload className="h-4 w-4" />
+            <Upload aria-hidden="true" className="h-4 w-4" />
           )}
-          Restore
+          Restore Backup
         </Button>
       </div>
 
@@ -222,7 +222,7 @@ export function DataBackupCard() {
           >
             <div className="rounded-lg border border-amber-500/30 bg-amber-500/5 p-4 space-y-3">
               <div className="flex items-start gap-2">
-                <AlertTriangle className="h-4 w-4 text-amber-500 mt-0.5 shrink-0" />
+                <AlertTriangle aria-hidden="true" className="h-4 w-4 text-amber-500 mt-0.5 shrink-0" />
                 <div>
                   <p className="text-sm font-medium text-foreground">
                     Replace all current data?
@@ -235,7 +235,7 @@ export function DataBackupCard() {
                   {pendingBackup && (
                     <p className="text-xs text-muted-foreground mt-1">
                       Backup from{" "}
-                      {new Date(pendingBackup.exportDate).toLocaleDateString()}{" "}
+                      {formatShortDate(pendingBackup.exportDate)}{" "}
                       — {pendingBackup.journal?.length ?? 0} journal entries,{" "}
                       {pendingBackup.photos?.length ?? 0} photos,{" "}
                       {pendingBackup.achievements?.length ?? 0} achievements.

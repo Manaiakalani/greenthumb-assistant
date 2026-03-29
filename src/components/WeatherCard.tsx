@@ -94,7 +94,7 @@ function useGeolocation() {
 
   const requestLocation = useCallback(() => {
     if (!navigator.geolocation) {
-      setError("Geolocation not supported");
+      setError("Geolocation is not supported by this browser. Set your location in Profile settings.");
       return;
     }
     setLoading(true);
@@ -156,7 +156,7 @@ export function WeatherCard() {
           <LocateFixed aria-hidden="true" className="h-3.5 w-3.5" />
           Use my location
         </button>
-        {geo.error && <p className="text-xs text-destructive mt-2">{geo.error}</p>}
+        {geo.error && <p className="text-xs text-destructive mt-2" aria-live="polite">{geo.error}</p>}
         <p className="text-xs mt-2">
           Or set it in <Link to="/profile" className="text-primary hover:underline">profile settings</Link>.
         </p>
@@ -192,7 +192,7 @@ export function WeatherCard() {
               <LocateFixed aria-hidden="true" className="h-3.5 w-3.5 text-muted-foreground hover:text-primary" />
             </button>
           )}
-          <span className="text-xs text-muted-foreground">{locationLabel}</span>
+          <span className="text-xs text-muted-foreground truncate max-w-[180px]">{locationLabel}</span>
         </div>
       </div>
 

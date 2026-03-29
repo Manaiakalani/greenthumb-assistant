@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import { BarChart3 } from "lucide-react";
 import { useGrassStore } from "@/stores/useGrassStore";
 import { ACTIVITY_META, type ActivityType, type JournalEntry } from "@/types/journal";
+import { formatShortMonth } from "@/lib/dateFormat";
 
 interface ProgressChartsProps {
   entries?: JournalEntry[];
@@ -25,7 +26,7 @@ export function ProgressCharts({ entries }: ProgressChartsProps) {
     for (let i = 5; i >= 0; i--) {
       const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
       const key = d.toISOString().slice(0, 7);
-      const label = d.toLocaleString("default", { month: "short" });
+      const label = formatShortMonth(d);
 
       const counts: Record<string, number> = {};
       let total = 0;
@@ -98,7 +99,7 @@ export function ProgressCharts({ entries }: ProgressChartsProps) {
               const heightPercent = maxCount > 0 ? (month.total / maxCount) * 100 : 0;
               return (
                 <div key={month.key} className="flex-1 flex flex-col items-center gap-1">
-                  <span className="text-[9px] text-muted-foreground font-medium">
+                  <span className="text-[9px] text-muted-foreground font-medium tabular-nums">
                     {month.total > 0 ? month.total : ""}
                   </span>
                   <div
@@ -112,10 +113,11 @@ export function ProgressCharts({ entries }: ProgressChartsProps) {
                       return (
                         <motion.div
                           key={type}
-                          initial={{ height: 0 }}
-                          animate={{ height: `${pct}%` }}
+                          initial={{ scaleY: 0 }}
+                          animate={{ scaleY: 1 }}
                           transition={{ duration: 0.6, delay: 0.1 }}
-                          className={`w-full ${barColors[type] ?? "bg-gray-500"}`}
+                          className={`w-full origin-bottom ${barColors[type] ?? "bg-gray-500"}`}
+                          style={{ height: `${pct}%` }}
                           title={`${ACTIVITY_META[type]?.label ?? type}: ${typeCount}`}
                         />
                       );

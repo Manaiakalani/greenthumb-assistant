@@ -6,6 +6,7 @@ dist
 .vscode
 *.md
 .env*
+screenshots
 e2e
 test-results
 playwright.config.ts

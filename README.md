@@ -2,7 +2,13 @@
 
 > The weather app for your lawn. Know exactly when to mow, fertilize, and water — and when to leave it alone.
 
-Grasswise is a progressive web app that delivers **personalized, season-aware lawn care guidance** based on your location, climate zone, and grass type. Track your lawn care activities, identify pests and diseases, follow guided tutorials, manage multiple lawns, earn achievement badges, snap progress photos, and share vintage collector cards with friends.
+Grasswise is a progressive web app with **75+ features** that delivers **personalized, season-aware lawn care guidance** based on your location, climate zone, and grass type. Track your lawn care activities, identify pests and diseases, follow guided tutorials, manage multiple lawns, earn achievement badges, snap progress photos, plan sprinkler zones, decode fertilizer labels, browse a lawn care glossary, generate progress reports, and share vintage collector cards with friends.
+
+---
+
+## 🌿 About
+
+Grasswise was built to give homeowners a free, privacy-first alternative to subscription lawn care services. All data stays on your device — no accounts, no tracking, no ads. The app combines university-backed agronomic research (Virginia Tech, NC State, Purdue, Texas A&M, UF/IFAS) with real-time weather data to deliver personalized lawn care guidance for any USDA hardiness zone.
 
 ---
 
@@ -120,13 +126,15 @@ Grasswise is a progressive web app that delivers **personalized, season-aware la
 
 ### Activity Tracking
 - **Lawn Journal** — Log mowing, watering, fertilizing, seeding, aeration, and more with notes and dates
+- **Full Calendar View** (`/calendar`) — Month grid with journal, soil plan, and checklist events color-coded by type
 - **Activity Heatmap** — GitHub-style contribution grid showing the last 16 weeks of activity at a glance
 - **Photo Timeline** — Capture lawn progress photos with camera support, image compression, and a lightbox gallery
 - **Before/After Compare** — Draggable slider to compare lawn photos side-by-side
-- **Streak Tracking** — See your consecutive-day activity streaks with a fire counter
-- **Weekly Goals** — Set per-activity weekly targets and track progress with auto-resetting each Monday
+- **Activity Streaks & Goals** — Weekly streak tracking with progress rings, per-activity targets, and auto-resetting each Monday
 - **Cost Tracker** — Log lawn care expenses by category with monthly/yearly summaries and category breakdown
 - **Monthly Checklist** — Auto-generated seasonal task list filtered by climate region with progress tracking
+- **Progress Report Generator** — Monthly/yearly activity summary with exportable stats
+- **Lawn Report Card** — Printable grade card with health score breakdown across key lawn care dimensions
 
 ### Tools & Data
 - **Grass Type Quiz** — 5-step interactive quiz (climate zone → blade shape → growth habit → color → results) with profile save
@@ -143,6 +151,11 @@ Grasswise is a progressive web app that delivers **personalized, season-aware la
 - **Calendar Export** — Download individual or all soil plan steps as .ics files for your calendar app
 - **Print Plan** — @media print optimized layout for printing soil plans
 - **Share Soil Plan** — Export soil plan as PNG image or share via Web Share API
+- **Lawn Care Glossary** (`/glossary`) — Searchable A-Z dictionary of 83+ lawn care terms with expandable definitions
+- **Fertilizer Label Decoder** — N-P-K ratio analysis with common presets and application rate guidance
+- **Soil Amendment Calculator** — Lime/sulfur amounts by target pH, current pH, and soil type
+- **Grass Comparison Tool** — Side-by-side trait ratings for 10 grass types across drought tolerance, shade, maintenance, and more
+- **Sprinkler Zone Planner** — Zone CRUD with schedules, head type selection, and gallon calculations
 - **Community Pulse** — See what other lawn keepers in your region are doing this season (dormant %, mowing %, watering %)
 
 ### Gamification
@@ -150,6 +163,7 @@ Grasswise is a progressive web app that delivers **personalized, season-aware la
 - **Collector Card Generator** — Vintage botanical-style "Lawn Care Collector's Card" with rarity system (Common → Legendary), fun titles, and foil shimmer effects
 - **Card Gallery** — Browse example cards from different regions and rarities with a detail lightbox
 - **Card Social Sharing** — Download your card as PNG, share via Web Share API, or copy a ready-made social media caption
+- **QR Profile Sharing** — Share your lawn profile via QR code for quick scanning
 
 ### Data Safety
 - **Full JSON Backup** — One-click export of all data (profile, journal, photos, achievements, goals, soil test, lawn size)
@@ -174,6 +188,12 @@ Grasswise is a progressive web app that delivers **personalized, season-aware la
 - **Privacy Policy** — Full /privacy page covering location data, localStorage, PWA, no-tracking, children's privacy
 - **Bundle Splitting** — Vendor chunks for React, Recharts, Motion, React Query, and UI — main bundle reduced by ~95%
 - **Safe Storage** — localStorage wrapper with try/catch for Safari private mode and quota exceeded errors
+- **Seasonal Tip of the Day** — 48 contextual tips by season, region, and current weather conditions
+- **Collapsible Tool Sections** — Tools page organized into 4 collapsible groups for cleaner navigation
+- **Dashboard Section Headers** — Visual hierarchy with labeled sections on the main dashboard
+- **Profile Stats Summary Card** — At-a-glance profile stats card on the profile page
+- **Keyboard Shortcuts** — Vim-style navigation with `?` help overlay for power users
+- **Vercel Best Practices** — Applied Vercel React Best Practices (65 rules) and Web Interface Guidelines
 - **Spanish Translation (i18n)** — Complete `es.json` translation file for all UI strings
 
 ---

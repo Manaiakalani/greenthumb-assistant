@@ -101,6 +101,7 @@
 @layer base {
   * {
     @apply border-border;
+    -webkit-tap-highlight-color: transparent;
   }
 
   body {
@@ -110,6 +111,23 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
+  }
+
+  /* Prevent 300ms double-tap zoom delay on mobile */
+  button,
+  a,
+  [role="button"],
+  input,
+  select,
+  textarea {
+    touch-action: manipulation;
+  }
+
+  /* Explicit dark-mode colors for native <select> on Windows */
+  .dark select,
+  .dark select option {
+    background-color: hsl(var(--card));
+    color: hsl(var(--foreground));
   }
 
   h1, h2, h3, h4 {

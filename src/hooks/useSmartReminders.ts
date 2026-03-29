@@ -16,9 +16,10 @@ export interface SmartReminder {
 export function useSmartReminders(
   weather?: WeatherData | null,
 ): SmartReminder[] {
+  const journal = useGrassStore((s) => s.journal);
+  const photos = useGrassStore((s) => s.photos);
+
   return useMemo(() => {
-    const journal = useGrassStore.getState().journal;
-    const photos = useGrassStore.getState().photos;
     const reminders: SmartReminder[] = [];
     const now = new Date();
 
@@ -167,5 +168,5 @@ export function useSmartReminders(
     reminders.sort((a, b) => order[a.priority] - order[b.priority]);
 
     return reminders.slice(0, 4); // Max 4 reminders
-  }, [weather]);
+  }, [weather, journal, photos]);
 }

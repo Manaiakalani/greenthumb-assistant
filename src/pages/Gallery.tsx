@@ -68,13 +68,16 @@ const EXAMPLE_PROFILES: (UserProfile & { _label: string })[] = [
 ];
 
 /** Simulated badge sets for example cards (different combos to show variety) */
-const EXAMPLE_BADGES: Achievement[][] = [
-  ACHIEVEMENTS.filter((a) => ["first-log", "profile-complete", "streak-3", "first-mow"].includes(a.id)),
-  ACHIEVEMENTS.filter((a) => ["first-log", "ten-logs", "summer-warrior", "card-generated", "dark-mode"].includes(a.id)),
-  ACHIEVEMENTS.filter((a) => ["first-log", "first-photo", "profile-complete"].includes(a.id)),
-  ACHIEVEMENTS.filter((a) => ["first-log", "ten-logs", "fifty-logs", "streak-7", "streak-3", "winter-survivor", "all-activities"].includes(a.id)),
-  ACHIEVEMENTS.filter((a) => ["first-log", "ten-logs", "first-photo", "ten-photos", "streak-3", "profile-complete", "card-generated", "location-detect"].includes(a.id)),
+const EXAMPLE_BADGE_IDS: Set<string>[] = [
+  new Set(["first-log", "profile-complete", "streak-3", "first-mow"]),
+  new Set(["first-log", "ten-logs", "summer-warrior", "card-generated", "dark-mode"]),
+  new Set(["first-log", "first-photo", "profile-complete"]),
+  new Set(["first-log", "ten-logs", "fifty-logs", "streak-7", "streak-3", "winter-survivor", "all-activities"]),
+  new Set(["first-log", "ten-logs", "first-photo", "ten-photos", "streak-3", "profile-complete", "card-generated", "location-detect"]),
 ];
+const EXAMPLE_BADGES: Achievement[][] = EXAMPLE_BADGE_IDS.map(
+  (ids) => ACHIEVEMENTS.filter((a) => ids.has(a.id)),
+);
 
 const Gallery = () => {
   const { profile } = useProfile();
@@ -95,7 +98,7 @@ const Gallery = () => {
           {/* Header */}
           <div className="mt-4 mb-6">
             <h1 className="font-display text-2xl font-bold text-foreground flex items-center gap-2">
-              <Sparkles className="h-6 w-6 text-primary" />
+              <Sparkles aria-hidden="true" className="h-6 w-6 text-primary" />
               Card Gallery
             </h1>
             <p className="text-sm text-muted-foreground mt-1">
@@ -136,7 +139,7 @@ const Gallery = () => {
                   }
                 }}
                 aria-label={`View ${label} card`}
-                className={`rounded-xl border p-2 cursor-pointer transition-all hover:shadow-lg ${
+                className={`rounded-xl border p-2 cursor-pointer transition-shadow hover:shadow-lg focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none ${
                   isUser
                     ? "border-primary/30 bg-primary/5"
                     : "border-primary/10 bg-card"
@@ -171,8 +174,8 @@ const Gallery = () => {
                 onClick={() => setSelectedIdx(null)}
                 onKeyDown={(e) => {
                   if (e.key === 'Escape') setSelectedIdx(null);
-                  if (e.key === 'ArrowLeft' && selectedIdx > 0) setSelectedIdx(selectedIdx - 1);
-                  if (e.key === 'ArrowRight' && selectedIdx < allCards.length - 1) setSelectedIdx(selectedIdx + 1);
+                  if (e.key === 'ArrowLeft') setSelectedIdx((prev) => prev !== null && prev > 0 ? prev - 1 : prev);
+                  if (e.key === 'ArrowRight') setSelectedIdx((prev) => prev !== null && prev < allCards.length - 1 ? prev + 1 : prev);
                 }}
                 tabIndex={-1}
                 ref={(el) => el?.focus()}
@@ -188,23 +191,23 @@ const Gallery = () => {
 
                   <div className="flex justify-between mt-3">
                     <button
-                      onClick={() => setSelectedIdx(Math.max(0, selectedIdx - 1))}
+                      onClick={() => setSelectedIdx((prev) => prev !== null ? Math.max(0, prev - 1) : prev)}
                       disabled={selectedIdx === 0}
                       className="p-2 rounded-full bg-white/10 text-white disabled:opacity-30 hover:bg-white/20"
                       aria-label="Previous card"
                     >
-                      <ChevronLeft className="h-5 w-5" />
+                      <ChevronLeft aria-hidden="true" className="h-5 w-5" />
                     </button>
                     <p className="text-xs text-white/70 self-center">
                       {allCards[selectedIdx].label}
                     </p>
                     <button
-                      onClick={() => setSelectedIdx(Math.min(allCards.length - 1, selectedIdx + 1))}
+                      onClick={() => setSelectedIdx((prev) => prev !== null ? Math.min(allCards.length - 1, prev + 1) : prev)}
                       disabled={selectedIdx === allCards.length - 1}
                       className="p-2 rounded-full bg-white/10 text-white disabled:opacity-30 hover:bg-white/20"
                       aria-label="Next card"
                     >
-                      <ChevronRight className="h-5 w-5" />
+                      <ChevronRight aria-hidden="true" className="h-5 w-5" />
                     </button>
                   </div>
                 </motion.div>

@@ -12,7 +12,7 @@ function GrasswiseLogo({ className }: { className?: string }) {
     <Link to="/" className={className}>
       <div className="flex items-center gap-2">
         <div className="rounded-lg bg-primary p-1.5">
-          <Leaf className="h-5 w-5 text-primary-foreground" />
+          <Leaf aria-hidden="true" className="h-5 w-5 text-primary-foreground" />
         </div>
         <span className="font-display text-xl font-bold text-foreground tracking-tight">
           {t("common.appName")}
@@ -37,9 +37,9 @@ function ThemeToggle() {
       aria-label={resolvedTheme === "dark" ? t("common.switchToLight") : t("common.switchToDark")}
     >
       {resolvedTheme === "dark" ? (
-        <Sun className="h-4 w-4" />
+        <Sun aria-hidden="true" className="h-4 w-4" />
       ) : (
-        <Moon className="h-4 w-4" />
+        <Moon aria-hidden="true" className="h-4 w-4" />
       )}
     </button>
   );
@@ -67,7 +67,7 @@ export function AppHeader() {
             className="rounded-full p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
             aria-label={t("common.editProfile")}
           >
-            <User className="h-4 w-4" />
+            <User aria-hidden="true" className="h-4 w-4" />
           </Link>
         </div>
       </div>

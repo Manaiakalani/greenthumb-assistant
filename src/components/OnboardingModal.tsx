@@ -54,14 +54,14 @@ export function OnboardingModal({ onComplete, onGoToProfile }: OnboardingModalPr
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: -20, scale: 0.95 }}
         transition={{ type: "spring", duration: 0.5 }}
-        className="w-full max-w-sm rounded-2xl bg-card border border-primary/15 shadow-2xl overflow-hidden"
+        className="w-full max-w-sm rounded-2xl bg-card border border-primary/15 shadow-2xl overflow-hidden overscroll-y-contain"
       >
         {/* Progress dots */}
         <div className="flex justify-center gap-2 pt-5">
           {STEPS.map((_, i) => (
             <div
               key={i}
-              className={`h-1.5 rounded-full transition-all duration-300 ${
+              className={`h-1.5 rounded-full transition-[width,background-color] duration-300 ${
                 i === step ? "w-6 bg-primary" : i < step ? "w-1.5 bg-primary/50" : "w-1.5 bg-border"
               }`}
             />
@@ -91,7 +91,7 @@ export function OnboardingModal({ onComplete, onGoToProfile }: OnboardingModalPr
             {step > 0 && (
               <Button
                 variant="outline"
-                onClick={() => setStep(step - 1)}
+                onClick={() => setStep((s) => s - 1)}
                 className="flex-1"
                 size="sm"
               >
@@ -120,7 +120,7 @@ export function OnboardingModal({ onComplete, onGoToProfile }: OnboardingModalPr
               </>
             ) : (
               <Button
-                onClick={() => setStep(step + 1)}
+                onClick={() => setStep((s) => s + 1)}
                 className="flex-1 gap-1 bg-primary"
                 size="sm"
               >

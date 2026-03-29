@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import {
   ArrowLeft, Globe, HelpCircle, Leaf, Loader2, LocateFixed, MapPin,
@@ -40,7 +40,6 @@ import {
 
 const Profile = () => {
   const { profile, updateProfile } = useProfile();
-  const navigate = useNavigate();
 
   const handleZoneChange = useCallback(
     (zone: USDAZone) => {
@@ -127,11 +126,13 @@ const Profile = () => {
           <Button
             variant="ghost"
             size="sm"
-            onClick={() => navigate("/")}
+            asChild
             className="gap-1.5 text-muted-foreground hover:text-foreground"
           >
-            <ArrowLeft className="h-4 w-4" />
-            Back to Dashboard
+            <Link to="/">
+              <ArrowLeft aria-hidden="true" className="h-4 w-4" />
+              Back to Dashboard
+            </Link>
           </Button>
         </motion.div>
 
@@ -160,7 +161,7 @@ const Profile = () => {
           {/* Summary card — at the top */}
           <div className="rounded-xl border border-primary/20 bg-primary/5 p-6 shadow-card">
             <h2 className="font-display text-base font-semibold text-foreground mb-4 flex items-center gap-2">
-              <Ruler className="h-4 w-4 text-primary" />
+              <Ruler aria-hidden="true" className="h-4 w-4 text-primary" />
               Profile Summary
             </h2>
             <div className="grid grid-cols-2 gap-5 text-sm">
@@ -174,7 +175,7 @@ const Profile = () => {
               ].map(({ icon: Icon, label, value }) => (
                 <div key={label} className="flex items-center gap-2.5">
                   <div className="rounded-lg bg-primary/10 p-1.5 shrink-0">
-                    <Icon className="h-4 w-4 text-primary" />
+                    <Icon aria-hidden="true" className="h-4 w-4 text-primary" />
                   </div>
                   <div className="min-w-0">
                     <p className="text-muted-foreground text-xs">{label}</p>
@@ -187,7 +188,7 @@ const Profile = () => {
             {badgesEarned.length > 0 && (
               <div className="mt-4 pt-3 border-t border-primary/10">
                 <div className="flex items-center gap-2 mb-2">
-                  <Trophy className="h-3.5 w-3.5 text-primary" />
+                  <Trophy aria-hidden="true" className="h-3.5 w-3.5 text-primary" />
                   <span className="text-xs font-medium text-foreground">
                     Badges ({badgesEarned.length}/{badgesTotal})
                   </span>
@@ -222,7 +223,7 @@ const Profile = () => {
           {/* Personal */}
           <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card space-y-5">
             <h2 className="font-display text-base font-semibold text-foreground flex items-center gap-2">
-              <Sprout className="h-4 w-4 text-primary" />
+              <Sprout aria-hidden="true" className="h-4 w-4 text-primary" />
               Personal
             </h2>
 
@@ -230,7 +231,9 @@ const Profile = () => {
               <Label htmlFor="name">Your Name</Label>
               <Input
                 id="name"
-                placeholder="e.g. Alex"
+                name="display-name"
+                autoComplete="off"
+                placeholder="e.g. Alex…"
                 maxLength={40}
                 value={profile.name}
                 onChange={(e) => updateProfile({ name: e.target.value })}
@@ -241,11 +244,13 @@ const Profile = () => {
               <Label htmlFor="location">Location</Label>
               <div className="flex gap-2">
                 <div className="relative flex-1">
-                  <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                  <MapPin aria-hidden="true" className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                   <Input
                     id="location"
+                    name="location"
+                    autoComplete="off"
                     className="pl-9"
-                    placeholder="e.g. Charlotte, NC"
+                    placeholder="e.g. Charlotte, NC…"
                     maxLength={60}
                     value={profile.location}
                     onChange={(e) => updateProfile({ location: e.target.value })}
@@ -261,9 +266,9 @@ const Profile = () => {
                   title="Auto-detect location, zone, and region"
                 >
                   {detecting ? (
-                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <Loader2 aria-hidden="true" className="h-4 w-4 animate-spin" />
                   ) : (
-                    <LocateFixed className="h-4 w-4" />
+                    <LocateFixed aria-hidden="true" className="h-4 w-4" />
                   )}
                 </Button>
               </div>
@@ -276,18 +281,18 @@ const Profile = () => {
           {/* Climate & Zone */}
           <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card space-y-5">
             <h2 className="font-display text-base font-semibold text-foreground flex items-center gap-2">
-              <Globe className="h-4 w-4 text-primary" />
+              <Globe aria-hidden="true" className="h-4 w-4 text-primary" />
               Climate & Zone
             </h2>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>USDA Hardiness Zone</Label>
+                <Label htmlFor="usda-zone">USDA Hardiness Zone</Label>
                 <Select
                   value={profile.zone}
                   onValueChange={(val) => handleZoneChange(val as USDAZone)}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger id="usda-zone">
                     <SelectValue placeholder="Select zone" />
                   </SelectTrigger>
                   <SelectContent>
@@ -301,14 +306,14 @@ const Profile = () => {
               </div>
 
               <div className="space-y-2">
-                <Label>Climate Region</Label>
+                <Label htmlFor="climate-region">Climate Region</Label>
                 <Select
                   value={profile.region}
                   onValueChange={(val) =>
                     handleRegionChange(val as ClimateRegion)
                   }
                 >
-                  <SelectTrigger>
+                  <SelectTrigger id="climate-region">
                     <SelectValue placeholder="Select region" />
                   </SelectTrigger>
                   <SelectContent>
@@ -331,18 +336,18 @@ const Profile = () => {
           {/* Lawn details */}
           <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card space-y-5">
             <h2 className="font-display text-base font-semibold text-foreground flex items-center gap-2">
-              <Leaf className="h-4 w-4 text-primary" />
+              <Leaf aria-hidden="true" className="h-4 w-4 text-primary" />
               Lawn Details
             </h2>
 
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-2">
-                <Label>Grass Type</Label>
+                <Label htmlFor="grass-type">Grass Type</Label>
                 <Select
                   value={profile.grassType}
                   onValueChange={(val) => updateProfile({ grassType: val })}
                 >
-                  <SelectTrigger>
+                  <SelectTrigger id="grass-type">
                     <SelectValue placeholder="Select grass" />
                   </SelectTrigger>
                   <SelectContent>
@@ -357,20 +362,20 @@ const Profile = () => {
                   to="/grass-quiz"
                   className="inline-flex items-center gap-1 text-xs text-primary hover:underline"
                 >
-                  <HelpCircle className="h-3 w-3" />
+                  <HelpCircle aria-hidden="true" className="h-3 w-3" />
                   Not sure? Take the grass quiz →
                 </Link>
               </div>
 
               <div className="space-y-2">
-                <Label>Lawn Size</Label>
+                <Label htmlFor="lawn-size">Lawn Size</Label>
                 <Select
                   value={profile.lawnSize}
                   onValueChange={(val) =>
                     updateProfile({ lawnSize: val as LawnSize })
                   }
                 >
-                  <SelectTrigger>
+                  <SelectTrigger id="lawn-size">
                     <SelectValue placeholder="Select size" />
                   </SelectTrigger>
                   <SelectContent>

@@ -8,7 +8,7 @@ function QuickStat({ icon: Icon, label, value, sub }: QuickStatItem) {
   return (
     <div className="flex flex-col items-center gap-1.5 p-4 rounded-xl bg-card border border-primary/15 shadow-card">
       <Icon aria-hidden="true" className="h-4 w-4 text-primary mb-0.5" />
-      <span className="text-lg font-display font-bold text-foreground">{value}</span>
+      <span className="text-lg font-display font-bold text-foreground tabular-nums">{value}</span>
       <span className="text-[11px] text-muted-foreground leading-tight text-center">{label}</span>
       {sub && <span className="text-[10px] text-muted-foreground/60">{sub}</span>}
     </div>

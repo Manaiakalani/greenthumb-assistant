@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
 import {
   ArrowLeft,
@@ -47,19 +47,19 @@ const STEPS: QuizStep[] = [
         id: "cool",
         label: "Cool (Zones 1–4)",
         description: "Northern regions with cold winters and mild summers.",
-        icon: <Flower2 className="h-5 w-5" />,
+        icon: <Flower2 aria-hidden="true" className="h-5 w-5" />,
       },
       {
         id: "transition",
         label: "Transition (Zones 5–7)",
         description: "Mid-range climates with hot summers and cold winters.",
-        icon: <Sun className="h-5 w-5" />,
+        icon: <Sun aria-hidden="true" className="h-5 w-5" />,
       },
       {
         id: "warm",
         label: "Warm (Zones 8–13)",
         description: "Southern regions with mild winters and hot summers.",
-        icon: <MapPin className="h-5 w-5" />,
+        icon: <MapPin aria-hidden="true" className="h-5 w-5" />,
       },
     ],
   },
@@ -72,25 +72,25 @@ const STEPS: QuizStep[] = [
         id: "wide",
         label: "Wide, flat blades",
         description: "St. Augustine, Tall Fescue",
-        icon: <Leaf className="h-5 w-5" />,
+        icon: <Leaf aria-hidden="true" className="h-5 w-5" />,
       },
       {
         id: "fine",
         label: "Fine, needle-like",
         description: "Fine Fescue, Bermuda",
-        icon: <Wheat className="h-5 w-5" />,
+        icon: <Wheat aria-hidden="true" className="h-5 w-5" />,
       },
       {
         id: "boat",
         label: "Boat-shaped tips",
         description: "Kentucky Bluegrass",
-        icon: <Sprout className="h-5 w-5" />,
+        icon: <Sprout aria-hidden="true" className="h-5 w-5" />,
       },
       {
         id: "coarse",
         label: "Pointed, coarse",
         description: "Zoysia, Bahia",
-        icon: <Leaf className="h-5 w-5" />,
+        icon: <Leaf aria-hidden="true" className="h-5 w-5" />,
       },
     ],
   },
@@ -103,19 +103,19 @@ const STEPS: QuizStep[] = [
         id: "stolons",
         label: "Stolons (above ground)",
         description: "Bermuda, St. Augustine, Centipede",
-        icon: <Sprout className="h-5 w-5" />,
+        icon: <Sprout aria-hidden="true" className="h-5 w-5" />,
       },
       {
         id: "rhizomes",
         label: "Rhizomes (underground)",
         description: "Kentucky Bluegrass, Zoysia",
-        icon: <Flower2 className="h-5 w-5" />,
+        icon: <Flower2 aria-hidden="true" className="h-5 w-5" />,
       },
       {
         id: "bunch",
         label: "Bunch-type / clumping",
         description: "Tall Fescue, Ryegrass, Bahia",
-        icon: <Wheat className="h-5 w-5" />,
+        icon: <Wheat aria-hidden="true" className="h-5 w-5" />,
       },
     ],
   },
@@ -128,25 +128,25 @@ const STEPS: QuizStep[] = [
         id: "blue-green",
         label: "Deep blue-green",
         description: "Kentucky Bluegrass",
-        icon: <Leaf className="h-5 w-5" />,
+        icon: <Leaf aria-hidden="true" className="h-5 w-5" />,
       },
       {
         id: "medium-green",
         label: "Medium green",
         description: "Tall Fescue, Ryegrass",
-        icon: <Sprout className="h-5 w-5" />,
+        icon: <Sprout aria-hidden="true" className="h-5 w-5" />,
       },
       {
         id: "dark-green",
         label: "Dark green",
         description: "Bermuda, Zoysia",
-        icon: <Leaf className="h-5 w-5" />,
+        icon: <Leaf aria-hidden="true" className="h-5 w-5" />,
       },
       {
         id: "light-green",
         label: "Light / apple green",
         description: "Centipede, St. Augustine",
-        icon: <Sun className="h-5 w-5" />,
+        icon: <Sun aria-hidden="true" className="h-5 w-5" />,
       },
     ],
   },
@@ -341,7 +341,7 @@ const GrassQuiz = () => {
             onClick={() => (currentStep === 0 ? navigate(-1) : goBack())}
             className="gap-1.5 text-muted-foreground hover:text-foreground"
           >
-            <ArrowLeft className="h-4 w-4" />
+            <ArrowLeft aria-hidden="true" className="h-4 w-4" />
             {currentStep === 0 ? "Back" : "Previous Question"}
           </Button>
         </motion.div>
@@ -395,7 +395,7 @@ const GrassQuiz = () => {
                       key={opt.id}
                       type="button"
                       onClick={() => selectOption(opt.id)}
-                      className={`w-full text-left rounded-xl border p-4 transition-colors flex items-start gap-3 ${
+                      className={`w-full text-left rounded-xl border p-4 transition-colors flex items-start gap-3 focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none ${
                         selected
                           ? "border-primary bg-primary/10 ring-2 ring-primary/30"
                           : "border-border bg-card hover:border-primary/40"
@@ -421,7 +421,7 @@ const GrassQuiz = () => {
                         )}
                       </div>
                       {selected && (
-                        <Check className="h-5 w-5 text-primary shrink-0 ml-auto self-center" />
+                        <Check aria-hidden="true" className="h-5 w-5 text-primary shrink-0 ml-auto self-center" />
                       )}
                     </button>
                   );
@@ -436,7 +436,7 @@ const GrassQuiz = () => {
                   className="gap-1.5"
                 >
                   {isLastQuestion ? "See Results" : "Next"}
-                  <ArrowRight className="h-4 w-4" />
+                  <ArrowRight aria-hidden="true" className="h-4 w-4" />
                 </Button>
               </div>
             </motion.div>
@@ -471,7 +471,7 @@ const GrassQuiz = () => {
                       <div className="flex items-center justify-between mb-3">
                         <div className="flex items-center gap-2">
                           <div className="rounded-lg bg-primary/10 p-2">
-                            <Sprout className="h-5 w-5 text-primary" />
+                            <Sprout aria-hidden="true" className="h-5 w-5 text-primary" />
                           </div>
                           <div>
                             <p className="font-display font-semibold text-foreground">
@@ -495,9 +495,10 @@ const GrassQuiz = () => {
                       {/* Confidence bar */}
                       <div className="h-2 rounded-full bg-muted overflow-hidden mb-4">
                         <motion.div
-                          className="h-full rounded-full bg-primary"
-                          initial={{ width: 0 }}
-                          animate={{ width: `${r.confidence}%` }}
+                          className="h-full rounded-full bg-primary origin-left"
+                          style={{ width: `${r.confidence}%` }}
+                          initial={{ scaleX: 0 }}
+                          animate={{ scaleX: 1 }}
                           transition={{
                             delay: 0.3 + i * 0.2,
                             duration: 0.6,
@@ -515,7 +516,7 @@ const GrassQuiz = () => {
                         variant={i === 0 ? "default" : "outline"}
                         className="w-full gap-1.5"
                       >
-                        <Check className="h-4 w-4" />
+                        <Check aria-hidden="true" className="h-4 w-4" />
                         Use {r.grass}
                       </Button>
                     </div>
@@ -534,15 +535,17 @@ const GrassQuiz = () => {
                   }}
                   className="gap-1.5"
                 >
-                  <ArrowLeft className="h-4 w-4" />
+                  <ArrowLeft aria-hidden="true" className="h-4 w-4" />
                   Retake Quiz
                 </Button>
                 <Button
                   variant="link"
-                  onClick={() => navigate("/profile")}
+                  asChild
                   className="text-muted-foreground"
                 >
-                  Back to Profile
+                  <Link to="/profile">
+                    Back to Profile
+                  </Link>
                 </Button>
               </div>
             </motion.div>

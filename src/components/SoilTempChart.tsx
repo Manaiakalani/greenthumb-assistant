@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { motion } from "motion/react";
+/* useMemo kept for activeRange only */
 import { Thermometer } from "lucide-react";
 
 interface SoilTempChartProps {
@@ -27,11 +28,10 @@ export function SoilTempChart({ currentTemp }: SoilTempChartProps) {
     return RANGES.find((r) => currentTemp >= r.min && currentTemp < r.max) ?? RANGES[RANGES.length - 1];
   }, [currentTemp]);
 
-  // Position of the marker on the bar (0–100%)
-  const markerPct = useMemo(() => {
-    if (currentTemp === null) return 50;
-    return Math.min(100, Math.max(0, ((currentTemp - 0) / 120) * 100));
-  }, [currentTemp]);
+  // Position of the marker on the bar (0–100%) — simple arithmetic, no memo needed
+  const markerPct = currentTemp === null
+    ? 50
+    : Math.min(100, Math.max(0, (currentTemp / 120) * 100));
 
   if (currentTemp === null) {
     return (

@@ -43,7 +43,7 @@ const Tools = () => {
           {/* Header */}
           <div className="mt-4 mb-6">
             <h1 className="font-display text-2xl font-bold text-foreground flex items-center gap-2">
-              <Wrench className="h-6 w-6 text-primary" />
+              <Wrench aria-hidden="true" className="h-6 w-6 text-primary" />
               Lawn Tools
             </h1>
             <p className="text-sm text-muted-foreground mt-1">
@@ -52,14 +52,14 @@ const Tools = () => {
           </div>
 
           {/* Soil & Fertilizer Plan CTA */}
-          <Link to="/plan">
+          <Link to="/plan" className="focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none rounded-xl">
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               className="mb-6 rounded-xl border border-primary/20 bg-gradient-to-r from-primary/5 via-card to-card p-4 shadow-card flex items-center gap-3 hover:border-primary/40 transition-colors group"
             >
               <div className="rounded-lg bg-primary/15 p-2.5">
-                <ClipboardList className="h-5 w-5 text-primary" />
+                <ClipboardList aria-hidden="true" className="h-5 w-5 text-primary" />
               </div>
               <div className="flex-1 min-w-0">
                 <h3 className="text-sm font-display font-semibold text-foreground">
@@ -69,7 +69,7 @@ const Tools = () => {
                   Zone-based soil & fertilizer schedule for {profile.region}.
                 </p>
               </div>
-              <ChevronRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
+              <ChevronRight aria-hidden="true" className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors shrink-0" />
             </motion.div>
           </Link>
 
@@ -98,6 +98,7 @@ const Tools = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 }}
             className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
+            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 300px" }}
           >
             <SoilTempChart currentTemp={weather?.current.soilTemp ?? null} />
           </motion.div>
@@ -108,6 +109,7 @@ const Tools = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.15 }}
             className="mt-6 rounded-xl border border-primary/15 bg-card p-5 shadow-card"
+            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 300px" }}
           >
             <SoilTestCard />
           </motion.div>
@@ -118,6 +120,7 @@ const Tools = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
             className="mt-6"
+            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 400px" }}
           >
             <ProgressCharts />
           </motion.div>
@@ -129,6 +132,7 @@ const Tools = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.25 }}
               className="mt-6"
+              style={{ contentVisibility: "auto", containIntrinsicSize: "auto 350px" }}
             >
               <Suspense fallback={<ChartSkeleton />}>
                 <ForecastChart forecast={weather.daily} />
@@ -142,6 +146,7 @@ const Tools = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 }}
             className="mt-6"
+            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 350px" }}
           >
             <Suspense fallback={<ChartSkeleton />}>
               <WeeklyActivityChart />
@@ -154,6 +159,7 @@ const Tools = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.35 }}
             className="mt-6"
+            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 350px" }}
           >
             <Suspense fallback={<ChartSkeleton />}>
               <LawnHealthRadar />
@@ -166,6 +172,7 @@ const Tools = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
             className="mt-6"
+            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 350px" }}
           >
             <Suspense fallback={<ChartSkeleton />}>
               <AchievementDonut />

@@ -115,6 +115,8 @@ function LeafCorner({ flip, className }: { flip?: boolean; className?: string })
     <svg
       viewBox="0 0 80 80"
       className={className}
+      aria-hidden="true"
+      focusable="false"
       style={{
         transform: flip ? "scaleX(-1)" : undefined,
         opacity: 0.12,
@@ -147,8 +149,10 @@ interface CollectorCardProps {
   earnedBadges?: Achievement[];
 }
 
+const EMPTY_BADGES: Achievement[] = [];
+
 export const CollectorCard = forwardRef<HTMLDivElement, CollectorCardProps>(
-  ({ profile, earnedBadges = [] }, ref) => {
+  ({ profile, earnedBadges = EMPTY_BADGES }, ref) => {
     const rarity = deriveRarity(profile);
     const cfg = RARITY_CONFIG[rarity];
     const displayBadges = earnedBadges.slice(0, 6);
@@ -332,7 +336,7 @@ export const CollectorCard = forwardRef<HTMLDivElement, CollectorCardProps>(
                       flexShrink: 0,
                     }}
                   >
-                    <Icon size={14} color="#d4cfc0" strokeWidth={2.2} />
+                    <Icon aria-hidden="true" size={14} color="#d4cfc0" strokeWidth={2.2} />
                   </div>
                   <div style={{ minWidth: 0 }}>
                     <p
@@ -450,7 +454,7 @@ export const CollectorCard = forwardRef<HTMLDivElement, CollectorCardProps>(
                   border: `1px solid ${cfg.border}66`,
                 }}
               >
-                <RarityIcon size={13} color={cfg.border} strokeWidth={2.5} />
+                <RarityIcon aria-hidden="true" size={13} color={cfg.border} strokeWidth={2.5} />
                 <span
                   style={{
                     fontSize: 10.5,

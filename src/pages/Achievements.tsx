@@ -15,7 +15,7 @@ const Achievements = () => {
           {/* Header */}
           <div className="mt-4 mb-6">
             <h1 className="font-display text-2xl font-bold text-foreground flex items-center gap-2">
-              <Trophy className="h-6 w-6 text-primary" />
+              <Trophy className="h-6 w-6 text-primary" aria-hidden="true" />
               Achievements
             </h1>
             <p className="text-sm text-muted-foreground mt-1">

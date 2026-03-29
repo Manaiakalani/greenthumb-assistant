@@ -30,7 +30,7 @@ export class ErrorBoundary extends Component<Props, State> {
       return (
         <div className="min-h-screen flex items-center justify-center bg-background px-6">
           <div className="max-w-sm text-center space-y-4">
-            <AlertTriangle className="h-12 w-12 text-amber-500 mx-auto" />
+            <AlertTriangle className="h-12 w-12 text-amber-500 mx-auto" aria-hidden="true" />
             <h1 className="font-display text-xl font-bold text-foreground">
               Something went wrong
             </h1>

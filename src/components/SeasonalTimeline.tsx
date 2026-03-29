@@ -58,7 +58,7 @@ export const SeasonalTimeline = React.memo(function SeasonalTimeline() {
             className="p-2 group"
           >
             <span className={cn(
-              "block h-1.5 rounded-full transition-all duration-300",
+              "block h-1.5 rounded-full transition-[width,background-color] duration-300",
               i === currentMonth
                 ? "w-4 bg-primary"
                 : i >= windowStart && i < windowStart + VISIBLE_COUNT
@@ -98,7 +98,7 @@ export const SeasonalTimeline = React.memo(function SeasonalTimeline() {
                   exit={{ opacity: 0, scale: 0.85 }}
                   transition={{ duration: 0.2 }}
                   className={cn(
-                    "rounded-lg p-2.5 relative transition-all",
+                    "rounded-lg p-2.5 relative transition-colors",
                     phaseColors[month.phase],
                     realIndex === currentMonth && "ring-2 ring-primary ring-offset-1 ring-offset-background"
                   )}

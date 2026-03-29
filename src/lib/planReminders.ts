@@ -124,7 +124,8 @@ export function checkAndNotify(
 /** Mark a reminder as dismissed (persisted in localStorage). */
 export function dismissReminder(id: string): void {
   const dismissed = getDismissedReminders();
-  if (!dismissed.includes(id)) {
+  const dismissedSet = new Set(dismissed);
+  if (!dismissedSet.has(id)) {
     dismissed.push(id);
     safeSetItem(DISMISSED_KEY, dismissed);
   }

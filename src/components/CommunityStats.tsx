@@ -67,21 +67,21 @@ export const CommunityStats = React.memo(function CommunityStats() {
           <div className="flex items-center justify-center gap-1 mb-1">
             <TrendingUp aria-hidden="true" className="h-3.5 w-3.5 text-lawn-dormant" />
           </div>
-          <p className="text-lg font-display font-bold text-foreground">{stats.dormant}%</p>
+          <p className="text-lg font-display font-bold text-foreground tabular-nums">{stats.dormant}%</p>
           <p className="text-[11px] text-muted-foreground">Lawns Dormant</p>
         </div>
         <div className="text-center">
           <div className="flex items-center justify-center gap-1 mb-1">
             <Scissors aria-hidden="true" className="h-3.5 w-3.5 text-primary" />
           </div>
-          <p className="text-lg font-display font-bold text-foreground">{stats.mowing}%</p>
+          <p className="text-lg font-display font-bold text-foreground tabular-nums">{stats.mowing}%</p>
           <p className="text-[11px] text-muted-foreground">Actively Mowing</p>
         </div>
         <div className="text-center">
           <div className="flex items-center justify-center gap-1 mb-1">
             <Droplets aria-hidden="true" className="h-3.5 w-3.5 text-blue-500" />
           </div>
-          <p className="text-lg font-display font-bold text-foreground">{stats.watering}%</p>
+          <p className="text-lg font-display font-bold text-foreground tabular-nums">{stats.watering}%</p>
           <p className="text-[11px] text-muted-foreground">Watering</p>
         </div>
       </div>

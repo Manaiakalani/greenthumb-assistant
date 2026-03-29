@@ -30,7 +30,7 @@ import {
   type PlanApplication,
   type PlanProgress,
 } from "@/data/soilPlans";
-import { SoilPlanGantt } from "@/components/charts";
+import { SoilPlanGantt } from "@/components/charts/SoilPlanGantt";
 import {
   generateIcsEvent,
   generateIcsMultipleEvents,
@@ -72,7 +72,7 @@ function StepCard({
             onToggle();
             haptic("light");
           }}
-          className={`relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 transition-all duration-200 ${
+          className={`relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border-2 transition-colors duration-200 ${
             isComplete
               ? "border-primary bg-primary text-primary-foreground scale-100"
               : isActive
@@ -82,7 +82,7 @@ function StepCard({
           aria-label={isComplete ? `Mark "${step.title}" incomplete` : `Mark "${step.title}" complete`}
         >
           {isComplete ? (
-            <Check className="h-4 w-4" />
+            <Check aria-hidden="true" className="h-4 w-4" />
           ) : (
             <span className="text-xs font-semibold">{index + 1}</span>
           )}
@@ -93,7 +93,7 @@ function StepCard({
 
       {/* Card body */}
       <div
-        className={`flex-1 mb-4 rounded-xl border p-4 transition-all duration-200 ${
+        className={`flex-1 mb-4 rounded-xl border p-4 transition-[color,background-color,border-color,box-shadow] duration-200 ${
           isComplete
             ? "border-primary/20 bg-primary/5"
             : isActive
@@ -133,7 +133,7 @@ function StepCard({
             aria-controls={`step-panel-${step.id}`}
             className="flex items-center gap-1 text-[11px] text-primary hover:underline"
           >
-            {expanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+            {expanded ? <ChevronUp aria-hidden="true" className="h-3 w-3" /> : <ChevronDown aria-hidden="true" className="h-3 w-3" />}
             {expanded ? "Less" : "Instructions"}
           </button>
           <button
@@ -152,7 +152,7 @@ function StepCard({
             aria-label="Add to calendar"
             title="Add to calendar"
           >
-            <Calendar className="h-3 w-3" />
+            <Calendar aria-hidden="true" className="h-3 w-3" />
             <span className="sr-only sm:not-sr-only">Add to calendar</span>
           </button>
         </div>
@@ -172,7 +172,7 @@ function StepCard({
               </p>
               {step.tips && (
                 <p className="mt-1.5 flex items-center gap-1 text-[11px] text-primary/80">
-                  <Info className="h-3 w-3 shrink-0" />
+                  <Info aria-hidden="true" className="h-3 w-3 shrink-0" />
                   {step.tips}
                 </p>
               )}
@@ -245,9 +245,9 @@ const SoilPlan = () => {
           {/* Back link */}
           <Link
             to="/tools"
-            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mt-3 mb-4 transition-colors"
+            className="inline-flex items-center gap-1.5 text-sm text-muted-foreground hover:text-foreground mt-3 mb-4 transition-colors focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none rounded"
           >
-            <ArrowLeft className="h-4 w-4" />
+            <ArrowLeft aria-hidden="true" className="h-4 w-4" />
             Back to Tools
           </Link>
 
@@ -259,7 +259,7 @@ const SoilPlan = () => {
           >
             <div className="flex items-center justify-between">
               <h1 className="font-display text-2xl font-bold text-foreground flex items-center gap-2">
-                <ClipboardList className="h-6 w-6 text-primary" />
+                <ClipboardList aria-hidden="true" className="h-6 w-6 text-primary" />
                 My Lawn Plan
               </h1>
               <button
@@ -267,7 +267,7 @@ const SoilPlan = () => {
                 className="no-print inline-flex items-center gap-1.5 rounded-lg border border-border bg-card px-3 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground hover:border-primary/40 transition-colors shadow-sm"
                 aria-label="Print plan"
               >
-                <Printer className="h-4 w-4" />
+                <Printer aria-hidden="true" className="h-4 w-4" />
                 Print Plan
               </button>
             </div>
@@ -286,7 +286,7 @@ const SoilPlan = () => {
               className="mb-6 rounded-xl border border-primary/30 bg-primary/5 p-4 flex items-center gap-3"
             >
               <div className="rounded-lg bg-primary/10 p-2">
-                <MapPin className="h-5 w-5 text-primary" />
+                <MapPin aria-hidden="true" className="h-5 w-5 text-primary" />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-foreground">
@@ -298,7 +298,7 @@ const SoilPlan = () => {
               </div>
               <Link
                 to="/profile"
-                className="shrink-0 rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+                className="shrink-0 rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:bg-primary/90 transition-colors focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none"
               >
                 Set Up
               </Link>
@@ -314,7 +314,7 @@ const SoilPlan = () => {
           >
             <div className="flex items-center gap-2 mb-2">
               <div className="rounded-lg bg-primary/15 p-1.5">
-                <Sparkles className="h-4 w-4 text-primary" />
+                <Sparkles aria-hidden="true" className="h-4 w-4 text-primary" />
               </div>
               <h3 className="font-display text-sm font-semibold text-foreground">
                 Plan Summary
@@ -328,13 +328,14 @@ const SoilPlan = () => {
             <div className="flex items-center gap-3">
               <div className="flex-1 h-2 rounded-full bg-muted overflow-hidden">
                 <motion.div
-                  className="h-full rounded-full bg-primary"
-                  initial={{ width: 0 }}
-                  animate={{ width: `${pct}%` }}
+                  className="h-full rounded-full bg-primary origin-left"
+                  style={{ width: `${pct}%` }}
+                  initial={{ scaleX: 0 }}
+                  animate={{ scaleX: 1 }}
                   transition={{ duration: 0.6, ease: "easeOut" }}
                 />
               </div>
-              <span className="text-xs font-medium text-foreground whitespace-nowrap">
+              <span className="text-xs font-medium text-foreground whitespace-nowrap tabular-nums">
                 {completedCount}/{totalSteps} done
               </span>
             </div>
@@ -359,7 +360,7 @@ const SoilPlan = () => {
           >
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
-                <Leaf className="h-5 w-5 text-primary" />
+                <Leaf aria-hidden="true" className="h-5 w-5 text-primary" />
                 <h3 className="font-display text-base font-semibold text-foreground">
                   {plan.year} Application Schedule
                 </h3>
@@ -384,7 +385,7 @@ const SoilPlan = () => {
                   aria-label="Export all steps to calendar"
                   title="Export all steps to calendar"
                 >
-                  <Download className="h-3.5 w-3.5" />
+                  <Download aria-hidden="true" className="h-3.5 w-3.5" />
                   Export All
                 </button>
                 <span className="text-[10px] text-muted-foreground px-2 py-0.5 rounded-full bg-primary/10">
@@ -420,7 +421,7 @@ const SoilPlan = () => {
               <div className="flex gap-3">
                 <div className="flex flex-col items-center">
                   <div className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-primary bg-primary/10">
-                    <Snowflake className="h-4 w-4 text-primary" />
+                    <Snowflake aria-hidden="true" className="h-4 w-4 text-primary" />
                   </div>
                 </div>
                 <div className="flex-1 pt-1">
@@ -443,7 +444,7 @@ const SoilPlan = () => {
             className="mb-6 rounded-xl border border-primary/15 bg-card p-5 shadow-card"
           >
             <div className="flex items-center gap-2 mb-3">
-              <Snowflake className="h-5 w-5 text-blue-500" />
+              <Snowflake aria-hidden="true" className="h-5 w-5 text-blue-500" />
               <h3 className="font-display text-base font-semibold text-foreground">
                 Winter Lawn Care Tips
               </h3>

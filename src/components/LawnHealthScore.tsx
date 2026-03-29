@@ -27,7 +27,7 @@ export const LawnHealthScore = React.memo(function LawnHealthScore() {
       <div className="flex items-center gap-6">
         {/* Circular gauge */}
         <div className="relative shrink-0">
-          <svg width="100" height="100" viewBox="0 0 100 100" className="-rotate-90">
+          <svg width="100" height="100" viewBox="0 0 100 100" className="-rotate-90" aria-hidden="true">
             <circle
               cx="50" cy="50" r="44"
               fill="none"
@@ -47,7 +47,7 @@ export const LawnHealthScore = React.memo(function LawnHealthScore() {
             />
           </svg>
           <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <span className="text-2xl font-display font-bold text-foreground">
+            <span className="text-2xl font-display font-bold text-foreground tabular-nums">
               {health.score}
             </span>
             <span className={`text-[10px] font-semibold ${health.color}`}>
@@ -72,13 +72,14 @@ export const LawnHealthScore = React.memo(function LawnHealthScore() {
                 <span className="text-muted-foreground w-20 shrink-0">{label}</span>
                 <div className="flex-1 h-1.5 rounded-full bg-muted overflow-hidden">
                   <motion.div
-                    className="h-full rounded-full bg-primary/70"
-                    initial={{ width: 0 }}
-                    animate={{ width: `${(value / max) * 100}%` }}
+                    className="h-full rounded-full bg-primary/70 origin-left"
+                    style={{ width: `${(value / max) * 100}%` }}
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: 1 }}
                     transition={{ duration: 0.8, delay: 0.3 }}
                   />
                 </div>
-                <span className="text-muted-foreground w-8 text-right">{value}/{max}</span>
+                <span className="text-muted-foreground w-8 text-right tabular-nums">{value}/{max}</span>
               </div>
             ))}
           </div>

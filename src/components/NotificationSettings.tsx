@@ -54,7 +54,7 @@ export function NotificationSettings() {
   return (
     <div className="space-y-4">
       <div className="flex items-center gap-2">
-        <Bell className="h-5 w-5 text-primary" />
+        <Bell className="h-5 w-5 text-primary" aria-hidden="true" />
         <h3 className="font-display text-lg font-semibold text-foreground">
           Notifications
         </h3>
@@ -83,9 +83,9 @@ export function NotificationSettings() {
       >
         <div className="flex items-center gap-3">
           {prefs.enabled ? (
-            <Bell className="h-5 w-5 text-primary" />
+            <Bell className="h-5 w-5 text-primary" aria-hidden="true" />
           ) : (
-            <BellOff className="h-5 w-5 text-muted-foreground" />
+            <BellOff aria-hidden="true" className="h-5 w-5 text-muted-foreground" />
           )}
           <div className="text-left">
             <p className="text-sm font-medium text-foreground">

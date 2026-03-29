@@ -23,27 +23,33 @@ const SHAPE_OPTIONS: { value: Shape; label: string }[] = [
 ];
 
 function NumberInput({
+  id,
   label,
   value,
   onChange,
   placeholder,
   unit = "ft",
 }: {
+  id?: string;
   label: string;
   value: string;
   onChange: (v: string) => void;
   placeholder?: string;
   unit?: string;
 }) {
+  const inputId = id || `lawn-${label.toLowerCase().replace(/\s+/g, '-')}`;
   return (
     <div className="space-y-1.5">
-      <Label className="text-xs">{label}</Label>
+      <Label htmlFor={inputId} className="text-xs">{label}</Label>
       <div className="relative">
         <input
+          id={inputId}
           type="number"
           min={0}
           inputMode="decimal"
-          className="w-full h-9 rounded-md border border-input bg-background px-3 pr-10 text-sm focus:outline-none focus:ring-2 focus:ring-primary/40"
+          name={inputId}
+          autoComplete="off"
+          className="w-full h-9 rounded-md border border-input bg-background px-3 pr-10 text-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder={placeholder}
@@ -122,21 +128,21 @@ export function LawnSizeEstimator() {
     return [
       {
         icon: Leaf,
-        name: "Fertilizer (1 lb N / 1,000 sq ft)",
-        amount: `${(k * 1).toFixed(1)} lbs`,
-        note: "Per application — typical 24-0-6 bag covers ~5,000 sq ft",
+        name: "Fertilizer (1\u00A0lb N / 1,000\u00A0sq\u00A0ft)",
+        amount: `${(k * 1).toFixed(1)}\u00A0lbs`,
+        note: "Per application — typical 24-0-6 bag covers ~5,000\u00A0sq\u00A0ft",
       },
       {
         icon: Sprout,
         name: "Seed for overseeding (tall fescue)",
-        amount: `${(k * 5).toFixed(1)} lbs`,
-        note: "4–6 lbs per 1,000 sq ft; using 5 lb midpoint",
+        amount: `${(k * 5).toFixed(1)}\u00A0lbs`,
+        note: "4–6\u00A0lbs per 1,000\u00A0sq\u00A0ft; using 5\u00A0lb midpoint",
       },
       {
         icon: ShieldCheck,
         name: "Pre-emergent (prodiamine 0.38%)",
-        amount: `${(k * 3).toFixed(1)} lbs`,
-        note: "~3 lbs granular per 1,000 sq ft per label rate",
+        amount: `${(k * 3).toFixed(1)}\u00A0lbs`,
+        note: "~3\u00A0lbs granular per 1,000\u00A0sq\u00A0ft per label rate",
       },
     ];
   }, [displaySize]);
@@ -145,7 +151,7 @@ export function LawnSizeEstimator() {
     <div className="space-y-5">
       {/* Header */}
       <div className="flex items-center gap-2">
-        <Ruler className="h-5 w-5 text-primary" />
+        <Ruler aria-hidden="true" className="h-5 w-5 text-primary" />
         <h3 className="font-display text-lg font-semibold text-foreground">
           Lawn Size Estimator
         </h3>
@@ -157,7 +163,7 @@ export function LawnSizeEstimator() {
 
       {/* Shape selector */}
       <div className="space-y-2">
-        <Label>Calculation Method</Label>
+        <Label htmlFor="lawn-calc-method">Calculation Method</Label>
         <Select
           value={shape}
           onValueChange={(v) => {
@@ -165,7 +171,7 @@ export function LawnSizeEstimator() {
             setSaved(false);
           }}
         >
-          <SelectTrigger>
+          <SelectTrigger id="lawn-calc-method">
             <SelectValue />
           </SelectTrigger>
           <SelectContent>
@@ -186,7 +192,7 @@ export function LawnSizeEstimator() {
               label="Total lawn area"
               value={directSqFt}
               onChange={(v) => { setDirectSqFt(v); setSaved(false); }}
-              placeholder="e.g. 5000"
+              placeholder="e.g. 5000…"
               unit="sq ft"
             />
           </div>
@@ -205,7 +211,7 @@ export function LawnSizeEstimator() {
               label="Diameter"
               value={circleDiameter}
               onChange={(v) => { setCircleDiameter(v); setSaved(false); }}
-              placeholder="e.g. 80"
+              placeholder="e.g. 80…"
             />
           </div>
         )}
@@ -225,7 +231,7 @@ export function LawnSizeEstimator() {
               label="Estimated total area"
               value={irregularSqFt}
               onChange={(v) => { setIrregularSqFt(v); setSaved(false); }}
-              placeholder="Estimate total square footage"
+              placeholder="Estimate total square footage…"
               unit="sq ft"
             />
           </div>
@@ -246,7 +252,7 @@ export function LawnSizeEstimator() {
         <div className="text-sm text-muted-foreground">
           Calculated area:{" "}
           <span className="font-semibold text-foreground">
-            {netArea.toLocaleString()} sq ft
+            {netArea.toLocaleString()}&nbsp;sq&nbsp;ft
           </span>
         </div>
       )}
@@ -258,7 +264,7 @@ export function LawnSizeEstimator() {
           disabled={!canSave}
           className="w-full gap-2 bg-primary"
         >
-          <Save className="h-4 w-4" />
+          <Save aria-hidden="true" className="h-4 w-4" />
           Save Lawn Size
         </Button>
       ) : null}
@@ -275,7 +281,7 @@ export function LawnSizeEstimator() {
               Saved Lawn Size
             </h4>
             <span className="text-xl font-display font-bold text-primary">
-              {displaySize.toLocaleString()} sq ft
+              {displaySize.toLocaleString()}&nbsp;sq&nbsp;ft
             </span>
           </div>
 
@@ -290,7 +296,7 @@ export function LawnSizeEstimator() {
                     key={p.name}
                     className="flex items-start gap-3 px-4 py-3"
                   >
-                    <p.icon className="h-4 w-4 mt-0.5 shrink-0 text-primary" />
+                    <p.icon aria-hidden="true" className="h-4 w-4 mt-0.5 shrink-0 text-primary" />
                     <div className="flex-1 min-w-0">
                       <div className="flex items-baseline justify-between gap-2">
                         <span className="text-sm font-medium text-foreground">

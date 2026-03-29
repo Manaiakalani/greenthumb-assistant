@@ -86,7 +86,7 @@ export function WateringCalculator() {
   return (
     <div className="space-y-5">
       <div className="flex items-center gap-2">
-        <Calculator className="h-5 w-5 text-primary" />
+        <Calculator aria-hidden="true" className="h-5 w-5 text-primary" />
         <h3 className="font-display text-lg font-semibold text-foreground">
           Watering Calculator
         </h3>
@@ -98,9 +98,9 @@ export function WateringCalculator() {
 
       <div className="grid grid-cols-2 gap-4">
         <div className="space-y-2">
-          <Label>Sprinkler Type</Label>
+          <Label htmlFor="sprinkler-type">Sprinkler Type</Label>
           <Select value={sprinklerType} onValueChange={(v) => { setSprinklerType(v as SprinklerType); setCalculated(false); }}>
-            <SelectTrigger><SelectValue /></SelectTrigger>
+            <SelectTrigger id="sprinkler-type"><SelectValue /></SelectTrigger>
             <SelectContent>
               {Object.entries(SPRINKLER_TYPES).map(([key, { label }]) => (
                 <SelectItem key={key} value={key}>{label}</SelectItem>
@@ -111,19 +111,19 @@ export function WateringCalculator() {
         <div className="space-y-2">
           <Label>Lawn Size</Label>
           <div className="flex items-center h-9 px-3 rounded-md border border-input bg-background text-sm">
-            {profile.lawnSize} (~{sqft.toLocaleString()} sq ft)
+            {profile.lawnSize} (~{sqft.toLocaleString()}&nbsp;sq&nbsp;ft)
           </div>
         </div>
       </div>
 
       <div className="flex items-center gap-2 text-xs text-muted-foreground">
-        <Droplets className="h-3.5 w-3.5" />
+        <Droplets aria-hidden="true" className="h-3.5 w-3.5" />
         <span>Target: {TARGET_INCHES}" per week (recommended for most lawns)</span>
       </div>
 
       {!calculated ? (
         <Button onClick={handleCalculate} className="w-full gap-2 bg-primary">
-          <Calculator className="h-4 w-4" />
+          <Calculator aria-hidden="true" className="h-4 w-4" />
           Calculate
         </Button>
       ) : (
@@ -137,15 +137,15 @@ export function WateringCalculator() {
           </h4>
           <div className="grid grid-cols-3 gap-4 text-center">
             <div>
-              <p className="text-2xl font-display font-bold text-primary">{result.minutesPerSession}</p>
+              <p className="text-2xl font-display font-bold text-primary tabular-nums">{result.minutesPerSession}</p>
               <p className="text-xs text-muted-foreground">min per session</p>
             </div>
             <div>
-              <p className="text-2xl font-display font-bold text-primary">{result.sessionsPerWeek}x</p>
+              <p className="text-2xl font-display font-bold text-primary tabular-nums">{result.sessionsPerWeek}x</p>
               <p className="text-xs text-muted-foreground">per week</p>
             </div>
             <div>
-              <p className="text-2xl font-display font-bold text-primary">{result.gallonsPerWeek}</p>
+              <p className="text-2xl font-display font-bold text-primary tabular-nums">{result.gallonsPerWeek}</p>
               <p className="text-xs text-muted-foreground">gal / week</p>
             </div>
           </div>
@@ -164,7 +164,7 @@ export function WateringCalculator() {
           {/* Recent rainfall */}
           <div className="rounded-xl border border-blue-200 bg-blue-50/50 dark:border-blue-900 dark:bg-blue-950/30 p-4">
             <div className="flex items-center gap-2 mb-2">
-              <CloudRain className="h-4 w-4 text-blue-500" />
+              <CloudRain aria-hidden="true" className="h-4 w-4 text-blue-500" />
               <h4 className="text-sm font-semibold text-foreground">Rainfall & Watering Adjustment</h4>
             </div>
             <p className="text-sm text-muted-foreground">
@@ -192,7 +192,7 @@ export function WateringCalculator() {
           {(weatherInsight.rainTomorrow || weatherInsight.rainDayAfter) && (
             <div className="rounded-xl border border-amber-200 bg-amber-50/50 dark:border-amber-900 dark:bg-amber-950/30 p-4">
               <div className="flex items-center gap-2">
-                <CloudRain className="h-4 w-4 text-amber-500" />
+                <CloudRain aria-hidden="true" className="h-4 w-4 text-amber-500" />
                 <p className="text-sm font-medium text-foreground">
                   {weatherInsight.rainTomorrow
                     ? "Rain expected tomorrow — consider skipping watering today"
@@ -206,7 +206,7 @@ export function WateringCalculator() {
           {weatherInsight.bestDays.length > 0 && (
             <div className="rounded-xl border border-green-200 bg-green-50/50 dark:border-green-900 dark:bg-green-950/30 p-4">
               <div className="flex items-center gap-2 mb-2">
-                <Sun className="h-4 w-4 text-green-500" />
+                <Sun aria-hidden="true" className="h-4 w-4 text-green-500" />
                 <h4 className="text-sm font-semibold text-foreground">Best Days to Water</h4>
               </div>
               <div className="flex flex-wrap gap-2">

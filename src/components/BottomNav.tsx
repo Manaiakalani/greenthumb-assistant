@@ -1,5 +1,5 @@
 import { useLocation, Link } from "react-router-dom";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Home, BookOpen, Camera, Wrench, Trophy, ClipboardList } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
@@ -26,7 +26,7 @@ export function BottomNav() {
               key={to}
               to={to}
               aria-current={active ? "page" : undefined}
-              className="relative flex flex-col items-center gap-0.5 px-2 py-2.5 rounded-lg transition-colors"
+              className="relative flex flex-col items-center gap-0.5 px-3 py-3 min-w-[44px] min-h-[44px] rounded-lg transition-colors"
             >
               {active && (
                 <motion.div
@@ -36,6 +36,7 @@ export function BottomNav() {
                 />
               )}
               <Icon
+                aria-hidden="true"
                 className={`h-5 w-5 relative z-10 transition-colors ${
                   active ? "text-primary" : "text-muted-foreground"
                 }`}

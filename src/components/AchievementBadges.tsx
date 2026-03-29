@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Trophy, Lock } from "lucide-react";
 import { ACHIEVEMENTS } from "@/lib/achievements";
 import { useEarnedBadges } from "@/hooks/useEarnedBadges";

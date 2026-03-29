@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/sonner";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import { ThemeProvider } from "next-themes";
-import { AnimatePresence, MotionConfig } from "framer-motion";
+import { AnimatePresence, MotionConfig } from "motion/react";
 import { ProfileProvider } from "@/context/ProfileContext";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { useSeasonalTheme } from "@/hooks/useSeasonalTheme";
@@ -17,6 +17,8 @@ const Tools = lazy(() => import("@/pages/Tools"));
 const Achievements = lazy(() => import("@/pages/Achievements"));
 const Gallery = lazy(() => import("@/pages/Gallery"));
 const SoilPlan = lazy(() => import("@/pages/SoilPlan"));
+const Privacy = lazy(() => import("@/pages/Privacy"));
+const GrassQuiz = lazy(() => import("@/pages/GrassQuiz"));
 
 const queryClient = new QueryClient();
 
@@ -40,6 +42,8 @@ function AnimatedRoutes() {
         <Route path="/achievements" element={<Suspense fallback={<LazyFallback />}><Achievements /></Suspense>} />
         <Route path="/gallery" element={<Suspense fallback={<LazyFallback />}><Gallery /></Suspense>} />
         <Route path="/plan" element={<Suspense fallback={<LazyFallback />}><SoilPlan /></Suspense>} />
+        <Route path="/privacy" element={<Suspense fallback={<LazyFallback />}><Privacy /></Suspense>} />
+        <Route path="/grass-quiz" element={<Suspense fallback={<LazyFallback />}><GrassQuiz /></Suspense>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>

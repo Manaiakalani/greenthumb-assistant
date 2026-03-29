@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Download, X } from "lucide-react";
 import { useInstallPrompt } from "@/hooks/useInstallPrompt";
 

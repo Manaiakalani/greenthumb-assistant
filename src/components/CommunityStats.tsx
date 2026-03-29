@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import React from "react";
+import { motion } from "motion/react";
 import { Users, TrendingUp, Scissors, Droplets } from "lucide-react";
 import { useProfile } from "@/context/ProfileContext";
 import { getSeason } from "@/data/stats";
@@ -40,7 +41,7 @@ function getCommunityStats(region: ClimateRegion, month: number) {
   };
 }
 
-export function CommunityStats() {
+export const CommunityStats = React.memo(function CommunityStats() {
   const { profile } = useProfile();
   const stats = getCommunityStats(profile.region, new Date().getMonth());
 
@@ -52,7 +53,7 @@ export function CommunityStats() {
       className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
     >
       <div className="flex items-center gap-2 mb-4">
-        <Users className="h-4 w-4 text-primary" />
+        <Users aria-hidden="true" className="h-4 w-4 text-primary" />
         <h3 className="font-display text-base font-semibold text-foreground">
           Community Pulse
         </h3>
@@ -64,21 +65,21 @@ export function CommunityStats() {
       <div className="grid grid-cols-3 gap-4">
         <div className="text-center">
           <div className="flex items-center justify-center gap-1 mb-1">
-            <TrendingUp className="h-3.5 w-3.5 text-lawn-dormant" />
+            <TrendingUp aria-hidden="true" className="h-3.5 w-3.5 text-lawn-dormant" />
           </div>
           <p className="text-lg font-display font-bold text-foreground">{stats.dormant}%</p>
           <p className="text-[11px] text-muted-foreground">Lawns Dormant</p>
         </div>
         <div className="text-center">
           <div className="flex items-center justify-center gap-1 mb-1">
-            <Scissors className="h-3.5 w-3.5 text-primary" />
+            <Scissors aria-hidden="true" className="h-3.5 w-3.5 text-primary" />
           </div>
           <p className="text-lg font-display font-bold text-foreground">{stats.mowing}%</p>
           <p className="text-[11px] text-muted-foreground">Actively Mowing</p>
         </div>
         <div className="text-center">
           <div className="flex items-center justify-center gap-1 mb-1">
-            <Droplets className="h-3.5 w-3.5 text-blue-500" />
+            <Droplets aria-hidden="true" className="h-3.5 w-3.5 text-blue-500" />
           </div>
           <p className="text-lg font-display font-bold text-foreground">{stats.watering}%</p>
           <p className="text-[11px] text-muted-foreground">Watering</p>
@@ -90,4 +91,4 @@ export function CommunityStats() {
       </p>
     </motion.div>
   );
-}
+});

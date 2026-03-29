@@ -1,10 +1,11 @@
 import { useCallback, useMemo, useRef, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Camera, Plus, Trash2, ImageIcon, X } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { Camera, Plus, Trash2, ImageIcon, X, ArrowLeftRight } from "lucide-react";
 import { toast } from "sonner";
 import { AppHeader } from "@/components/AppHeader";
 import { BottomNav } from "@/components/BottomNav";
 import { PageTransition } from "@/components/PageTransition";
+import { PhotoCompare } from "@/components/PhotoCompare";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -84,7 +85,7 @@ const Photos = () => {
   }, [photos]);
 
   return (
-    <div className="min-h-screen bg-background pb-20">
+    <div className="min-h-screen bg-background pb-24">
       <AppHeader />
       <PageTransition>
         <main id="main-content" className="max-w-2xl mx-auto px-4">
@@ -98,6 +99,17 @@ const Photos = () => {
               Capture your lawn's progress over time.
             </p>
           </div>
+
+          {/* Progress Comparison */}
+          {photos.length >= 2 && (
+            <div className="mb-6">
+              <h2 className="font-display text-lg font-semibold text-foreground mb-3 flex items-center gap-2">
+                <ArrowLeftRight className="h-5 w-5 text-primary" />
+                Progress Comparison
+              </h2>
+              <PhotoCompare />
+            </div>
+          )}
 
           {/* Upload button */}
           <input
@@ -142,12 +154,13 @@ const Photos = () => {
                 )}
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-1.5">
-                    <Label>Date</Label>
-                    <Input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+                    <Label htmlFor="photo-date">Date</Label>
+                    <Input id="photo-date" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
                   </div>
                   <div className="space-y-1.5">
-                    <Label>Note (optional)</Label>
+                    <Label htmlFor="photo-note">Note (optional)</Label>
                     <Input
+                      id="photo-note"
                       placeholder="e.g. After first mow"
                       value={note}
                       onChange={(e) => setNote(e.target.value)}
@@ -193,8 +206,17 @@ const Photos = () => {
                           initial={{ opacity: 0, scale: 0.9 }}
                           animate={{ opacity: 1, scale: 1 }}
                           transition={{ delay: i * 0.05 }}
+                          role="button"
+                          tabIndex={0}
                           className="relative group rounded-lg overflow-hidden aspect-square cursor-pointer"
                           onClick={() => setLightbox(photo.photo)}
+                          onKeyDown={(e) => {
+                            if (e.key === 'Enter' || e.key === ' ') {
+                              e.preventDefault();
+                              setLightbox(photo.photo);
+                            }
+                          }}
+                          aria-label={`View photo${photo.note ? `: ${photo.note}` : ''}`}
                         >
                           <img
                             src={photo.photo}

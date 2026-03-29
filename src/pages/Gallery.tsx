@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { Sparkles, ChevronLeft, ChevronRight } from "lucide-react";
 import { AppHeader } from "@/components/AppHeader";
 import { BottomNav } from "@/components/BottomNav";
@@ -88,7 +88,7 @@ const Gallery = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background pb-20">
+    <div className="min-h-screen bg-background pb-24">
       <AppHeader />
       <PageTransition>
         <main id="main-content" className="max-w-2xl mx-auto px-4">
@@ -126,7 +126,16 @@ const Gallery = () => {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.05 }}
+                role="button"
+                tabIndex={0}
                 onClick={() => setSelectedIdx(i)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setSelectedIdx(i);
+                  }
+                }}
+                aria-label={`View ${label} card`}
                 className={`rounded-xl border p-2 cursor-pointer transition-all hover:shadow-lg ${
                   isUser
                     ? "border-primary/30 bg-primary/5"

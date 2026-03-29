@@ -261,7 +261,7 @@ export const CollectorCard = forwardRef<HTMLDivElement, CollectorCardProps>(
                 right: 14,
                 fontSize: 10,
                 color: "#8b7e6a",
-                fontFamily: "'DM Sans', sans-serif",
+                fontFamily: "'Inter', system-ui, sans-serif",
                 letterSpacing: 1,
               }}
             >
@@ -342,7 +342,7 @@ export const CollectorCard = forwardRef<HTMLDivElement, CollectorCardProps>(
                         color: "#8b7e6a",
                         textTransform: "uppercase",
                         letterSpacing: 0.8,
-                        fontFamily: "'DM Sans', sans-serif",
+                        fontFamily: "'Inter', system-ui, sans-serif",
                         margin: 0,
                         lineHeight: 1.2,
                       }}
@@ -409,7 +409,7 @@ export const CollectorCard = forwardRef<HTMLDivElement, CollectorCardProps>(
                     style={{
                       fontSize: 10,
                       color: "#8b7e6a",
-                      fontFamily: "'DM Sans', sans-serif",
+                      fontFamily: "'Inter', system-ui, sans-serif",
                       fontWeight: 600,
                     }}
                   >
@@ -458,7 +458,7 @@ export const CollectorCard = forwardRef<HTMLDivElement, CollectorCardProps>(
                     color: "#d4cfc0",
                     textTransform: "uppercase",
                     letterSpacing: 1.8,
-                    fontFamily: "'DM Sans', sans-serif",
+                    fontFamily: "'Inter', system-ui, sans-serif",
                   }}
                 >
                   {edition} — {series}
@@ -473,7 +473,7 @@ export const CollectorCard = forwardRef<HTMLDivElement, CollectorCardProps>(
                 fontSize: 8,
                 color: "#8b7e6a88",
                 marginTop: 8,
-                fontFamily: "'DM Sans', sans-serif",
+                fontFamily: "'Inter', system-ui, sans-serif",
                 letterSpacing: 1,
               }}
             >

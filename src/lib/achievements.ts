@@ -40,17 +40,14 @@ export const ACHIEVEMENTS: Achievement[] = [
 // Persistence
 // ---------------------------------------------------------------------------
 
+import { safeGetItem, safeSetItem } from "@/lib/safeStorage";
+
 export function loadEarned(): EarnedAchievement[] {
-  try {
-    const raw = localStorage.getItem(EARNED_KEY);
-    return raw ? (JSON.parse(raw) as EarnedAchievement[]) : [];
-  } catch {
-    return [];
-  }
+  return safeGetItem<EarnedAchievement[]>(EARNED_KEY, []);
 }
 
 export function saveEarned(earned: EarnedAchievement[]) {
-  localStorage.setItem(EARNED_KEY, JSON.stringify(earned));
+  safeSetItem(EARNED_KEY, earned);
 }
 
 export function earnAchievement(id: string): boolean {

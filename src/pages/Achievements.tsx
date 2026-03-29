@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Trophy, Images } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AppHeader } from "@/components/AppHeader";
@@ -8,7 +8,7 @@ import { AchievementBadges } from "@/components/AchievementBadges";
 
 const Achievements = () => {
   return (
-    <div className="min-h-screen bg-background pb-20">
+    <div className="min-h-screen bg-background pb-24">
       <AppHeader />
       <PageTransition>
         <main id="main-content" className="max-w-2xl mx-auto px-4">

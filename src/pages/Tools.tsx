@@ -1,34 +1,42 @@
-import { motion } from "framer-motion";
+import { lazy, Suspense } from "react";
+import { motion } from "motion/react";
 import { Wrench, ClipboardList, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AppHeader } from "@/components/AppHeader";
 import { BottomNav } from "@/components/BottomNav";
 import { PageTransition } from "@/components/PageTransition";
 import { WateringCalculator } from "@/components/WateringCalculator";
+import { LawnSizeEstimator } from "@/components/LawnSizeEstimator";
 import { SoilTempChart } from "@/components/SoilTempChart";
+import { SoilTestCard } from "@/components/SoilTestCard";
 import { ProgressCharts } from "@/components/ProgressCharts";
-import { useQuery } from "@tanstack/react-query";
-import { fetchWeather } from "@/lib/weather";
+import { useWeather } from "@/hooks/useWeather";
 import { useProfile } from "@/context/ProfileContext";
+import { Skeleton } from "@/components/ui/skeleton";
+
+const WeeklyActivityChart = lazy(() =>
+  import("@/components/charts/WeeklyActivityChart").then((m) => ({ default: m.WeeklyActivityChart }))
+);
+const LawnHealthRadar = lazy(() =>
+  import("@/components/charts/LawnHealthRadar").then((m) => ({ default: m.LawnHealthRadar }))
+);
+const AchievementDonut = lazy(() =>
+  import("@/components/charts/AchievementDonut").then((m) => ({ default: m.AchievementDonut }))
+);
+const ForecastChart = lazy(() =>
+  import("@/components/charts/ForecastChart").then((m) => ({ default: m.ForecastChart }))
+);
+
+function ChartSkeleton() {
+  return <Skeleton className="h-72 rounded-xl" />;
+}
 
 const Tools = () => {
   const { profile } = useProfile();
-
-  const { data: weather } = useQuery({
-    queryKey: ["weather", profile.latitude, profile.longitude, profile.location],
-    queryFn: () =>
-      fetchWeather({
-        latitude: profile.latitude,
-        longitude: profile.longitude,
-        location: profile.location || undefined,
-      }),
-    enabled: !!(profile.latitude != null || profile.location),
-    staleTime: 15 * 60 * 1000,
-    retry: 1,
-  });
+  const { data: weather } = useWeather();
 
   return (
-    <div className="min-h-screen bg-background pb-20">
+    <div className="min-h-screen bg-background pb-24">
       <AppHeader />
       <PageTransition>
         <main id="main-content" className="max-w-2xl mx-auto px-4">
@@ -65,11 +73,21 @@ const Tools = () => {
             </motion.div>
           </Link>
 
-          {/* Watering Calculator */}
+          {/* Lawn Size Estimator */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             className="rounded-xl border border-primary/15 bg-card p-6 shadow-card"
+          >
+            <LawnSizeEstimator />
+          </motion.div>
+
+          {/* Watering Calculator */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.05 }}
+            className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
           >
             <WateringCalculator />
           </motion.div>
@@ -84,6 +102,16 @@ const Tools = () => {
             <SoilTempChart currentTemp={weather?.current.soilTemp ?? null} />
           </motion.div>
 
+          {/* Soil Test Results */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15 }}
+            className="mt-6 rounded-xl border border-primary/15 bg-card p-5 shadow-card"
+          >
+            <SoilTestCard />
+          </motion.div>
+
           {/* Progress Charts */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -92,6 +120,56 @@ const Tools = () => {
             className="mt-6"
           >
             <ProgressCharts />
+          </motion.div>
+
+          {/* Weather Forecast Chart */}
+          {weather?.daily && (
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.25 }}
+              className="mt-6"
+            >
+              <Suspense fallback={<ChartSkeleton />}>
+                <ForecastChart forecast={weather.daily} />
+              </Suspense>
+            </motion.div>
+          )}
+
+          {/* Weekly Activity Chart */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3 }}
+            className="mt-6"
+          >
+            <Suspense fallback={<ChartSkeleton />}>
+              <WeeklyActivityChart />
+            </Suspense>
+          </motion.div>
+
+          {/* Lawn Health Radar */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.35 }}
+            className="mt-6"
+          >
+            <Suspense fallback={<ChartSkeleton />}>
+              <LawnHealthRadar />
+            </Suspense>
+          </motion.div>
+
+          {/* Achievement Donut */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4 }}
+            className="mt-6"
+          >
+            <Suspense fallback={<ChartSkeleton />}>
+              <AchievementDonut />
+            </Suspense>
           </motion.div>
         </main>
       </PageTransition>

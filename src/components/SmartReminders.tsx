@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { Bell, ChevronRight } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useSmartReminders, type SmartReminder } from "@/hooks/useSmartReminders";
@@ -19,7 +19,7 @@ export function SmartReminders({ weather }: { weather?: WeatherData | null }) {
     <div className="rounded-xl border border-primary/15 bg-card p-5 shadow-card">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <Bell className="h-5 w-5 text-primary" />
+          <Bell aria-hidden="true" className="h-5 w-5 text-primary" />
           <h3 className="font-display text-base font-semibold text-foreground">
             Smart Reminders
           </h3>
@@ -53,7 +53,7 @@ export function SmartReminders({ weather }: { weather?: WeatherData | null }) {
         className="flex items-center justify-center gap-1 mt-3 text-xs text-primary hover:underline"
       >
         Log an activity
-        <ChevronRight className="h-3 w-3" />
+        <ChevronRight aria-hidden="true" className="h-3 w-3" />
       </Link>
     </div>
   );

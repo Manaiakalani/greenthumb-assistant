@@ -1,3 +1,4 @@
+import { safeGetItem, safeSetItem } from "@/lib/safeStorage";
 import type { JournalEntry, PhotoEntry, WeeklyGoals } from "@/types/journal";
 
 const JOURNAL_KEY = "grasswise-journal";
@@ -8,20 +9,11 @@ const PHOTOS_KEY = "grasswise-photos";
 // ---------------------------------------------------------------------------
 
 export function loadJournal(): JournalEntry[] {
-  try {
-    const raw = localStorage.getItem(JOURNAL_KEY);
-    return raw ? (JSON.parse(raw) as JournalEntry[]) : [];
-  } catch {
-    return [];
-  }
+  return safeGetItem<JournalEntry[]>(JOURNAL_KEY, []);
 }
 
 export function saveJournal(entries: JournalEntry[]) {
-  try {
-    localStorage.setItem(JOURNAL_KEY, JSON.stringify(entries));
-  } catch (e) {
-    console.error("Failed to save journal (storage full?):", e);
-  }
+  safeSetItem(JOURNAL_KEY, entries);
 }
 
 export function addJournalEntry(entry: Omit<JournalEntry, "id" | "createdAt">): JournalEntry {
@@ -46,20 +38,11 @@ export function deleteJournalEntry(id: string) {
 // ---------------------------------------------------------------------------
 
 export function loadPhotos(): PhotoEntry[] {
-  try {
-    const raw = localStorage.getItem(PHOTOS_KEY);
-    return raw ? (JSON.parse(raw) as PhotoEntry[]) : [];
-  } catch {
-    return [];
-  }
+  return safeGetItem<PhotoEntry[]>(PHOTOS_KEY, []);
 }
 
 export function savePhotos(photos: PhotoEntry[]) {
-  try {
-    localStorage.setItem(PHOTOS_KEY, JSON.stringify(photos));
-  } catch (e) {
-    console.error("Failed to save photos (storage full?):", e);
-  }
+  safeSetItem(PHOTOS_KEY, photos);
 }
 
 export function addPhoto(entry: Omit<PhotoEntry, "id" | "createdAt">): PhotoEntry {
@@ -166,20 +149,11 @@ export function getWeekEnd(date: Date = new Date()): string {
 }
 
 export function loadWeeklyGoals(): WeeklyGoals | null {
-  try {
-    const raw = localStorage.getItem(GOALS_KEY);
-    return raw ? (JSON.parse(raw) as WeeklyGoals) : null;
-  } catch {
-    return null;
-  }
+  return safeGetItem<WeeklyGoals | null>(GOALS_KEY, null);
 }
 
 export function saveWeeklyGoals(goals: WeeklyGoals) {
-  try {
-    localStorage.setItem(GOALS_KEY, JSON.stringify(goals));
-  } catch (e) {
-    console.error("Failed to save weekly goals:", e);
-  }
+  safeSetItem(GOALS_KEY, goals);
 }
 
 /** Count activities by type for the current ISO week */

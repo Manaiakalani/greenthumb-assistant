@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { ActionCard } from "@/components/ActionCard";
 import { useProfile } from "@/context/ProfileContext";
 import { getSeasonalActions } from "@/data/actions";

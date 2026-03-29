@@ -1,17 +1,14 @@
+import { safeGetItem, safeGetRaw, safeSetItem } from "@/lib/safeStorage";
 import type { NotificationPrefs } from "@/types/journal";
 
 const PREFS_KEY = "grasswise-notification-prefs";
 
 export function loadNotificationPrefs(): NotificationPrefs {
-  try {
-    const raw = localStorage.getItem(PREFS_KEY);
-    if (raw) return JSON.parse(raw) as NotificationPrefs;
-  } catch { /* ignore */ }
-  return { enabled: false, mowReminder: true, waterReminder: true, seasonalTips: true };
+  return safeGetItem<NotificationPrefs>(PREFS_KEY, { enabled: false, mowReminder: true, waterReminder: true, seasonalTips: true });
 }
 
 export function saveNotificationPrefs(prefs: NotificationPrefs) {
-  localStorage.setItem(PREFS_KEY, JSON.stringify(prefs));
+  safeSetItem(PREFS_KEY, prefs);
 }
 
 /**
@@ -48,13 +45,13 @@ export function startReminderScheduler() {
 
     // Only send one reminder per day
     const today = new Date().toISOString().split("T")[0];
-    if (localStorage.getItem(LAST_KEY) === today) return;
+    if (safeGetRaw(LAST_KEY) === today) return;
 
     const hour = new Date().getHours();
     // Send reminder around 9 AM
     if (hour < 9 || hour > 10) return;
 
-    localStorage.setItem(LAST_KEY, today);
+    safeSetItem(LAST_KEY, today);
 
     const month = new Date().getMonth();
     const season = month >= 2 && month <= 4 ? "spring" : month >= 5 && month <= 7 ? "summer" : month >= 8 && month <= 10 ? "fall" : "winter";

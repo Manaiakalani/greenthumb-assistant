@@ -1,3 +1,4 @@
+import React from "react";
 import { cn } from "@/lib/utils";
 import type { HealthStatus } from "@/types/lawn";
 
@@ -14,7 +15,7 @@ const statusConfig: Record<HealthStatus, { emoji: string; colorClass: string; bg
   dormant: { emoji: "💤", colorClass: "text-lawn-dormant", bgClass: "bg-lawn-dormant/10" },
 };
 
-export function LawnStatusBadge({ status, label, className }: LawnStatusBadgeProps) {
+export const LawnStatusBadge = React.memo(function LawnStatusBadge({ status, label, className }: LawnStatusBadgeProps) {
   const config = statusConfig[status];
 
   return (
@@ -25,9 +26,11 @@ export function LawnStatusBadge({ status, label, className }: LawnStatusBadgePro
         config.colorClass,
         className
       )}
+      role="status"
+      aria-label={`Lawn status: ${label}`}
     >
-      <span>{config.emoji}</span>
+      <span aria-hidden="true">{config.emoji}</span>
       {label}
     </span>
   );
-}
+});

@@ -44,6 +44,19 @@ export const LAWN_SIZES = ["Small", "Medium", "Large"] as const;
 
 export type LawnSize = (typeof LAWN_SIZES)[number];
 
+/** Soil test nutrient level */
+export type NutrientLevel = 'low' | 'adequate' | 'high';
+
+/** Soil test results from a lab or home kit */
+export interface SoilTestResults {
+  ph: number;           // 4.0-9.0
+  nitrogen: NutrientLevel;
+  phosphorus: NutrientLevel;
+  potassium: NutrientLevel;
+  organicMatter?: number; // percentage
+  testDate: string;      // ISO date
+}
+
 /** Complete user profile */
 export interface UserProfile {
   name: string;
@@ -55,6 +68,10 @@ export interface UserProfile {
   /** Saved from geolocation — used for weather lookups */
   latitude?: number;
   longitude?: number;
+  /** Precise lawn size in square feet from the estimator */
+  lawnSizeSqFt?: number;
+  /** Most recent soil test results */
+  soilTest?: SoilTestResults;
 }
 
 /** Default profile for new users */

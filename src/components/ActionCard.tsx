@@ -1,4 +1,5 @@
-import { motion } from "framer-motion";
+import React from "react";
+import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 import type { LucideIcon } from "lucide-react";
 import type { ActionStatus } from "@/types/lawn";
@@ -25,7 +26,7 @@ const statusDotStyles: Record<ActionStatus, string> = {
   danger: "bg-lawn-danger",
 };
 
-export function ActionCard({ icon: Icon, title, description, status, statusLabel, detail, className }: ActionCardProps) {
+export const ActionCard = React.memo(function ActionCard({ icon: Icon, title, description, status, statusLabel, detail, className }: ActionCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 12 }}
@@ -39,7 +40,7 @@ export function ActionCard({ icon: Icon, title, description, status, statusLabel
     >
       <div className="flex items-start gap-4">
         <div className="rounded-lg bg-primary/10 p-2.5">
-          <Icon className="h-5 w-5 text-primary" />
+          <Icon aria-hidden="true" className="h-5 w-5 text-primary" />
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 mb-1.5">
@@ -57,4 +58,4 @@ export function ActionCard({ icon: Icon, title, description, status, statusLabel
       </div>
     </motion.div>
   );
-}
+});

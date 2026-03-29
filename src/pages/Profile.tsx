@@ -1,8 +1,8 @@
 import { useCallback, useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { motion } from "framer-motion";
+import { useNavigate, Link } from "react-router-dom";
+import { motion } from "motion/react";
 import {
-  ArrowLeft, Globe, Leaf, Loader2, LocateFixed, MapPin,
+  ArrowLeft, Globe, HelpCircle, Leaf, Loader2, LocateFixed, MapPin,
   Ruler, Sprout, Trophy, Wheat, User, Maximize,
 } from "lucide-react";
 import { toast } from "sonner";
@@ -12,7 +12,7 @@ import { AppHeader } from "@/components/AppHeader";
 import { BottomNav } from "@/components/BottomNav";
 import { CollectorCardModal } from "@/components/CollectorCardModal";
 import { NotificationSettings } from "@/components/NotificationSettings";
-import { ExportBackup } from "@/components/ExportBackup";
+import { DataBackupCard } from "@/components/DataBackupCard";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -114,7 +114,7 @@ const Profile = () => {
   const { earned: badgesEarned, total: badgesTotal } = useEarnedBadges();
 
   return (
-    <div className="min-h-screen bg-background pb-20">
+    <div className="min-h-screen bg-background pb-24">
       <AppHeader />
 
       <main id="main-content" className="max-w-2xl mx-auto px-4 pb-12">
@@ -353,6 +353,13 @@ const Profile = () => {
                     ))}
                   </SelectContent>
                 </Select>
+                <Link
+                  to="/grass-quiz"
+                  className="inline-flex items-center gap-1 text-xs text-primary hover:underline"
+                >
+                  <HelpCircle className="h-3 w-3" />
+                  Not sure? Take the grass quiz →
+                </Link>
               </div>
 
               <div className="space-y-2">
@@ -385,7 +392,7 @@ const Profile = () => {
 
           {/* Export & Backup */}
           <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card">
-            <ExportBackup />
+            <DataBackupCard />
           </div>
         </motion.div>
       </main>

@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#2c7a4a" />
+    <title>Grasswise — Offline</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        font-family: 'DM Sans', system-ui, sans-serif;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #f9f8f4;
+        color: #1a3a2a;
+        padding: 2rem;
+      }
+      .container {
+        text-align: center;
+        max-width: 320px;
+      }
+      .icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+      }
+      h1 {
+        font-family: 'Fraunces', serif;
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+      p {
+        color: #5a6b5e;
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 1.5rem;
+      }
+      button {
+        background: #2c7a4a;
+        color: white;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        font-size: 0.9rem;
+        font-weight: 500;
+        cursor: pointer;
+      }
+      button:hover { background: #245f3c; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="icon">🌱</div>
+      <h1>You're Offline</h1>
+      <p>
+        Grasswise needs an internet connection to load weather data and sync your lawn care info.
+        Check your connection and try again.
+      </p>
+      <button onclick="location.reload()">Try Again</button>
+    </div>
+  </body>
+</html>

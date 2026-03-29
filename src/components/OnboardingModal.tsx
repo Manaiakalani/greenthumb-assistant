@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { MapPin, Leaf, Sparkles, ArrowRight, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 

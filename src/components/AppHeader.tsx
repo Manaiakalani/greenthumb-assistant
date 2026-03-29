@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { Leaf, Moon, Sun, User } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTheme } from "next-themes";
@@ -33,7 +33,7 @@ function ThemeToggle() {
   return (
     <button
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
-      className="rounded-full p-1.5 text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+      className="rounded-full p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
       aria-label={resolvedTheme === "dark" ? t("common.switchToLight") : t("common.switchToDark")}
     >
       {resolvedTheme === "dark" ? (
@@ -64,7 +64,7 @@ export function AppHeader() {
           <ThemeToggle />
           <Link
             to="/profile"
-            className="rounded-full p-1.5 text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+            className="rounded-full p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
             aria-label={t("common.editProfile")}
           >
             <User className="h-4 w-4" />

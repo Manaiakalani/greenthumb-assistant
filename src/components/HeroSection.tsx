@@ -1,9 +1,10 @@
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { LawnStatusBadge } from "@/components/LawnStatusBadge";
 import { useProfile } from "@/context/ProfileContext";
 import { getTimelineForRegion } from "@/data/timeline";
 import type { HealthStatus } from "@/types/lawn";
-import heroLawn from "@/assets/hero-lawn.jpg";
+import heroLawnWebp from "@/assets/hero-lawn.webp";
+import heroLawnJpg from "@/assets/hero-lawn.jpg";
 
 function getGreeting(): string {
   const hour = new Date().getHours();
@@ -48,15 +49,19 @@ export function HeroSection() {
       transition={{ duration: 0.6 }}
       className="relative rounded-2xl overflow-hidden mt-4 mb-8"
     >
-      <img
-        src={heroLawn}
-        alt="Lush green lawn in morning sunlight"
-        className="w-full h-44 object-cover"
-        width={640}
-        height={176}
-        decoding="async"
-        fetchPriority="high"
-      />
+      <picture>
+        <source srcSet={heroLawnWebp} type="image/webp" />
+        <img
+          src={heroLawnJpg}
+          alt="Lush green lawn in morning sunlight"
+          className="w-full h-44 object-cover"
+          width={640}
+          height={176}
+          decoding="async"
+          // @ts-expect-error — React 19 expects lowercase; browsers accept both
+          fetchpriority="high"
+        />
+      </picture>
       <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-foreground/20 to-transparent" />
       <div className="absolute bottom-0 left-0 right-0 p-5">
         <div className="flex items-center justify-between">

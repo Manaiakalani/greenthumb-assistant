@@ -23,9 +23,11 @@ interface ProfileContextValue {
 
 const ProfileContext = createContext<ProfileContextValue | null>(null);
 
+import { safeGetRaw, safeSetItem } from "@/lib/safeStorage";
+
 function loadProfile(): UserProfile {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
+    const raw = safeGetRaw(STORAGE_KEY);
     if (raw) {
       const parsed = JSON.parse(raw) as Partial<UserProfile>;
       return { ...DEFAULT_PROFILE, ...parsed };
@@ -37,13 +39,13 @@ function loadProfile(): UserProfile {
 }
 
 function saveProfile(profile: UserProfile) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));
+  safeSetItem(STORAGE_KEY, profile);
 }
 
 export function ProfileProvider({ children }: { children: ReactNode }) {
   const [profile, setProfile] = useState<UserProfile>(loadProfile);
   const [hasCompletedSetup, setHasCompletedSetup] = useState(
-    () => localStorage.getItem(STORAGE_KEY) !== null,
+    () => safeGetRaw(STORAGE_KEY) !== null,
   );
 
   const updateProfile = useCallback((updates: Partial<UserProfile>) => {

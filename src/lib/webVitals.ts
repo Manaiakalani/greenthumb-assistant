@@ -5,11 +5,13 @@ import { onCLS, onINP, onLCP, onFCP, onTTFB, type Metric } from "web-vitals";
  * Replace `logMetric` with an analytics endpoint in production.
  */
 function logMetric(metric: Metric) {
-  // eslint-disable-next-line no-console
-  console.debug(
-    `[web-vitals] ${metric.name}: ${Math.round(metric.value * 100) / 100}`,
-    metric.rating,
-  );
+  if (import.meta.env.DEV) {
+    // eslint-disable-next-line no-console
+    console.debug(
+      `[web-vitals] ${metric.name}: ${Math.round(metric.value * 100) / 100}`,
+      metric.rating,
+    );
+  }
 }
 
 export function reportWebVitals(onReport: (m: Metric) => void = logMetric) {

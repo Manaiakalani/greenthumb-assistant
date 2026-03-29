@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { BarChart3 } from "lucide-react";
 import { useGrassStore } from "@/stores/useGrassStore";
 import { ACTIVITY_META, type ActivityType, type JournalEntry } from "@/types/journal";
@@ -40,7 +40,7 @@ export function ProgressCharts({ entries }: ProgressChartsProps) {
     }
 
     return { months: monthData, maxCount: max };
-  }, [entries]);
+  }, [entries, storeEntries]);
 
   // Get top activity types across all 6 months
   const topTypes = useMemo(() => {

@@ -1,5 +1,5 @@
 import { useCallback, useState, useRef } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import {
   Bell, BellOff, Shield, Droplets, Scissors, Leaf,
 } from "lucide-react";

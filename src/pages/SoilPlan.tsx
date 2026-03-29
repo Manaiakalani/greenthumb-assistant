@@ -1,14 +1,17 @@
 import { useCallback, useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { Link } from "react-router-dom";
 import {
   ArrowLeft,
+  Calendar,
   Check,
   ChevronDown,
   ChevronUp,
   ClipboardList,
+  Download,
   Leaf,
   MapPin,
+  Printer,
   Snowflake,
   Sparkles,
   Info,
@@ -27,6 +30,13 @@ import {
   type PlanApplication,
   type PlanProgress,
 } from "@/data/soilPlans";
+import { SoilPlanGantt } from "@/components/charts";
+import {
+  generateIcsEvent,
+  generateIcsMultipleEvents,
+  downloadIcsFile,
+  parseApplicationDateRange,
+} from "@/lib/calendar";
 
 /* ─── Step Card ──────────────────────────────────────── */
 
@@ -36,12 +46,14 @@ function StepCard({
   isComplete,
   isActive,
   onToggle,
+  planYear,
 }: {
   step: PlanApplication;
   index: number;
   isComplete: boolean;
   isActive: boolean;
   onToggle: () => void;
+  planYear: number;
 }) {
   const [expanded, setExpanded] = useState(false);
   const meta = CATEGORY_META[step.category];
@@ -114,17 +126,41 @@ function StepCard({
         </div>
 
         {/* Expandable description */}
-        <button
-          onClick={() => setExpanded((prev) => !prev)}
-          className="mt-2 flex items-center gap-1 text-[11px] text-primary hover:underline"
-        >
-          {expanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
-          {expanded ? "Less" : "Instructions"}
-        </button>
+        <div className="mt-2 flex items-center gap-2">
+          <button
+            onClick={() => setExpanded((prev) => !prev)}
+            aria-expanded={expanded}
+            aria-controls={`step-panel-${step.id}`}
+            className="flex items-center gap-1 text-[11px] text-primary hover:underline"
+          >
+            {expanded ? <ChevronUp className="h-3 w-3" /> : <ChevronDown className="h-3 w-3" />}
+            {expanded ? "Less" : "Instructions"}
+          </button>
+          <button
+            onClick={() => {
+              const { start, end } = parseApplicationDateRange(step.dateRange, planYear);
+              const ics = generateIcsEvent({
+                title: `🌿 ${step.title}`,
+                description: `${step.instruction}\n\n${step.description}${step.tips ? `\n\nTip: ${step.tips}` : ""}`,
+                startDate: start,
+                endDate: end,
+              });
+              downloadIcsFile(ics, `grasswise-${step.id}.ics`);
+              toast.success("Calendar event downloaded", { description: step.title });
+            }}
+            className="flex items-center gap-1 text-[11px] text-muted-foreground hover:text-primary transition-colors"
+            aria-label="Add to calendar"
+            title="Add to calendar"
+          >
+            <Calendar className="h-3 w-3" />
+            <span className="sr-only sm:not-sr-only">Add to calendar</span>
+          </button>
+        </div>
 
         <AnimatePresence>
           {expanded && (
             <motion.div
+              id={`step-panel-${step.id}`}
               initial={{ height: 0, opacity: 0 }}
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
@@ -202,7 +238,7 @@ const SoilPlan = () => {
   );
 
   return (
-    <div className="min-h-screen bg-background pb-20">
+    <div className="min-h-screen bg-background pb-24">
       <AppHeader />
       <PageTransition>
         <main id="main-content" className="max-w-2xl mx-auto px-4">
@@ -221,10 +257,20 @@ const SoilPlan = () => {
             animate={{ opacity: 1, y: 0 }}
             className="mb-6"
           >
-            <h1 className="font-display text-2xl font-bold text-foreground flex items-center gap-2">
-              <ClipboardList className="h-6 w-6 text-primary" />
-              My Lawn Plan
-            </h1>
+            <div className="flex items-center justify-between">
+              <h1 className="font-display text-2xl font-bold text-foreground flex items-center gap-2">
+                <ClipboardList className="h-6 w-6 text-primary" />
+                My Lawn Plan
+              </h1>
+              <button
+                onClick={() => window.print()}
+                className="no-print inline-flex items-center gap-1.5 rounded-lg border border-border bg-card px-3 py-1.5 text-sm font-medium text-muted-foreground hover:text-foreground hover:border-primary/40 transition-colors shadow-sm"
+                aria-label="Print plan"
+              >
+                <Printer className="h-4 w-4" />
+                Print Plan
+              </button>
+            </div>
             <p className="text-sm text-muted-foreground mt-1">
               Your year-round soil & fertilizer schedule for{" "}
               <strong className="text-foreground">{profile.region}</strong> ·{" "}
@@ -294,6 +340,16 @@ const SoilPlan = () => {
             </div>
           </motion.div>
 
+          {/* Soil Plan Gantt Timeline */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.08 }}
+            className="mb-6"
+          >
+            <SoilPlanGantt region={profile.region} />
+          </motion.div>
+
           {/* Plan year selector (informational) */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -308,9 +364,33 @@ const SoilPlan = () => {
                   {plan.year} Application Schedule
                 </h3>
               </div>
-              <span className="text-[10px] text-muted-foreground px-2 py-0.5 rounded-full bg-primary/10">
-                {profile.region} · Zone {profile.zone}
-              </span>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={() => {
+                    const events = plan.applications.map((app) => {
+                      const { start, end } = parseApplicationDateRange(app.dateRange, plan.year);
+                      return {
+                        title: `🌿 ${app.title}`,
+                        description: `${app.instruction}\n\n${app.description}${app.tips ? `\n\nTip: ${app.tips}` : ""}`,
+                        startDate: start,
+                        endDate: end,
+                      };
+                    });
+                    const ics = generateIcsMultipleEvents(events);
+                    downloadIcsFile(ics, `grasswise-lawn-plan-${plan.year}.ics`);
+                    toast.success("Full plan exported", { description: `${plan.applications.length} events downloaded` });
+                  }}
+                  className="no-print inline-flex items-center gap-1.5 rounded-lg border border-border bg-card px-2.5 py-1 text-[11px] font-medium text-muted-foreground hover:text-foreground hover:border-primary/40 transition-colors shadow-sm"
+                  aria-label="Export all steps to calendar"
+                  title="Export all steps to calendar"
+                >
+                  <Download className="h-3.5 w-3.5" />
+                  Export All
+                </button>
+                <span className="text-[10px] text-muted-foreground px-2 py-0.5 rounded-full bg-primary/10">
+                  {profile.region} · Zone {profile.zone}
+                </span>
+              </div>
             </div>
 
             {/* Missed past steps warning */}
@@ -332,6 +412,7 @@ const SoilPlan = () => {
                   isComplete={!!progress.completed[step.id]}
                   isActive={step.id === activeStepId}
                   onToggle={() => handleToggle(step.id, step.title)}
+                  planYear={plan.year}
                 />
               ))}
 

@@ -1,10 +1,11 @@
-import { motion } from "framer-motion";
+import React from "react";
+import { motion } from "motion/react";
 import { Heart, TrendingUp, Info } from "lucide-react";
 import { useLawnHealth } from "@/hooks/useLawnHealth";
 import { useProfile } from "@/context/ProfileContext";
 import { useGrassStore } from "@/stores/useGrassStore";
 
-export function LawnHealthScore() {
+export const LawnHealthScore = React.memo(function LawnHealthScore() {
   const { profile } = useProfile();
   const journal = useGrassStore((s) => s.journal);
   const photos = useGrassStore((s) => s.photos);
@@ -17,7 +18,7 @@ export function LawnHealthScore() {
   return (
     <div className="rounded-xl border border-primary/15 bg-card p-5 shadow-card">
       <div className="flex items-center gap-2 mb-4">
-        <Heart className="h-5 w-5 text-primary" />
+        <Heart aria-hidden="true" className="h-5 w-5 text-primary" />
         <h3 className="font-display text-base font-semibold text-foreground">
           Lawn Health Score
         </h3>
@@ -89,9 +90,9 @@ export function LawnHealthScore() {
         <div className="mt-4 pt-3 border-t border-border">
           <div className="flex items-start gap-2">
             {health.score >= 80 ? (
-              <TrendingUp className="h-3.5 w-3.5 text-green-500 mt-0.5 shrink-0" />
+              <TrendingUp aria-hidden="true" className="h-3.5 w-3.5 text-green-500 mt-0.5 shrink-0" />
             ) : (
-              <Info className="h-3.5 w-3.5 text-amber-500 mt-0.5 shrink-0" />
+              <Info aria-hidden="true" className="h-3.5 w-3.5 text-amber-500 mt-0.5 shrink-0" />
             )}
             <p className="text-xs text-muted-foreground leading-relaxed">
               {health.tips[0]}
@@ -101,4 +102,4 @@ export function LawnHealthScore() {
       )}
     </div>
   );
-}
+});

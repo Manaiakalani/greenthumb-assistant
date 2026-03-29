@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { Target, Plus, Minus, Check, ChevronDown, ChevronUp } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
@@ -132,6 +132,7 @@ export function WeeklyGoalsWidget({ entries }: WeeklyGoalsWidgetProps) {
               <button
                 key={act}
                 onClick={() => toggleDraftActivity(act)}
+                aria-pressed={active}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium transition-colors border ${
                   active
                     ? "border-primary/30 bg-primary/10 text-primary"

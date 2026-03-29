@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { motion } from "framer-motion";
+import { motion } from "motion/react";
 import { CalendarDays } from "lucide-react";
 import type { JournalEntry } from "@/types/journal";
 

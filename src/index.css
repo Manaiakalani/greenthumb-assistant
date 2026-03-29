@@ -50,8 +50,8 @@
     --shadow-card-hover: 0 4px 12px hsl(150 10% 20% / 0.1), 0 8px 24px hsl(150 10% 20% / 0.06);
     --shadow-status: 0 2px 8px hsl(152 45% 32% / 0.2);
 
-    --font-display: 'Fraunces', serif;
-    --font-body: 'DM Sans', sans-serif;
+    --font-display: 'Fraunces', Georgia, serif;
+    --font-body: 'Inter', system-ui, sans-serif;
   }
 
   .dark {
@@ -106,10 +106,16 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-body);
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
   }
 
   h1, h2, h3, h4 {
     font-family: var(--font-display);
+    font-optical-sizing: auto;
+    text-wrap: balance;
   }
 }
 
@@ -197,5 +203,50 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* Print-friendly styles */
+@media print {
+  /* Hide navigation, headers, non-essential UI */
+  nav, .fixed, header, [aria-label="Main navigation"],
+  button:not(.print-show), .no-print {
+    display: none !important;
+  }
+
+  /* Reset background for printing */
+  body {
+    background: white !important;
+    color: black !important;
+    font-size: 12pt;
+  }
+
+  /* Ensure cards print well */
+  .bg-card {
+    background: white !important;
+    border: 1px solid #ddd !important;
+    box-shadow: none !important;
+    break-inside: avoid;
+  }
+
+  /* Show all content, no scroll */
+  .overflow-x-auto, .overflow-hidden {
+    overflow: visible !important;
+  }
+
+  /* Ensure plan steps are visible */
+  main {
+    padding: 0 !important;
+    max-width: 100% !important;
+  }
+
+  /* Add print header */
+  .print-header {
+    display: block !important;
+  }
+
+  /* Page breaks */
+  .page-break {
+    break-before: page;
   }
 }

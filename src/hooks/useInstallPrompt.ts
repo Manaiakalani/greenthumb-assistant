@@ -10,10 +10,12 @@ interface BeforeInstallPromptEvent extends Event {
   userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
 }
 
+import { safeGetRaw, safeSetItem } from "@/lib/safeStorage";
+
 const DISMISSED_KEY = "grasswise-install-dismissed";
 
 function checkDismissed(): boolean {
-  const ts = localStorage.getItem(DISMISSED_KEY);
+  const ts = safeGetRaw(DISMISSED_KEY);
   if (!ts) return false;
   return Date.now() - Number(ts) < 7 * 24 * 60 * 60 * 1000;
 }
@@ -59,7 +61,7 @@ export function useInstallPrompt() {
   }, [deferredPrompt]);
 
   const dismiss = useCallback(() => {
-    localStorage.setItem(DISMISSED_KEY, String(Date.now()));
+    safeSetItem(DISMISSED_KEY, String(Date.now()));
     dismissedRef.current = true;
     setDeferredPrompt(null);
   }, []);

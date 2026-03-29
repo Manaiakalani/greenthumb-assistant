@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 import { BookOpen, Plus, Trash2, Flame, Calendar } from "lucide-react";
 import { toast } from "sonner";
 import { AppHeader } from "@/components/AppHeader";
@@ -81,7 +81,7 @@ const Journal = () => {
   }, [entries]);
 
   return (
-    <div className="min-h-screen bg-background pb-20">
+    <div className="min-h-screen bg-background pb-24">
       <AppHeader />
       <PageTransition>
         <main id="main-content" className="max-w-2xl mx-auto px-4">
@@ -136,9 +136,9 @@ const Journal = () => {
               >
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-1.5">
-                    <Label>Activity</Label>
+                    <Label htmlFor="journal-activity">Activity</Label>
                     <Select value={activity} onValueChange={(v) => setActivity(v as ActivityType)}>
-                      <SelectTrigger>
+                      <SelectTrigger id="journal-activity">
                         <SelectValue />
                       </SelectTrigger>
                       <SelectContent>
@@ -151,8 +151,9 @@ const Journal = () => {
                     </Select>
                   </div>
                   <div className="space-y-1.5">
-                    <Label>Date</Label>
+                    <Label htmlFor="journal-date">Date</Label>
                     <Input
+                      id="journal-date"
                       type="date"
                       value={date}
                       onChange={(e) => setDate(e.target.value)}
@@ -160,8 +161,9 @@ const Journal = () => {
                   </div>
                 </div>
                 <div className="space-y-1.5">
-                  <Label>Notes (optional)</Label>
+                  <Label htmlFor="journal-notes">Notes (optional)</Label>
                   <Input
+                    id="journal-notes"
                     placeholder="e.g. Set mower to 3.5 inches…"
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}

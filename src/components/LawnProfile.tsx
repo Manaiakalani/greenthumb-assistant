@@ -1,10 +1,11 @@
-import { motion } from "framer-motion";
+import React from "react";
+import { motion } from "motion/react";
 import { ArrowUp, Leaf, Settings } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useProfile } from "@/context/ProfileContext";
 import { getGrowthMessage } from "@/data/lawn-profile";
 
-export function LawnProfile() {
+export const LawnProfile = React.memo(function LawnProfile() {
   const { profile } = useProfile();
 
   const fields = [
@@ -29,7 +30,7 @@ export function LawnProfile() {
           to="/profile"
           className="flex items-center gap-1 text-xs text-primary hover:underline"
         >
-          <Settings className="h-3 w-3" />
+          <Settings aria-hidden="true" className="h-3 w-3" />
           Edit Profile
         </Link>
       </div>
@@ -39,7 +40,7 @@ export function LawnProfile() {
           <div key={label}>
             <p className="text-muted-foreground text-xs">{label}</p>
             <p className="font-medium text-foreground flex items-center gap-1">
-              {icon && <Leaf className="h-3.5 w-3.5 text-primary" />}
+              {icon && <Leaf aria-hidden="true" className="h-3.5 w-3.5 text-primary" />}
               {value}
             </p>
           </div>
@@ -48,10 +49,10 @@ export function LawnProfile() {
 
       <div className="mt-4 pt-4 border-t border-primary/10">
         <p className="text-xs text-muted-foreground flex items-center gap-1">
-          <ArrowUp className="h-3 w-3" />
+          <ArrowUp aria-hidden="true" className="h-3 w-3" />
           {getGrowthMessage(profile.region, profile.grassType)}
         </p>
       </div>
     </motion.div>
   );
-}
+});

@@ -31,6 +31,7 @@ import {
   type PlanProgress,
 } from "@/data/soilPlans";
 import { SoilPlanGantt } from "@/components/charts/SoilPlanGantt";
+import { SharePlanButton } from "@/components/SharePlanButton";
 import {
   generateIcsEvent,
   generateIcsMultipleEvents,
@@ -270,6 +271,7 @@ const SoilPlan = () => {
                 <Printer aria-hidden="true" className="h-4 w-4" />
                 Print Plan
               </button>
+              <SharePlanButton />
             </div>
             <p className="text-sm text-muted-foreground mt-1">
               Your year-round soil & fertilizer schedule for{" "}

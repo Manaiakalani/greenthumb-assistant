@@ -1,0 +1,197 @@
+{
+  "common": {
+    "appName": "Grasswise",
+    "cancel": "Cancelar",
+    "save": "Guardar",
+    "delete": "Eliminar",
+    "notSet": "No configurado",
+    "done": "hecho",
+    "getStarted": "Comenzar",
+    "setUp": "Configurar",
+    "back": "Volver",
+    "next": "Siguiente",
+    "loading": "Cargando…",
+    "zone": "Zona {{zone}}",
+    "achievementUnlocked": "{{emoji}} ¡Logro Desbloqueado!",
+    "editProfile": "Editar perfil",
+    "switchToLight": "Cambiar a modo claro",
+    "switchToDark": "Cambiar a modo oscuro"
+  },
+
+  "nav": {
+    "home": "Inicio",
+    "plan": "Plan",
+    "journal": "Diario",
+    "photos": "Fotos",
+    "tools": "Herramientas",
+    "badges": "Insignias",
+    "mainNavigation": "Navegación principal"
+  },
+
+  "dashboard": {
+    "setupPrompt": {
+      "title": "Configura tu perfil de césped",
+      "description": "Obtén recomendaciones personalizadas para tu zona."
+    },
+    "lawnPlan": {
+      "title": "Mi Plan de Césped",
+      "description": "Consulta tu calendario anual de suelo y fertilización."
+    }
+  },
+
+  "journal": {
+    "title": "Diario del Césped",
+    "subtitle": "Registra cada corte, riego y tratamiento.",
+    "streakLabel": "{{count}}d racha",
+    "logActivity": "Registrar Actividad",
+    "activityLabel": "Actividad",
+    "dateLabel": "Fecha",
+    "notesLabel": "Notas (opcional)",
+    "notesPlaceholder": "ej. Cortadora a 3.5 pulgadas…",
+    "emptyTitle": "Sin registros aún",
+    "emptyDescription": "Toca \"Registrar Actividad\" para comenzar a rastrear el cuidado de tu césped.",
+    "entryRemoved": "Registro eliminado",
+    "loggedFor": "Registrado para {{date}}",
+    "deleteEntry": "Eliminar registro"
+  },
+
+  "photos": {
+    "title": "Línea de Tiempo Fotográfica",
+    "subtitle": "Captura el progreso de tu césped a lo largo del tiempo.",
+    "addPhoto": "Agregar Foto",
+    "processing": "Procesando…",
+    "dateLabel": "Fecha",
+    "noteLabel": "Nota (opcional)",
+    "notePlaceholder": "ej. Después del primer corte",
+    "emptyTitle": "Sin fotos aún",
+    "emptyDescription": "Toma una foto de tu césped para comenzar a seguir su progreso.",
+    "photoSaved": "📸 ¡Foto guardada!",
+    "photoRemoved": "Foto eliminada",
+    "couldNotProcess": "No se pudo procesar la imagen",
+    "preview": "Vista previa",
+    "deletePhoto": "Eliminar foto"
+  },
+
+  "profile": {
+    "backToDashboard": "Volver al Panel",
+    "title": "Tu Perfil de Césped",
+    "subtitle": "Personaliza tu perfil para que Grasswise te dé las recomendaciones más precisas.",
+    "summary": {
+      "title": "Resumen del Perfil",
+      "name": "Nombre",
+      "location": "Ubicación",
+      "usdaZone": "Zona USDA",
+      "region": "Región",
+      "grassType": "Tipo de Césped",
+      "lawnSize": "Tamaño del Césped",
+      "badges": "Insignias ({{earned}}/{{total}})",
+      "autoSave": "Los cambios se guardan automáticamente."
+    },
+    "personal": {
+      "title": "Personal",
+      "yourName": "Tu Nombre",
+      "namePlaceholder": "ej. Alejandro",
+      "locationLabel": "Ubicación",
+      "locationPlaceholder": "ej. Ciudad de México",
+      "detectLocation": "Detectar mi ubicación",
+      "detectTooltip": "Detectar automáticamente ubicación, zona y región",
+      "detectHelp": "Toca detectar para autocompletar tu ubicación, zona y región."
+    },
+    "climate": {
+      "title": "Clima y Zona",
+      "usdaZone": "Zona de Resistencia USDA",
+      "climateRegion": "Región Climática",
+      "selectZone": "Seleccionar zona",
+      "selectRegion": "Seleccionar región",
+      "zoneHint": "Cambiar tu zona sugerirá automáticamente una región climática correspondiente."
+    },
+    "lawn": {
+      "title": "Detalles del Césped",
+      "grassType": "Tipo de Césped",
+      "lawnSize": "Tamaño del Césped",
+      "selectGrass": "Seleccionar césped",
+      "selectSize": "Seleccionar tamaño"
+    },
+    "toasts": {
+      "locationDetected": "¡Ubicación detectada!",
+      "locationFailed": "No se pudo detectar la ubicación",
+      "locationFailedDesc": "Habilita los permisos de ubicación o ingresa manualmente."
+    }
+  },
+
+  "soilPlan": {
+    "backToTools": "Volver a Herramientas",
+    "title": "Mi Plan de Césped",
+    "subtitle": "Tu calendario anual de suelo y fertilización para <strong>{{region}}</strong> · Zona {{zone}} · {{year}}",
+    "setupPrompt": {
+      "title": "Configura tu ubicación primero",
+      "description": "Tu plan se personaliza por zona. Detecta tu ubicación para mejores resultados."
+    },
+    "planSummary": "Resumen del Plan",
+    "progressLabel": "{{completed}}/{{total}} completados",
+    "applicationSchedule": "Calendario de Aplicaciones {{year}}",
+    "less": "Menos",
+    "instructions": "Instrucciones",
+    "markedComplete": "¡Marcado como completado!",
+    "markIncomplete": "Marcar \"{{title}}\" como incompleto",
+    "markComplete": "Marcar \"{{title}}\" como completado",
+    "grassTypeNote": "🌿 {{grassType}} — Este plan está optimizado para tu tipo de césped en {{region}} (Zona {{zone}}).",
+    "endOfSeason": "¡Fin de Temporada! 🎉",
+    "winterTips": "Consejos de Cuidado Invernal"
+  },
+
+  "weeklyGoals": {
+    "title": "Metas Semanales",
+    "cta": "Establece objetivos como \"Cortar 1×, Regar 3×\" para mantenerte al día.",
+    "setGoals": "Establecer Metas",
+    "setWeeklyGoals": "Establecer Metas Semanales",
+    "saveGoals": "Guardar Metas",
+    "goalsSaved": "¡Metas semanales establecidas! 🎯",
+    "complete": "✓ ¡Completo!",
+    "editGoals": "Editar metas",
+    "decreaseTarget": "Disminuir objetivo",
+    "increaseTarget": "Aumentar objetivo"
+  },
+
+  "exportBackup": {
+    "title": "Datos y Respaldo",
+    "description": "Todos tus datos se almacenan localmente en este dispositivo. Exporta un respaldo o restaura desde uno anterior.",
+    "journalEntries": "Registros del diario",
+    "photos": "Fotos",
+    "achievements": "Logros",
+    "export": "Exportar",
+    "restore": "Restaurar",
+    "confirmRestore": {
+      "title": "¿Reemplazar todos los datos?",
+      "description": "Esto sobrescribirá tu perfil, diario, fotos y logros actuales con el archivo de respaldo. Esto no se puede deshacer.",
+      "confirm": "Sí, Restaurar"
+    },
+    "toasts": {
+      "exported": "¡Respaldo descargado! 📦",
+      "exportedDesc": "Guarda este archivo en un lugar seguro — puedes restaurarlo después.",
+      "exportFailed": "Error al exportar",
+      "restored": "¡Respaldo restaurado! 🎉",
+      "restoredDesc": "Se han cargado los datos de {{date}}.",
+      "invalidFile": "Archivo de respaldo inválido",
+      "invalidFileDesc": "Esto no parece ser un respaldo de Grasswise.",
+      "restoreFailed": "Error al restaurar",
+      "restoreFailedDesc": "No se pudo analizar el archivo.",
+      "readFailed": "No se pudo leer el archivo"
+    }
+  },
+
+  "lawnHealth": {
+    "title": "Puntuación de Salud del Césped",
+    "consistency": "Consistencia",
+    "variety": "Variedad",
+    "recency": "Recencia",
+    "engagement": "Compromiso"
+  },
+
+  "progressCharts": {
+    "title": "Tendencias de Actividad",
+    "period": "Últimos 6 meses",
+    "emptyTitle": "Sin datos de actividad aún",
+    "emptyDescription": "Comienza a registrar actividades para ver tendencias aquí."
+  }
+}

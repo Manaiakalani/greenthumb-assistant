@@ -19,6 +19,8 @@ const Gallery = lazy(() => import("@/pages/Gallery"));
 const SoilPlan = lazy(() => import("@/pages/SoilPlan"));
 const Privacy = lazy(() => import("@/pages/Privacy"));
 const GrassQuiz = lazy(() => import("@/pages/GrassQuiz"));
+const PestIdentifier = lazy(() => import("@/pages/PestIdentifier"));
+const Tutorials = lazy(() => import("@/pages/Tutorials"));
 
 const queryClient = new QueryClient();
 
@@ -44,6 +46,8 @@ function AnimatedRoutes() {
         <Route path="/plan" element={<Suspense fallback={<LazyFallback />}><SoilPlan /></Suspense>} />
         <Route path="/privacy" element={<Suspense fallback={<LazyFallback />}><Privacy /></Suspense>} />
         <Route path="/grass-quiz" element={<Suspense fallback={<LazyFallback />}><GrassQuiz /></Suspense>} />
+        <Route path="/pest-identifier" element={<Suspense fallback={<LazyFallback />}><PestIdentifier /></Suspense>} />
+        <Route path="/tutorials" element={<Suspense fallback={<LazyFallback />}><Tutorials /></Suspense>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>

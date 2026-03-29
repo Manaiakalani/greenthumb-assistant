@@ -2,7 +2,7 @@
 
 > The weather app for your lawn. Know exactly when to mow, fertilize, and water — and when to leave it alone.
 
-Grasswise is a progressive web app that delivers **personalized, season-aware lawn care guidance** based on your location, climate zone, and grass type. Track your lawn care activities, earn achievement badges, snap progress photos, and share vintage collector cards with friends.
+Grasswise is a progressive web app that delivers **personalized, season-aware lawn care guidance** based on your location, climate zone, and grass type. Track your lawn care activities, identify pests and diseases, follow guided tutorials, manage multiple lawns, earn achievement badges, snap progress photos, and share vintage collector cards with friends.
 
 ---
 
@@ -15,12 +15,14 @@ Grasswise is a progressive web app that delivers **personalized, season-aware la
 - **USDA Zone Detection** — Auto-detect your location, hardiness zone, and climate region using browser geolocation
 - **Seasonal Timeline** — 5-month carousel with arrow navigation, dot indicators, and animated transitions — centered on the current month
 - **Dynamic Health Badge** — Lawn status (Thriving, Dormant, Recovering, Heat Stress) derived from your region's current growth phase
+- **Multi-Lawn Support** — Manage multiple lawn areas (front, back, side) with separate grass types and sizes per area
 
 ### Intelligence
 - **Lawn Health Score** — 0-100 composite score with circular gauge, letter grade, and breakdown across Consistency, Variety, Recency, and Engagement — plus actionable tips to improve
 - **Smart Reminders** — Context-aware nudges based on your journal history and live weather (e.g. "Rain coming — skip watering!", "It's been 12 days since your last mow", "High heat alert!")
-- **5 Recharts Visualizations** — Weekly activity stacked bar chart, lawn health radar, weather forecast composed chart, achievement donut, and soil plan Gantt timeline
+- **7 Recharts Visualizations** — Weekly activity stacked bar chart, lawn health radar, weather forecast composed chart, achievement donut, soil plan Gantt timeline, cost over time area chart, and mowing frequency bar chart
 - **Soil Plan Reminders** — Notification banner for upcoming fertilizer/soil tasks within a 7-day window
+- **Weather Alerts** — Contextual alerts for frost, heat stress, heavy rain, drought, and high wind with actionable lawn care advice
 
 ### Activity Tracking
 - **Lawn Journal** — Log mowing, watering, fertilizing, seeding, aeration, and more with notes and dates
@@ -29,16 +31,24 @@ Grasswise is a progressive web app that delivers **personalized, season-aware la
 - **Before/After Compare** — Draggable slider to compare lawn photos side-by-side
 - **Streak Tracking** — See your consecutive-day activity streaks with a fire counter
 - **Weekly Goals** — Set per-activity weekly targets and track progress with auto-resetting each Monday
+- **Cost Tracker** — Log lawn care expenses by category with monthly/yearly summaries and category breakdown
+- **Monthly Checklist** — Auto-generated seasonal task list filtered by climate region with progress tracking
 
 ### Tools & Data
 - **Grass Type Quiz** — 5-step interactive quiz (climate zone → blade shape → growth habit → color → results) with profile save
 - **Soil Test Input** — pH slider + nitrogen/phosphorus/potassium toggles with color-coded recommendations
 - **Lawn Size Estimator** — Shape-based area calculator (rectangle, circle, L-shape) with product quantity estimates
 - **Weather-Aware Watering Calculator** — Factors in recent rainfall, rain forecast, and suggests best watering days
+- **Pest & Disease Identifier** (`/pest-identifier`) — Multi-step symptom quiz identifying 15 common lawn pests, diseases, and weeds with treatments and prevention tips
+- **Guided Tutorials** (`/tutorials`) — 8 step-by-step lawn care tutorials across basics, seasonal, and advanced categories with progress tracking
+- **Mowing Height Guide** — Grass-type-specific mowing heights by season with visual indicators and the one-third rule
+- **Seed & Product Calculator** — Calculate seed needed by lawn size, grass type, and new lawn vs overseeding with bag count
+- **Lawn Care Timer** — Countdown timer with presets (Quick Water, Deep Soak, Fertilizer Wait) and audio/vibration alerts
 - **Soil Temperature Chart** — Visual gradient bar showing current soil temp at 6 cm depth with lawn-care insights per range
 - **Research-Backed Soil & Fertilizer Plans** — Zone-based seasonal plans with monthly action checklists, progress tracking, calendar export, and print support. Plans sourced from Virginia Tech, NC State, Purdue, Texas A&M, UF/IFAS, and USDA extension research — fall-heavy nitrogen, soil-temp-triggered pre-emergents, and grass-type-specific warnings
 - **Calendar Export** — Download individual or all soil plan steps as .ics files for your calendar app
 - **Print Plan** — @media print optimized layout for printing soil plans
+- **Share Soil Plan** — Export soil plan as PNG image or share via Web Share API
 - **Community Pulse** — See what other lawn keepers in your region are doing this season (dormant %, mowing %, watering %)
 
 ### Gamification
@@ -50,6 +60,7 @@ Grasswise is a progressive web app that delivers **personalized, season-aware la
 ### Data Safety
 - **Full JSON Backup** — One-click export of all data (profile, journal, photos, achievements, goals, soil test, lawn size)
 - **Restore from Backup** — Import a previous backup with validation and confirmation dialog — never lose your progress
+- **Offline Weather Cache** — Caches last weather fetch in localStorage for offline access with 1-hour freshness
 
 ### Polish
 - **Onboarding Walkthrough** — 3-step intro modal for new users with skip option
@@ -61,6 +72,7 @@ Grasswise is a progressive web app that delivers **personalized, season-aware la
 - **Haptic Feedback** — Subtle vibration on key actions (mobile devices)
 - **Dark Mode** — System-aware theme toggle with smooth transitions; charts adapt colors automatically
 - **Seasonal Theme Accents** — Accent colors shift with the season (spring green → summer gold → fall amber → winter blue)
+- **Seasonal Hero Backgrounds** — Dynamic CSS gradient backgrounds that change with the season
 - **Typography** — Inter variable font (optical sizing) for body, Fraunces serif for display headings
 - **PWA Support** — Installable on mobile (192px + 512px icons) with offline fallback page, Workbox-powered service worker, and app shortcuts
 - **Accessibility** — `aria-label`s, `aria-expanded`, `aria-pressed`, `focus-visible` states, `prefers-reduced-motion` support, `MotionConfig`, keyboard-navigable galleries, form label associations, and 44px+ touch targets
@@ -68,6 +80,7 @@ Grasswise is a progressive web app that delivers **personalized, season-aware la
 - **Privacy Policy** — Full /privacy page covering location data, localStorage, PWA, no-tracking, children's privacy
 - **Bundle Splitting** — Vendor chunks for React, Recharts, Motion, React Query, and UI — main bundle reduced by ~95%
 - **Safe Storage** — localStorage wrapper with try/catch for Safari private mode and quota exceeded errors
+- **Spanish Translation (i18n)** — Complete `es.json` translation file for all UI strings
 
 ---
 
@@ -80,7 +93,7 @@ Grasswise is a progressive web app that delivers **personalized, season-aware la
 | Styling | Tailwind CSS 3 + CSS custom properties + seasonal accent overrides |
 | Fonts | Inter (variable, optical sizing) + Fraunces (display serif) via Google Fonts |
 | Animation | Motion (tree-shaking entry for Framer Motion 12+, `MotionConfig reducedMotion="user"`) |
-| Charts | Recharts 3 (BarChart, RadarChart, ComposedChart, PieChart) |
+| Charts | Recharts 3 (BarChart, RadarChart, ComposedChart, PieChart, AreaChart) |
 | Data Fetching | TanStack React Query 5 |
 | Routing | React Router DOM 6 |
 | State | Zustand 5 (journal/photos/achievements) + React Context (profile) |
@@ -94,7 +107,7 @@ Grasswise is a progressive web app that delivers **personalized, season-aware la
 | PWA | vite-plugin-pwa + Workbox (generateSW, offline fallback, app shortcuts) |
 | Storage | localStorage with safe wrapper (quota + privacy mode handling) |
 | Testing | Vitest 4 (136 unit tests) + Playwright (252 E2E tests x 6 browsers) |
-| i18n | react-i18next (en locale, extensible) |
+| i18n | react-i18next (en + es locales, extensible) |
 
 **Production deps:** 21 | **Dev deps:** 20 | **Zero backend — 100% client-side**
 
@@ -182,18 +195,26 @@ src/
 │   │   ├── LawnHealthRadar        <- Radar chart (4 health dimensions)
 │   │   ├── ForecastChart          <- Composed chart (temp lines + precip bars)
 │   │   ├── AchievementDonut       <- Pie donut (earned vs locked badges)
-│   │   └── SoilPlanGantt          <- Horizontal bar (monthly plan timeline)
+│   │   ├── SoilPlanGantt          <- Horizontal bar (monthly plan timeline)
+│   │   ├── CostOverTimeChart      <- Area chart (monthly spending, 12 months)
+│   │   └── MowingFrequencyChart   <- Bar chart (mows per month, color-coded)
 │   ├── DataBackupCard             <- Full JSON backup & restore card
+│   ├── CostTracker                <- Expense logging with category breakdown
+│   ├── LawnCareTimer              <- Countdown timer with presets & alerts
 │   ├── LawnSizeEstimator          <- Shape-based area calculator
+│   ├── MonthlyChecklist           <- Region-filtered seasonal task list
+│   ├── MowingHeightGuide          <- Grass-type mowing heights by season
+│   ├── SeedCalculator             <- Seed & product quantity calculator
 │   ├── PhotoCompare               <- Before/after draggable slider
 │   ├── ReminderBanner             <- Upcoming soil plan task notifications
 │   ├── SeasonalTimeline           <- 5-month carousel with arrow navigation
 │   ├── SoilTestCard               <- pH/NPK input with recommendations
 │   ├── WateringCalculator         <- Weather-aware watering with rainfall
 │   ├── WeatherCard                <- Live weather + dual F/C + geolocation
-│   └── ...                        <- HeroSection, QuickStats, SmartReminders, etc.
+│   └── ...                        <- HeroSection, QuickStats, SmartReminders, WeatherAlerts, etc.
 ├── data/
-│   └── soilPlans                  <- Research-backed fertilizer plans (3 zones)
+│   ├── soilPlans                  <- Research-backed fertilizer plans (3 zones)
+│   └── tutorials                  <- 8 step-by-step lawn care tutorials
 ├── hooks/
 │   ├── useWeather                 <- Shared weather query hook (TanStack Query)
 │   └── ...                        <- useLawnHealth, useSmartReminders, etc.
@@ -208,9 +229,12 @@ src/
 │   ├── Tools                      <- Charts, watering calc, soil test, lawn size
 │   ├── SoilPlan                   <- Fertilizer plan + Gantt + calendar export + print
 │   ├── GrassQuiz                  <- 5-step grass identification quiz
+│   ├── PestIdentifier             <- Multi-step pest & disease symptom quiz
+│   ├── Tutorials                  <- Guided lawn care tutorials with progress
 │   ├── Privacy                    <- Full privacy policy page
 │   └── ...                        <- Journal, Photos, Profile, Achievements, Gallery
 ├── test/                          <- 10 test files, 136 unit tests
+├── locales/                       <- i18n translation files (en.json, es.json)
 └── types/                         <- TypeScript interfaces
 e2e/
 └── fit-and-finish.spec.ts         <- 252 Playwright E2E tests
@@ -230,10 +254,13 @@ e2e/
 8. **Log your work** — Track every mow, water, and treatment in the journal with dates and notes
 9. **Watch the heatmap fill in** — A GitHub-style grid shows your consistency over 16 weeks
 10. **Snap photos** — Build a visual timeline and compare before/after with a drag slider
-11. **Use the tools** — Calculate watering, input soil test results, estimate lawn size, and explore data charts
-12. **Earn badges** — Unlock 17 achievements by maintaining streaks, trying new activities, and more
-13. **Share your card** — Generate a collector card with your lawn profile and share it on social media
-14. **Back up your data** — Export everything as JSON and restore anytime
+11. **Use the tools** — Calculate watering, input soil test results, estimate lawn size, look up mowing heights, calculate seed amounts, set lawn care timers, and explore data charts
+12. **Identify problems** — Use the Pest & Disease Identifier quiz to diagnose lawn issues and get treatment plans
+13. **Follow tutorials** — Work through 8 guided tutorials covering basics, seasonal care, and advanced techniques
+14. **Track costs** — Log expenses by category and review monthly/yearly spending with charts
+15. **Earn badges** — Unlock 17 achievements by maintaining streaks, trying new activities, and more
+16. **Share your card** — Generate a collector card with your lawn profile and share it on social media
+17. **Back up your data** — Export everything as JSON and restore anytime
 
 ---
 

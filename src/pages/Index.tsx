@@ -17,6 +17,7 @@ import { OnboardingModal } from "@/components/OnboardingModal";
 import { BottomNav } from "@/components/BottomNav";
 import { InstallBanner } from "@/components/InstallBanner";
 import { ReminderBanner } from "@/components/ReminderBanner";
+import { WeatherAlerts } from "@/components/WeatherAlerts";
 import { LawnHealthScore } from "@/components/LawnHealthScore";
 import { SmartReminders } from "@/components/SmartReminders";
 import { safeGetRaw, safeSetItem } from "@/lib/safeStorage";
@@ -137,6 +138,12 @@ const Index = () => {
             <div className="mt-6">
               <WeatherCard />
             </div>
+
+            {weather && (
+              <div className="mt-4">
+                <WeatherAlerts weather={weather} />
+              </div>
+            )}
 
             <div className="mt-6">
               <SmartReminders weather={weather} />

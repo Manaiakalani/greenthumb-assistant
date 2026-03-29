@@ -20,6 +20,7 @@ import { ReminderBanner } from "@/components/ReminderBanner";
 import { WeatherAlerts } from "@/components/WeatherAlerts";
 import { LawnHealthScore } from "@/components/LawnHealthScore";
 import { SmartReminders } from "@/components/SmartReminders";
+import { SeasonalTipCard } from "@/components/SeasonalTipCard";
 import { safeGetRaw, safeSetItem } from "@/lib/safeStorage";
 import { checkAndNotify } from "@/lib/planReminders";
 import { getPlanForRegion } from "@/data/soilPlans";
@@ -150,6 +151,10 @@ const Index = () => {
             </div>
 
             <ActionsSection />
+
+            <div className="mt-4">
+              <SeasonalTipCard />
+            </div>
 
             {/* Lawn Plan CTA */}
             <Link to="/plan">

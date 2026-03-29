@@ -6,6 +6,7 @@ import { ThemeProvider } from "next-themes";
 import { AnimatePresence, MotionConfig } from "motion/react";
 import { ProfileProvider } from "@/context/ProfileContext";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import KeyboardShortcuts from "@/components/KeyboardShortcuts";
 import { useSeasonalTheme } from "@/hooks/useSeasonalTheme";
 import Index from "@/pages/Index";
 import NotFound from "@/pages/NotFound";
@@ -21,6 +22,8 @@ const Privacy = lazy(() => import("@/pages/Privacy"));
 const GrassQuiz = lazy(() => import("@/pages/GrassQuiz"));
 const PestIdentifier = lazy(() => import("@/pages/PestIdentifier"));
 const Tutorials = lazy(() => import("@/pages/Tutorials"));
+const CalendarPage = lazy(() => import("@/pages/Calendar"));
+const Glossary = lazy(() => import("@/pages/Glossary"));
 
 const queryClient = new QueryClient();
 
@@ -48,6 +51,8 @@ function AnimatedRoutes() {
         <Route path="/grass-quiz" element={<Suspense fallback={<LazyFallback />}><GrassQuiz /></Suspense>} />
         <Route path="/pest-identifier" element={<Suspense fallback={<LazyFallback />}><PestIdentifier /></Suspense>} />
         <Route path="/tutorials" element={<Suspense fallback={<LazyFallback />}><Tutorials /></Suspense>} />
+        <Route path="/calendar" element={<Suspense fallback={<LazyFallback />}><CalendarPage /></Suspense>} />
+        <Route path="/glossary" element={<Suspense fallback={<LazyFallback />}><Glossary /></Suspense>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
@@ -69,6 +74,7 @@ const App = () => (
       </a>
       <Toaster />
       <BrowserRouter>
+        <KeyboardShortcuts />
         <AnimatedRoutes />
       </BrowserRouter>
     </ProfileProvider>

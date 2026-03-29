@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import { motion } from "motion/react";
-import { Wrench, ClipboardList, ChevronRight, Bug, BookOpen, Scissors, Calculator, DollarSign, CheckSquare, Timer } from "lucide-react";
+import { Wrench, ClipboardList, ChevronRight, Bug, BookOpen, Scissors, Calculator, CalendarDays, BookA } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AppHeader } from "@/components/AppHeader";
 import { BottomNav } from "@/components/BottomNav";
@@ -15,6 +15,15 @@ import { SeedCalculator } from "@/components/SeedCalculator";
 import { CostTracker } from "@/components/CostTracker";
 import { MonthlyChecklist } from "@/components/MonthlyChecklist";
 import { LawnCareTimer } from "@/components/LawnCareTimer";
+import { FertilizerDecoder } from "@/components/FertilizerDecoder";
+import { SoilAmendmentCalc } from "@/components/SoilAmendmentCalc";
+import { GrassCompare } from "@/components/GrassCompare";
+import { SprinklerZonePlanner } from "@/components/SprinklerZonePlanner";
+import { ActivityStreaks } from "@/components/ActivityStreaks";
+import { SeasonalTipCard } from "@/components/SeasonalTipCard";
+import { ProgressReport } from "@/components/ProgressReport";
+import LawnReportCard from "@/components/LawnReportCard";
+import QRProfileShare from "@/components/QRProfileShare";
 import { useWeather } from "@/hooks/useWeather";
 import { useProfile } from "@/context/ProfileContext";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -107,11 +116,30 @@ const Tools = () => {
                 <div><h3 className="text-sm font-display font-semibold text-foreground">Grass Quiz</h3><p className="text-xs text-muted-foreground">ID your grass</p></div>
               </motion.div>
             </Link>
-            <div className="rounded-xl border border-primary/15 bg-card p-4 shadow-card flex items-center gap-3">
-              <div className="rounded-lg bg-amber-500/15 p-2"><Calculator aria-hidden="true" className="h-5 w-5 text-amber-500" /></div>
-              <div><h3 className="text-sm font-display font-semibold text-foreground">Seed Calc</h3><p className="text-xs text-muted-foreground">Below ↓</p></div>
-            </div>
+            <Link to="/calendar" className="focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none rounded-xl">
+              <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+                className="rounded-xl border border-primary/15 bg-card p-4 shadow-card hover:border-primary/40 transition-colors flex items-center gap-3">
+                <div className="rounded-lg bg-blue-500/15 p-2"><CalendarDays aria-hidden="true" className="h-5 w-5 text-blue-500" /></div>
+                <div><h3 className="text-sm font-display font-semibold text-foreground">Calendar</h3><p className="text-xs text-muted-foreground">Monthly view</p></div>
+              </motion.div>
+            </Link>
+            <Link to="/glossary" className="focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none rounded-xl">
+              <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+                className="rounded-xl border border-primary/15 bg-card p-4 shadow-card hover:border-primary/40 transition-colors flex items-center gap-3">
+                <div className="rounded-lg bg-teal-500/15 p-2"><BookA aria-hidden="true" className="h-5 w-5 text-teal-500" /></div>
+                <div><h3 className="text-sm font-display font-semibold text-foreground">Glossary</h3><p className="text-xs text-muted-foreground">80+ terms</p></div>
+              </motion.div>
+            </Link>
           </div>
+
+          {/* Seasonal Tip of the Day */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mb-6"
+          >
+            <SeasonalTipCard />
+          </motion.div>
 
           {/* Monthly Checklist */}
           <motion.div
@@ -186,6 +214,61 @@ const Tools = () => {
             <LawnCareTimer />
           </motion.div>
 
+          {/* Fertilizer Decoder */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.14 }}
+            className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
+            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 400px" }}
+          >
+            <FertilizerDecoder />
+          </motion.div>
+
+          {/* Soil Amendment Calculator */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.15 }}
+            className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
+            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 350px" }}
+          >
+            <SoilAmendmentCalc />
+          </motion.div>
+
+          {/* Grass Comparison Tool */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.16 }}
+            className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
+            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 400px" }}
+          >
+            <GrassCompare />
+          </motion.div>
+
+          {/* Sprinkler Zone Planner */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.17 }}
+            className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
+            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 400px" }}
+          >
+            <SprinklerZonePlanner />
+          </motion.div>
+
+          {/* Activity Streaks & Goals */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.18 }}
+            className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
+            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 350px" }}
+          >
+            <ActivityStreaks />
+          </motion.div>
+
           {/* Soil Temperature Chart */}
           <motion.div
             initial={{ opacity: 0, y: 12 }}
@@ -206,6 +289,39 @@ const Tools = () => {
             style={{ contentVisibility: "auto", containIntrinsicSize: "auto 300px" }}
           >
             <SoilTestCard />
+          </motion.div>
+
+          {/* Lawn Report Card */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.19 }}
+            className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
+            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 500px" }}
+          >
+            <LawnReportCard />
+          </motion.div>
+
+          {/* Progress Report */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.2 }}
+            className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
+            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 400px" }}
+          >
+            <ProgressReport />
+          </motion.div>
+
+          {/* QR Profile Share */}
+          <motion.div
+            initial={{ opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.21 }}
+            className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
+            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 350px" }}
+          >
+            <QRProfileShare />
           </motion.div>
 
           {/* Progress Charts */}

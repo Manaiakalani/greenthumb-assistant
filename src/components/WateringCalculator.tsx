@@ -165,7 +165,7 @@ export function WateringCalculator() {
           <div className="rounded-xl border border-blue-200 bg-blue-50/50 dark:border-blue-900 dark:bg-blue-950/30 p-4">
             <div className="flex items-center gap-2 mb-2">
               <CloudRain aria-hidden="true" className="h-4 w-4 text-blue-500" />
-              <h4 className="text-sm font-semibold text-foreground">Rainfall & Watering Adjustment</h4>
+              <h4 className="text-sm font-display font-semibold text-foreground">Rainfall & Watering Adjustment</h4>
             </div>
             <p className="text-sm text-muted-foreground">
               Recent rainfall: <span className="font-medium text-foreground">{weatherInsight.recentRainfall}"</span> in the past 3 days
@@ -207,7 +207,7 @@ export function WateringCalculator() {
             <div className="rounded-xl border border-green-200 bg-green-50/50 dark:border-green-900 dark:bg-green-950/30 p-4">
               <div className="flex items-center gap-2 mb-2">
                 <Sun aria-hidden="true" className="h-4 w-4 text-green-500" />
-                <h4 className="text-sm font-semibold text-foreground">Best Days to Water</h4>
+                <h4 className="text-sm font-display font-semibold text-foreground">Best Days to Water</h4>
               </div>
               <div className="flex flex-wrap gap-2">
                 {weatherInsight.bestDays.map((day) => (

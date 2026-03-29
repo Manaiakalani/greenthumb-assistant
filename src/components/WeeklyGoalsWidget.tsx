@@ -120,7 +120,7 @@ export function WeeklyGoalsWidget({ entries }: WeeklyGoalsWidgetProps) {
       >
         <div className="flex items-center gap-2">
           <Target aria-hidden="true" className="h-5 w-5 text-primary" />
-          <h3 className="text-sm font-semibold text-foreground">Set Weekly Goals</h3>
+          <h3 className="text-sm font-display font-semibold text-foreground">Set Weekly Goals</h3>
         </div>
 
         {/* Activity toggles */}
@@ -221,7 +221,7 @@ export function WeeklyGoalsWidget({ entries }: WeeklyGoalsWidgetProps) {
       >
         <div className="flex items-center gap-2">
           <Target aria-hidden="true" className="h-4 w-4 text-primary" />
-          <h3 className="text-sm font-semibold text-foreground">Weekly Goals</h3>
+          <h3 className="text-sm font-display font-semibold text-foreground">Weekly Goals</h3>
           {allComplete && (
             <span className="text-xs px-2 py-0.5 rounded-full bg-green-500/10 text-green-600 dark:text-green-400 font-medium">
               ✓ Complete!

@@ -200,7 +200,7 @@ const Photos = () => {
                 const monthName = formatMonthYear(new Date(+year, +month - 1));
                 return (
                   <div key={monthKey}>
-                    <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-3">
+                    <h3 className="text-xs font-body font-semibold text-muted-foreground uppercase tracking-wider mb-3">
                       {monthName}
                     </h3>
                     <div className="grid grid-cols-3 gap-2">

@@ -45,7 +45,7 @@ export function AchievementBadges() {
         const items = ACHIEVEMENTS.filter((a) => a.category === cat);
         return (
           <div key={cat}>
-            <h4 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider mb-2">
+            <h4 className="text-xs font-body font-semibold text-muted-foreground uppercase tracking-wider mb-2">
               {categoryLabels[cat]}
             </h4>
             <div className="grid grid-cols-3 gap-2">

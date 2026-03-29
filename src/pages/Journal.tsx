@@ -206,7 +206,7 @@ const Journal = () => {
                   <div key={monthKey}>
                     <div className="flex items-center gap-2 mb-3">
                       <Calendar aria-hidden="true" className="h-3.5 w-3.5 text-muted-foreground" />
-                      <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                      <h3 className="text-xs font-body font-semibold text-muted-foreground uppercase tracking-wider">
                         {monthName}
                       </h3>
                       <span className="text-[10px] text-muted-foreground">

@@ -115,7 +115,7 @@ export default function QRProfileShare() {
       {/* Header */}
       <div className="flex items-center gap-2">
         <QrCode className="h-5 w-5 text-primary" aria-hidden="true" />
-        <h3 className="text-lg font-semibold">Share Your Profile</h3>
+        <h3 className="text-lg font-semibold [text-wrap:balance]">Share Your Profile</h3>
       </div>
 
       {/* QR Code */}

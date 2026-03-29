@@ -199,12 +199,17 @@ function GoalEditor({ initial, onSave, onCancel }: GoalEditorProps) {
     <form onSubmit={handleSubmit} className="space-y-3">
       {goals.map((g, idx) => (
         <div key={idx} className="flex items-center gap-2">
+          <label htmlFor={`goal-activity-${idx}`} className="sr-only">
+            Activity
+          </label>
           <select
+            id={`goal-activity-${idx}`}
+            name={`goal-activity-${idx}`}
             value={g.activity}
             onChange={(e) =>
               updateGoal(idx, { activity: e.target.value as ActivityType })
             }
-            className="flex-1 rounded-lg border bg-background px-2 py-1.5 text-sm"
+            className="flex-1 rounded-lg border bg-background px-2 py-1.5 text-sm text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             {ACTIVITY_TYPES.map((a) => (
               <option key={a} value={a}>
@@ -213,9 +218,14 @@ function GoalEditor({ initial, onSave, onCancel }: GoalEditorProps) {
             ))}
           </select>
 
-          <span className="text-xs text-muted-foreground">×</span>
+          <span className="text-xs text-muted-foreground" aria-hidden="true">×</span>
 
+          <label htmlFor={`goal-target-${idx}`} className="sr-only">
+            Target count
+          </label>
           <input
+            id={`goal-target-${idx}`}
+            name={`goal-target-${idx}`}
             type="number"
             min={1}
             max={30}
@@ -225,13 +235,13 @@ function GoalEditor({ initial, onSave, onCancel }: GoalEditorProps) {
                 target: Math.max(1, parseInt(e.target.value, 10) || 1),
               })
             }
-            className="w-14 rounded-lg border bg-background px-2 py-1.5 text-center text-sm tabular-nums"
+            className="w-14 rounded-lg border bg-background px-2 py-1.5 text-center text-sm tabular-nums text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           />
 
           <button
             type="button"
             onClick={() => removeGoal(idx)}
-            className="rounded p-1 text-muted-foreground transition-colors hover:text-destructive"
+            className="rounded p-1 text-muted-foreground transition-colors hover:text-destructive focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             aria-label="Remove goal"
           >
             <X aria-hidden="true" className="h-3.5 w-3.5" />
@@ -243,7 +253,7 @@ function GoalEditor({ initial, onSave, onCancel }: GoalEditorProps) {
         <button
           type="button"
           onClick={addGoal}
-          className="inline-flex items-center gap-1 text-xs text-primary transition-colors hover:text-primary/80"
+          className="inline-flex items-center gap-1 text-xs text-primary transition-colors hover:text-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <Plus aria-hidden="true" className="h-3.5 w-3.5" />
           Add goal
@@ -253,14 +263,14 @@ function GoalEditor({ initial, onSave, onCancel }: GoalEditorProps) {
       <div className="flex gap-2 pt-1">
         <button
           type="submit"
-          className="rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/90"
+          className="rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           Save Goals
         </button>
         <button
           type="button"
           onClick={onCancel}
-          className="rounded-lg bg-muted px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted/80"
+          className="rounded-lg bg-muted px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           Cancel
         </button>
@@ -433,7 +443,7 @@ export function ActivityStreaks({ className }: ActivityStreaksProps) {
             <button
               type="button"
               onClick={() => setEditing(true)}
-              className="text-xs text-primary transition-colors hover:text-primary/80"
+              className="text-xs text-primary transition-colors hover:text-primary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring rounded"
             >
               {weeklyGoals?.goals.length ? "Edit" : "Set Goals"}
             </button>

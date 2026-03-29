@@ -117,7 +117,7 @@ export const MonthlyChecklist = React.memo(function MonthlyChecklist() {
           <ClipboardList aria-hidden="true" className="h-5 w-5 text-primary" />
         </div>
         <div className="flex-1 min-w-0">
-          <h2 className="font-display text-lg font-semibold text-foreground">
+          <h2 className="font-display text-lg font-semibold text-foreground [text-wrap:balance]">
             Monthly Checklist
           </h2>
           <p className="text-xs text-muted-foreground">
@@ -177,7 +177,7 @@ export const MonthlyChecklist = React.memo(function MonthlyChecklist() {
             type="button"
             onClick={() => setActiveCategory(null)}
             className={cn(
-              "rounded-full px-3 py-1.5 text-xs font-medium transition-colors min-h-[32px]",
+              "rounded-full px-3 py-1.5 text-xs font-medium transition-colors min-h-[32px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
               activeCategory === null
                 ? "bg-primary text-primary-foreground"
                 : "bg-muted text-muted-foreground hover:bg-muted/80",
@@ -191,7 +191,7 @@ export const MonthlyChecklist = React.memo(function MonthlyChecklist() {
               type="button"
               onClick={() => setActiveCategory(activeCategory === cat ? null : cat)}
               className={cn(
-                "rounded-full px-3 py-1.5 text-xs font-medium transition-colors min-h-[32px]",
+                "rounded-full px-3 py-1.5 text-xs font-medium transition-colors min-h-[32px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
                 activeCategory === cat
                   ? "bg-primary text-primary-foreground"
                   : "bg-muted text-muted-foreground hover:bg-muted/80",

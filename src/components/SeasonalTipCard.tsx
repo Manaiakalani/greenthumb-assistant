@@ -203,7 +203,7 @@ export function SeasonalTipCard({ className }: SeasonalTipCardProps) {
           <button
             type="button"
             onClick={handleNextTip}
-            className="inline-flex items-center gap-1.5 rounded-lg bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary transition-colors hover:bg-primary/20"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary transition-colors hover:bg-primary/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <RefreshCw aria-hidden="true" className="h-3.5 w-3.5" />
             Next Tip
@@ -212,7 +212,7 @@ export function SeasonalTipCard({ className }: SeasonalTipCardProps) {
           <button
             type="button"
             onClick={handleDismiss}
-            className="inline-flex items-center gap-1.5 rounded-lg bg-muted px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted/80"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-muted px-3 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:bg-muted/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <Check aria-hidden="true" className="h-3.5 w-3.5" />
             Got it!
@@ -223,7 +223,7 @@ export function SeasonalTipCard({ className }: SeasonalTipCardProps) {
             aria-label={isFav ? "Remove from favorites" : "Add to favorites"}
             onClick={() => toggleFavorite(currentTip.id)}
             className={cn(
-              "ml-auto rounded-lg p-1.5 transition-colors",
+              "ml-auto rounded-lg p-1.5 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
               isFav
                 ? "text-red-500 hover:text-red-600"
                 : "text-muted-foreground hover:text-red-400",

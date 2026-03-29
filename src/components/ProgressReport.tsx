@@ -150,7 +150,8 @@ export const ProgressReport = React.memo(function ProgressReport() {
         </div>
         <button
           onClick={() => window.print()}
-          className="no-print rounded-lg px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors flex items-center gap-1.5"
+          type="button"
+          className="no-print rounded-lg px-3 py-1.5 text-xs font-medium text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors flex items-center gap-1.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           aria-label="Print report"
         >
           <Printer aria-hidden="true" className="h-3.5 w-3.5" />
@@ -166,7 +167,7 @@ export const ProgressReport = React.memo(function ProgressReport() {
             role="radio"
             aria-checked={period === p}
             onClick={() => setPeriod(p)}
-            className={`flex-1 rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
+            className={`flex-1 rounded-md px-3 py-1.5 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
               period === p
                 ? "bg-card text-foreground shadow-sm"
                 : "text-muted-foreground hover:text-foreground"

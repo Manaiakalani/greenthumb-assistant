@@ -256,21 +256,24 @@ const LawnReportCard = React.memo(function LawnReportCard() {
       >
         <button
           onClick={handlePrint}
-          className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground shadow-sm hover:opacity-90 transition-opacity"
+          type="button"
+          className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground shadow-sm hover:opacity-90 transition-opacity focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <Printer className="h-4 w-4" aria-hidden="true" />
           Print Report
         </button>
         <button
           onClick={handleDownload}
-          className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2.5 text-sm font-medium text-foreground shadow-sm hover:bg-accent transition-colors"
+          type="button"
+          className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2.5 text-sm font-medium text-foreground shadow-sm hover:bg-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <Download className="h-4 w-4" aria-hidden="true" />
           Download as Image
         </button>
         <button
           onClick={handleShare}
-          className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2.5 text-sm font-medium text-foreground shadow-sm hover:bg-accent transition-colors"
+          type="button"
+          className="inline-flex items-center gap-2 rounded-lg border border-border bg-card px-4 py-2.5 text-sm font-medium text-foreground shadow-sm hover:bg-accent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
         >
           <Share2 className="h-4 w-4" aria-hidden="true" />
           Share
@@ -377,7 +380,7 @@ const LawnReportCard = React.memo(function LawnReportCard() {
                   <div className="h-2.5 w-full overflow-hidden rounded-full bg-muted">
                     <div
                       data-score-bar=""
-                      className={`h-full rounded-full transition-all ${barColor(pct)}`}
+                      className={`h-full rounded-full transition-[width] ${barColor(pct)}`}
                       style={{ width: `${pct}%` }}
                     />
                   </div>

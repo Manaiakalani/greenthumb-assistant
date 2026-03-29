@@ -81,7 +81,7 @@ const Glossary = () => {
         <main id="main-content" className="max-w-2xl mx-auto px-4">
           {/* Header */}
           <div className="mt-4 mb-6">
-            <h1 className="font-display text-2xl font-bold text-foreground flex items-center gap-2">
+            <h1 className="font-display text-2xl font-bold text-foreground flex items-center gap-2 [text-wrap:balance]">
               <BookOpen aria-hidden="true" className="h-6 w-6 text-primary" />
               Lawn Care Glossary
             </h1>
@@ -113,7 +113,7 @@ const Glossary = () => {
                 key={cat.value}
                 type="button"
                 onClick={() => setActiveCategory(cat.value)}
-                className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors ${
+                className={`rounded-full px-3 py-1.5 text-xs font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary ${
                   activeCategory === cat.value
                     ? "bg-primary/10 border border-primary/20 text-primary"
                     : "bg-muted/50 border border-transparent text-muted-foreground hover:bg-muted"
@@ -182,7 +182,7 @@ const Glossary = () => {
                                   scrollToTerm(r),
                                 );
                               }}
-                              className="rounded-md bg-primary/5 px-1.5 py-0.5 text-[10px] font-medium text-primary transition-colors hover:bg-primary/10"
+                              className="rounded-md bg-primary/5 px-1.5 py-0.5 text-[10px] font-medium text-primary transition-colors hover:bg-primary/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
                             >
                               {r}
                             </button>

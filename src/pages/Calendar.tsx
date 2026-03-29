@@ -139,7 +139,7 @@ const Calendar = () => {
         <main id="main-content" className="max-w-2xl mx-auto px-4">
           {/* Heading */}
           <div className="mt-4 mb-4">
-            <h1 className="font-display text-2xl font-bold text-foreground flex items-center gap-2">
+            <h1 className="font-display text-2xl font-bold text-foreground flex items-center gap-2 [text-wrap:balance]">
               <CalendarDays aria-hidden="true" className="h-6 w-6 text-primary" />
               Calendar
             </h1>
@@ -152,7 +152,7 @@ const Calendar = () => {
           <div className="flex items-center gap-4 mb-4">
             {LEGEND.map((l) => (
               <div key={l.type} className="flex items-center gap-1.5">
-                <span className={`h-2.5 w-2.5 rounded-full ${l.color}`} />
+                <span className={`h-2.5 w-2.5 rounded-full ${l.color}`} aria-hidden="true" />
                 <span className="text-xs text-muted-foreground">{l.label}</span>
               </div>
             ))}
@@ -163,14 +163,15 @@ const Calendar = () => {
             <button
               onClick={goToPrev}
               aria-label="Previous month"
-              className="p-2 rounded-lg hover:bg-muted transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+              className="p-2 rounded-lg hover:bg-muted transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
-              <ChevronLeft className="h-5 w-5 text-foreground" />
+              <ChevronLeft className="h-5 w-5 text-foreground" aria-hidden="true" />
             </button>
 
             <button
               onClick={goToToday}
-              className="font-display text-lg font-semibold text-foreground hover:text-primary transition-colors"
+              aria-label={`Go to ${MONTH_NAMES[now.getMonth()]} ${now.getFullYear()}`}
+              className="font-display text-lg font-semibold text-foreground hover:text-primary transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
             >
               {MONTH_NAMES[month]} {year}
             </button>
@@ -178,9 +179,9 @@ const Calendar = () => {
             <button
               onClick={goToNext}
               aria-label="Next month"
-              className="p-2 rounded-lg hover:bg-muted transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center"
+              className="p-2 rounded-lg hover:bg-muted transition-colors min-w-[44px] min-h-[44px] flex items-center justify-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
-              <ChevronRight className="h-5 w-5 text-foreground" />
+              <ChevronRight className="h-5 w-5 text-foreground" aria-hidden="true" />
             </button>
           </div>
 
@@ -264,6 +265,7 @@ const Calendar = () => {
                           {dotTypes.map((type) => (
                             <span
                               key={type}
+                              aria-hidden="true"
                               className={`h-1.5 w-1.5 rounded-full ${DOT_COLORS[type]}`}
                             />
                           ))}
@@ -309,6 +311,7 @@ const Calendar = () => {
                         >
                           <span
                             className={`mt-0.5 h-2.5 w-2.5 rounded-full shrink-0 ${DOT_COLORS[event.type]}`}
+                            aria-hidden="true"
                           />
                           <div className="min-w-0 flex-1">
                             <p className="text-sm font-medium text-foreground">

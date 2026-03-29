@@ -5,6 +5,10 @@ import {
   MapPin,
   ClipboardList,
   ChevronRight,
+  CloudSun,
+  TrendingUp,
+  Zap,
+  Users,
 } from "lucide-react";
 import { useProfile } from "@/context/ProfileContext";
 import { useWeather } from "@/hooks/useWeather";
@@ -132,11 +136,23 @@ const Index = () => {
 
             <QuickStats />
 
-            <div className="mt-6">
+            {/* — Your Progress — */}
+            <h2 className="font-display text-lg font-semibold text-foreground mt-8 mb-3 flex items-center gap-2">
+              <TrendingUp aria-hidden="true" className="h-5 w-5 text-primary" />
+              Your Progress
+            </h2>
+
+            <div>
               <LawnHealthScore />
             </div>
 
-            <div className="mt-6">
+            {/* — Weather & Alerts — */}
+            <h2 className="font-display text-lg font-semibold text-foreground mt-8 mb-3 flex items-center gap-2">
+              <CloudSun aria-hidden="true" className="h-5 w-5 text-primary" />
+              Weather & Alerts
+            </h2>
+
+            <div>
               <WeatherCard />
             </div>
 
@@ -149,6 +165,12 @@ const Index = () => {
             <div className="mt-6">
               <SmartReminders weather={weather} />
             </div>
+
+            {/* — Quick Actions — */}
+            <h2 className="font-display text-lg font-semibold text-foreground mt-8 mb-3 flex items-center gap-2">
+              <Zap aria-hidden="true" className="h-5 w-5 text-primary" />
+              Quick Actions
+            </h2>
 
             <ActionsSection />
 
@@ -179,7 +201,13 @@ const Index = () => {
               </motion.div>
             </Link>
 
-            <Suspense fallback={<Skeleton className="h-24 rounded-xl mt-6" />}>
+            {/* — Community & Timeline — */}
+            <h2 className="font-display text-lg font-semibold text-foreground mt-8 mb-3 flex items-center gap-2">
+              <Users aria-hidden="true" className="h-5 w-5 text-primary" />
+              Community & Timeline
+            </h2>
+
+            <Suspense fallback={<Skeleton className="h-24 rounded-xl" />}>
               <CommunityStats />
             </Suspense>
 

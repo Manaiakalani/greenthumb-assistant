@@ -71,6 +71,7 @@ function HelpOverlay({
             className={cn(
               "bg-card rounded-xl shadow-card w-full max-w-md max-h-[80vh] overflow-y-auto",
               "border border-border p-6",
+              "overscroll-contain",
             )}
             initial={{ scale: 0.95, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -88,7 +89,7 @@ function HelpOverlay({
                 className="rounded-sm p-1 opacity-70 transition-colors hover:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 aria-label="Close shortcuts help"
               >
-                <X className="h-4 w-4" />
+                <X className="h-4 w-4" aria-hidden="true" />
               </button>
             </div>
 

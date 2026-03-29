@@ -168,7 +168,7 @@ export const LawnCareTimer = React.memo(function LawnCareTimer() {
         <div className="rounded-lg bg-primary/10 p-2.5">
           <Timer aria-hidden="true" className="h-5 w-5 text-primary" />
         </div>
-        <h2 className="font-display text-lg font-semibold text-foreground">
+        <h2 className="font-display text-lg font-semibold text-foreground [text-wrap:balance]">
           Lawn Care Timer
         </h2>
       </div>
@@ -222,7 +222,8 @@ export const LawnCareTimer = React.memo(function LawnCareTimer() {
             onChange={(e) => setCustomMinutes(e.target.value)}
             placeholder="Minutes"
             aria-label="Custom duration in minutes"
-            className="w-24 rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground tabular-nums placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+            name="custom-duration"
+            className="w-24 rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground tabular-nums placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           />
           <button
             type="button"

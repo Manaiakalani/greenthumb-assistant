@@ -127,7 +127,7 @@ export function GrassCompare() {
       {/* Header */}
       <div className="mb-4 flex items-center gap-2">
         <Scale aria-hidden="true" className="h-5 w-5 text-primary" />
-        <h2 className="font-display text-lg font-semibold text-foreground">
+        <h2 className="font-display text-lg font-semibold text-foreground [text-wrap:balance]">
           Grass Comparison
         </h2>
       </div>

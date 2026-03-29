@@ -403,7 +403,7 @@ export const SprinklerZonePlanner: React.FC = () => {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <Droplets aria-hidden="true" className="h-5 w-5 text-primary" />
-          <h3 className="font-display text-lg font-semibold text-card-foreground">
+          <h3 className="font-display text-lg font-semibold text-card-foreground [text-wrap:balance]">
             Sprinkler Zone Planner
           </h3>
         </div>

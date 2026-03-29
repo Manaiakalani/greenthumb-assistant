@@ -182,7 +182,7 @@ export const SoilAmendmentCalc = React.memo(function SoilAmendmentCalc() {
         <div className="rounded-lg bg-primary/10 p-2.5">
           <Pipette aria-hidden="true" className="h-5 w-5 text-primary" />
         </div>
-        <h2 className="font-display text-lg font-semibold text-foreground">
+        <h2 className="font-display text-lg font-semibold text-foreground [text-wrap:balance]">
           Soil Amendment Calculator
         </h2>
       </div>
@@ -219,6 +219,9 @@ export const SoilAmendmentCalc = React.memo(function SoilAmendmentCalc() {
           <input
             id="target-ph"
             type="number"
+            name="target-ph"
+            autoComplete="off"
+            inputMode="decimal"
             min={3.0}
             max={9.0}
             step={0.1}
@@ -227,7 +230,7 @@ export const SoilAmendmentCalc = React.memo(function SoilAmendmentCalc() {
               const v = parseFloat(e.target.value);
               if (!isNaN(v)) setTargetPh(Math.max(3.0, Math.min(9.0, v)));
             }}
-            className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm tabular-nums text-foreground min-h-[44px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring"
+            className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm tabular-nums text-foreground min-h-[44px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           />
         </div>
 
@@ -239,9 +242,10 @@ export const SoilAmendmentCalc = React.memo(function SoilAmendmentCalc() {
           <div className="relative">
             <select
               id="soil-type"
+              name="soil-type"
               value={soilType}
               onChange={(e) => setSoilType(e.target.value as SoilType)}
-              className="w-full appearance-none rounded-lg border border-input bg-background px-3 py-2.5 pr-10 text-sm text-foreground min-h-[44px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-full appearance-none rounded-lg border border-input bg-background px-3 py-2.5 pr-10 text-sm text-foreground min-h-[44px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               {SOIL_TYPES.map((st) => (
                 <option key={st} value={st}>
@@ -264,11 +268,14 @@ export const SoilAmendmentCalc = React.memo(function SoilAmendmentCalc() {
           <input
             id="lawn-size-amend"
             type="number"
+            name="lawn-size"
+            autoComplete="off"
+            inputMode="numeric"
             min={100}
             max={200000}
             value={lawnSize}
             onChange={(e) => setLawnSize(Math.max(100, Number(e.target.value) || 100))}
-            className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm tabular-nums text-foreground min-h-[44px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring"
+            className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm tabular-nums text-foreground min-h-[44px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           />
         </div>
 

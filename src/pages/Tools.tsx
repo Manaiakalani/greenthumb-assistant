@@ -1,6 +1,6 @@
 import { lazy, Suspense } from "react";
 import { motion } from "motion/react";
-import { Wrench, ClipboardList, ChevronRight, Bug, BookOpen, Scissors, Calculator, CalendarDays, BookA } from "lucide-react";
+import { Wrench, ClipboardList, ChevronRight, ChevronDown, Bug, BookOpen, Scissors, Calculator, CalendarDays, BookA } from "lucide-react";
 import { Link } from "react-router-dom";
 import { AppHeader } from "@/components/AppHeader";
 import { BottomNav } from "@/components/BottomNav";
@@ -132,288 +132,136 @@ const Tools = () => {
             </Link>
           </div>
 
-          {/* Seasonal Tip of the Day */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-6"
-          >
+          {/* Seasonal Tip */}
+          <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} className="mb-6">
             <SeasonalTipCard />
           </motion.div>
 
-          {/* Monthly Checklist */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mb-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
-            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 400px" }}
-          >
-            <MonthlyChecklist />
-          </motion.div>
+          {/* Calculators & Tools */}
+          <details className="group mb-6" open>
+            <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden font-display text-lg font-semibold flex items-center justify-between p-4 rounded-xl bg-card border border-primary/15 shadow-card hover:border-primary/30 transition-colors">
+              <span className="flex items-center gap-2">
+                <span aria-hidden="true">📊</span> Calculators & Tools
+                <span className="text-xs font-normal text-muted-foreground bg-primary/10 rounded-full px-2 py-0.5">7</span>
+              </span>
+              <ChevronDown aria-hidden="true" className="h-4 w-4 text-muted-foreground transition-transform duration-200 group-open:rotate-180" />
+            </summary>
+            <div className="mt-3 space-y-6">
+              <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card">
+                <LawnSizeEstimator />
+              </div>
+              <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card">
+                <WateringCalculator />
+              </div>
+              <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 350px" }}>
+                <SeedCalculator />
+              </div>
+              <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 400px" }}>
+                <FertilizerDecoder />
+              </div>
+              <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 350px" }}>
+                <SoilAmendmentCalc />
+              </div>
+              <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 300px" }}>
+                <MowingHeightGuide />
+              </div>
+              <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 400px" }}>
+                <GrassCompare />
+              </div>
+            </div>
+          </details>
 
-          {/* Lawn Size Estimator */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="rounded-xl border border-primary/15 bg-card p-6 shadow-card"
-          >
-            <LawnSizeEstimator />
-          </motion.div>
-
-          {/* Watering Calculator */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.05 }}
-            className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
-          >
-            <WateringCalculator />
-          </motion.div>
-
-          {/* Mowing Height Guide */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.07 }}
-            className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
-            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 300px" }}
-          >
-            <MowingHeightGuide />
-          </motion.div>
-
-          {/* Seed Calculator */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.09 }}
-            className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
-            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 350px" }}
-          >
-            <SeedCalculator />
-          </motion.div>
-
-          {/* Cost Tracker */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.11 }}
-            className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
-            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 400px" }}
-          >
-            <CostTracker />
-          </motion.div>
-
-          {/* Lawn Care Timer */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.13 }}
-            className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
-            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 300px" }}
-          >
-            <LawnCareTimer />
-          </motion.div>
-
-          {/* Fertilizer Decoder */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.14 }}
-            className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
-            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 400px" }}
-          >
-            <FertilizerDecoder />
-          </motion.div>
-
-          {/* Soil Amendment Calculator */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15 }}
-            className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
-            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 350px" }}
-          >
-            <SoilAmendmentCalc />
-          </motion.div>
-
-          {/* Grass Comparison Tool */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.16 }}
-            className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
-            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 400px" }}
-          >
-            <GrassCompare />
-          </motion.div>
-
-          {/* Sprinkler Zone Planner */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.17 }}
-            className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
-            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 400px" }}
-          >
-            <SprinklerZonePlanner />
-          </motion.div>
-
-          {/* Activity Streaks & Goals */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.18 }}
-            className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
-            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 350px" }}
-          >
-            <ActivityStreaks />
-          </motion.div>
-
-          {/* Soil Temperature Chart */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
-            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 300px" }}
-          >
-            <SoilTempChart currentTemp={weather?.current.soilTemp ?? null} />
-          </motion.div>
-
-          {/* Soil Test Results */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.15 }}
-            className="mt-6 rounded-xl border border-primary/15 bg-card p-5 shadow-card"
-            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 300px" }}
-          >
-            <SoilTestCard />
-          </motion.div>
-
-          {/* Lawn Report Card */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.19 }}
-            className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
-            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 500px" }}
-          >
-            <LawnReportCard />
-          </motion.div>
-
-          {/* Progress Report */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
-            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 400px" }}
-          >
-            <ProgressReport />
-          </motion.div>
-
-          {/* QR Profile Share */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.21 }}
-            className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
-            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 350px" }}
-          >
-            <QRProfileShare />
-          </motion.div>
-
-          {/* Progress Charts */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="mt-6"
-            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 400px" }}
-          >
-            <ProgressCharts />
-          </motion.div>
-
-          {/* Weather Forecast Chart */}
-          {weather?.daily && (
-            <motion.div
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.25 }}
-              className="mt-6"
-              style={{ contentVisibility: "auto", containIntrinsicSize: "auto 350px" }}
-            >
+          {/* Charts & Analytics */}
+          <details className="group mb-6">
+            <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden font-display text-lg font-semibold flex items-center justify-between p-4 rounded-xl bg-card border border-primary/15 shadow-card hover:border-primary/30 transition-colors">
+              <span className="flex items-center gap-2">
+                <span aria-hidden="true">📈</span> Charts & Analytics
+                <span className="text-xs font-normal text-muted-foreground bg-primary/10 rounded-full px-2 py-0.5">9</span>
+              </span>
+              <ChevronDown aria-hidden="true" className="h-4 w-4 text-muted-foreground transition-transform duration-200 group-open:rotate-180" />
+            </summary>
+            <div className="mt-3 space-y-6">
+              <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 300px" }}>
+                <SoilTempChart currentTemp={weather?.current.soilTemp ?? null} />
+              </div>
+              <div className="rounded-xl border border-primary/15 bg-card p-5 shadow-card" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 300px" }}>
+                <SoilTestCard />
+              </div>
+              <div style={{ contentVisibility: "auto", containIntrinsicSize: "auto 400px" }}>
+                <ProgressCharts />
+              </div>
+              {weather?.daily && (
+                <Suspense fallback={<ChartSkeleton />}>
+                  <ForecastChart forecast={weather.daily} />
+                </Suspense>
+              )}
               <Suspense fallback={<ChartSkeleton />}>
-                <ForecastChart forecast={weather.daily} />
+                <WeeklyActivityChart />
               </Suspense>
-            </motion.div>
-          )}
+              <Suspense fallback={<ChartSkeleton />}>
+                <LawnHealthRadar />
+              </Suspense>
+              <Suspense fallback={<ChartSkeleton />}>
+                <AchievementDonut />
+              </Suspense>
+              <Suspense fallback={<ChartSkeleton />}>
+                <CostChart />
+              </Suspense>
+              <Suspense fallback={<ChartSkeleton />}>
+                <MowingFrequencyChart />
+              </Suspense>
+            </div>
+          </details>
 
-          {/* Weekly Activity Chart */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="mt-6"
-            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 350px" }}
-          >
-            <Suspense fallback={<ChartSkeleton />}>
-              <WeeklyActivityChart />
-            </Suspense>
-          </motion.div>
+          {/* Planning & Tracking */}
+          <details className="group mb-6">
+            <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden font-display text-lg font-semibold flex items-center justify-between p-4 rounded-xl bg-card border border-primary/15 shadow-card hover:border-primary/30 transition-colors">
+              <span className="flex items-center gap-2">
+                <span aria-hidden="true">📋</span> Planning & Tracking
+                <span className="text-xs font-normal text-muted-foreground bg-primary/10 rounded-full px-2 py-0.5">5</span>
+              </span>
+              <ChevronDown aria-hidden="true" className="h-4 w-4 text-muted-foreground transition-transform duration-200 group-open:rotate-180" />
+            </summary>
+            <div className="mt-3 space-y-6">
+              <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 400px" }}>
+                <MonthlyChecklist />
+              </div>
+              <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 400px" }}>
+                <CostTracker />
+              </div>
+              <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 400px" }}>
+                <SprinklerZonePlanner />
+              </div>
+              <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 350px" }}>
+                <ActivityStreaks />
+              </div>
+              <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 300px" }}>
+                <LawnCareTimer />
+              </div>
+            </div>
+          </details>
 
-          {/* Lawn Health Radar */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.35 }}
-            className="mt-6"
-            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 350px" }}
-          >
-            <Suspense fallback={<ChartSkeleton />}>
-              <LawnHealthRadar />
-            </Suspense>
-          </motion.div>
-
-          {/* Achievement Donut */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4 }}
-            className="mt-6"
-            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 350px" }}
-          >
-            <Suspense fallback={<ChartSkeleton />}>
-              <AchievementDonut />
-            </Suspense>
-          </motion.div>
-
-          {/* Cost Over Time Chart */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.45 }}
-            className="mt-6"
-            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 350px" }}
-          >
-            <Suspense fallback={<ChartSkeleton />}>
-              <CostChart />
-            </Suspense>
-          </motion.div>
-
-          {/* Mowing Frequency Chart */}
-          <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="mt-6"
-            style={{ contentVisibility: "auto", containIntrinsicSize: "auto 350px" }}
-          >
-            <Suspense fallback={<ChartSkeleton />}>
-              <MowingFrequencyChart />
-            </Suspense>
-          </motion.div>
+          {/* Reports & Sharing */}
+          <details className="group mb-6">
+            <summary className="cursor-pointer list-none [&::-webkit-details-marker]:hidden font-display text-lg font-semibold flex items-center justify-between p-4 rounded-xl bg-card border border-primary/15 shadow-card hover:border-primary/30 transition-colors">
+              <span className="flex items-center gap-2">
+                <span aria-hidden="true">📝</span> Reports & Sharing
+                <span className="text-xs font-normal text-muted-foreground bg-primary/10 rounded-full px-2 py-0.5">3</span>
+              </span>
+              <ChevronDown aria-hidden="true" className="h-4 w-4 text-muted-foreground transition-transform duration-200 group-open:rotate-180" />
+            </summary>
+            <div className="mt-3 space-y-6">
+              <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 500px" }}>
+                <LawnReportCard />
+              </div>
+              <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 400px" }}>
+                <ProgressReport />
+              </div>
+              <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 350px" }}>
+                <QRProfileShare />
+              </div>
+            </div>
+          </details>
         </main>
       </PageTransition>
       <BottomNav />

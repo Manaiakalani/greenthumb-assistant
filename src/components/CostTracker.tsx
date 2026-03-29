@@ -150,9 +150,10 @@ export const CostTracker: React.FC = () => {
               <input
                 id="cost-date"
                 type="date"
+                name="expense-date"
                 value={date}
                 onChange={(e) => setDate(e.target.value)}
-                className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-ring"
+                className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
             </div>
 
@@ -165,11 +166,12 @@ export const CostTracker: React.FC = () => {
               </label>
               <select
                 id="cost-category"
+                name="expense-category"
                 value={category}
                 onChange={(e) =>
                   setCategory(e.target.value as CostEntry["category"])
                 }
-                className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground transition-colors focus:outline-none focus:ring-2 focus:ring-ring"
+                className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 {CATEGORIES.map((c) => (
                   <option key={c.value} value={c.value}>
@@ -191,10 +193,12 @@ export const CostTracker: React.FC = () => {
               <input
                 id="cost-product"
                 type="text"
+                name="expense-product"
+                autoComplete="off"
                 placeholder="e.g. Scotts Turf Builder"
                 value={product}
                 onChange={(e) => setProduct(e.target.value)}
-                className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground transition-colors placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm text-foreground transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
             </div>
 
@@ -208,12 +212,15 @@ export const CostTracker: React.FC = () => {
               <input
                 id="cost-amount"
                 type="number"
+                name="expense-amount"
+                autoComplete="off"
+                inputMode="decimal"
                 step="0.01"
                 min="0.01"
                 placeholder="0.00"
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
-                className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm tabular-nums text-foreground transition-colors placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+                className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm tabular-nums text-foreground transition-colors placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
             </div>
           </div>
@@ -226,7 +233,7 @@ export const CostTracker: React.FC = () => {
 
           <button
             type="submit"
-            className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring"
+            className="inline-flex min-h-[44px] items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
           >
             <Plus className="h-4 w-4" aria-hidden="true" />
             Add Expense
@@ -365,7 +372,7 @@ export const CostTracker: React.FC = () => {
                     type="button"
                     onClick={() => handleDelete(entry.id)}
                     aria-label={`Delete ${entry.product}`}
-                    className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive focus:outline-none focus:ring-2 focus:ring-ring"
+                    className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-destructive/10 hover:text-destructive focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                   >
                     <Trash2 className="h-4 w-4" aria-hidden="true" />
                   </button>

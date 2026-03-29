@@ -14,7 +14,7 @@ const Tutorials = () => {
         <main id="main-content" className="max-w-2xl mx-auto px-4">
           {/* Header */}
           <div className="mt-4 mb-6">
-            <h1 className="font-display text-2xl font-bold text-foreground flex items-center gap-2">
+            <h1 className="font-display text-2xl font-bold text-foreground flex items-center gap-2 [text-wrap:balance]">
               <BookOpen aria-hidden="true" className="h-6 w-6 text-primary" />
               Guided Tutorials
             </h1>
@@ -23,7 +23,7 @@ const Tutorials = () => {
             </p>
             <Link
               to="/tools"
-              className="inline-flex items-center gap-1.5 mt-2 text-xs font-medium text-primary hover:text-primary/80 transition-colors"
+              className="inline-flex items-center gap-1.5 mt-2 text-xs font-medium text-primary hover:text-primary/80 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded"
             >
               ← Back to Tools
             </Link>

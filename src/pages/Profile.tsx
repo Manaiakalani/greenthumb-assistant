@@ -1,8 +1,8 @@
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
 import {
-  ArrowLeft, Globe, HelpCircle, Leaf, Loader2, LocateFixed, MapPin,
+  Activity, ArrowLeft, CalendarDays, Camera, Globe, HelpCircle, Leaf, Loader2, LocateFixed, MapPin,
   Ruler, Sprout, Trophy, Wheat, User, Maximize,
 } from "lucide-react";
 import { toast } from "sonner";
@@ -111,6 +111,17 @@ const Profile = () => {
 
   const grassOptions = GRASS_TYPES[profile.region] ?? GRASS_TYPES["Transition Zone"];
   const { earned: badgesEarned, total: badgesTotal } = useEarnedBadges();
+  const journal = useGrassStore((s) => s.journal);
+  const photos = useGrassStore((s) => s.photos);
+
+  const memberSince = useMemo(() => {
+    const timestamps = [
+      ...journal.map((e) => e.createdAt),
+      ...badgesEarned.map((b) => b.earnedAt),
+    ].filter(Boolean);
+    if (timestamps.length === 0) return null;
+    return new Date(Math.min(...timestamps));
+  }, [journal, badgesEarned]);
 
   return (
     <div className="min-h-screen bg-background pb-24">
@@ -149,6 +160,66 @@ const Profile = () => {
             Customize your profile so Grasswise can give you the most
             accurate recommendations.
           </p>
+        </motion.div>
+
+        {/* Your Stats */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.05 }}
+          className="mb-8"
+        >
+          <div className="rounded-xl border border-primary/15 bg-card p-5 shadow-card">
+            <h2 className="font-display text-base font-semibold text-foreground mb-4 flex items-center gap-2">
+              <Trophy aria-hidden="true" className="h-4 w-4 text-primary" />
+              Your Stats
+            </h2>
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="flex items-center gap-3 min-h-[44px]">
+                <div className="rounded-lg bg-green-500/10 p-2 shrink-0">
+                  <Activity aria-hidden="true" className="h-4 w-4 text-green-600" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-lg font-bold text-foreground">{journal.length}</p>
+                  <p className="text-xs text-muted-foreground">Activities</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 min-h-[44px]">
+                <div className="rounded-lg bg-blue-500/10 p-2 shrink-0">
+                  <Camera aria-hidden="true" className="h-4 w-4 text-blue-600" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-lg font-bold text-foreground">{photos.length}</p>
+                  <p className="text-xs text-muted-foreground">Photos</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 min-h-[44px]">
+                <div className="rounded-lg bg-amber-500/10 p-2 shrink-0">
+                  <Trophy aria-hidden="true" className="h-4 w-4 text-amber-600" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-lg font-bold text-foreground">
+                    {badgesEarned.length}
+                    <span className="text-sm font-normal text-muted-foreground">/{badgesTotal}</span>
+                  </p>
+                  <p className="text-xs text-muted-foreground">Achievements</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 min-h-[44px]">
+                <div className="rounded-lg bg-purple-500/10 p-2 shrink-0">
+                  <CalendarDays aria-hidden="true" className="h-4 w-4 text-purple-600" />
+                </div>
+                <div className="min-w-0">
+                  <p className="text-sm font-bold text-foreground">
+                    {memberSince
+                      ? memberSince.toLocaleDateString(undefined, { month: "short", year: "numeric" })
+                      : "Just joined"}
+                  </p>
+                  <p className="text-xs text-muted-foreground">Member since</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </motion.div>
 
         {/* Profile form */}

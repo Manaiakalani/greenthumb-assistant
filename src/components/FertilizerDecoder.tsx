@@ -150,7 +150,7 @@ export const FertilizerDecoder = React.memo(function FertilizerDecoder() {
         <div className="rounded-lg bg-primary/10 p-2.5">
           <FlaskConical aria-hidden="true" className="h-5 w-5 text-primary" />
         </div>
-        <h2 className="font-display text-lg font-semibold text-foreground">
+        <h2 className="font-display text-lg font-semibold text-foreground [text-wrap:balance]">
           Fertilizer Label Decoder
         </h2>
       </div>
@@ -163,8 +163,9 @@ export const FertilizerDecoder = React.memo(function FertilizerDecoder() {
         <div className="relative">
           <select
             id="preset-select"
-            className="w-full appearance-none rounded-lg border border-input bg-background px-3 py-2.5 pr-10 text-sm text-foreground min-h-[44px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring"
+            className="w-full appearance-none rounded-lg border border-input bg-background px-3 py-2.5 pr-10 text-sm text-foreground min-h-[44px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             defaultValue=""
+            name="fertilizer-preset"
             onChange={(e) => {
               const preset = fertilizerPresets.find((fp) => fp.name === e.target.value);
               if (preset) applyPreset(preset);
@@ -192,9 +193,9 @@ export const FertilizerDecoder = React.memo(function FertilizerDecoder() {
           <legend className="text-sm font-medium text-foreground mb-2">N-P-K Values</legend>
           <div className="grid grid-cols-3 gap-3">
             {([
-              { label: "N", value: n, setter: setN, color: "border-green-500 focus:ring-green-500/30" },
-              { label: "P", value: p, setter: setP, color: "border-amber-500 focus:ring-amber-500/30" },
-              { label: "K", value: k, setter: setK, color: "border-blue-500 focus:ring-blue-500/30" },
+              { label: "N", value: n, setter: setN, color: "border-green-500 focus-visible:ring-green-500/30" },
+              { label: "P", value: p, setter: setP, color: "border-amber-500 focus-visible:ring-amber-500/30" },
+              { label: "K", value: k, setter: setK, color: "border-blue-500 focus-visible:ring-blue-500/30" },
             ] as const).map(({ label, value, setter, color }) => (
               <div key={label}>
                 <label htmlFor={`npk-${label}`} className="block text-xs font-medium text-muted-foreground mb-1">
@@ -203,12 +204,15 @@ export const FertilizerDecoder = React.memo(function FertilizerDecoder() {
                 <input
                   id={`npk-${label}`}
                   type="number"
+                  name={`npk-${label.toLowerCase()}`}
+                  autoComplete="off"
+                  inputMode="numeric"
                   min={0}
                   max={100}
                   value={value}
                   onChange={(e) => setter(Math.max(0, Math.min(100, Number(e.target.value) || 0)))}
                   className={cn(
-                    "w-full rounded-lg border-2 bg-background px-3 py-2 text-center text-lg font-semibold tabular-nums text-foreground min-h-[44px] transition-colors focus:outline-none focus:ring-2",
+                    "w-full rounded-lg border-2 bg-background px-3 py-2 text-center text-lg font-semibold tabular-nums text-foreground min-h-[44px] transition-colors focus-visible:outline-none focus-visible:ring-2",
                     color,
                   )}
                 />
@@ -226,11 +230,14 @@ export const FertilizerDecoder = React.memo(function FertilizerDecoder() {
             <input
               id="bag-size"
               type="number"
+              name="bag-size"
+              autoComplete="off"
+              inputMode="numeric"
               min={1}
               max={100}
               value={bagSize}
               onChange={(e) => setBagSize(Math.max(1, Number(e.target.value) || 1))}
-              className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm tabular-nums text-foreground min-h-[44px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm tabular-nums text-foreground min-h-[44px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             />
           </div>
           <div>
@@ -240,18 +247,21 @@ export const FertilizerDecoder = React.memo(function FertilizerDecoder() {
             <input
               id="lawn-size-fert"
               type="number"
+              name="lawn-size"
+              autoComplete="off"
+              inputMode="numeric"
               min={100}
               max={200000}
               value={lawnSize}
               onChange={(e) => setLawnSize(Math.max(100, Number(e.target.value) || 100))}
-              className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm tabular-nums text-foreground min-h-[44px] transition-colors focus:outline-none focus:ring-2 focus:ring-ring"
+              className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm tabular-nums text-foreground min-h-[44px] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             />
           </div>
         </div>
 
         <button
           type="submit"
-          className="w-full rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground min-h-[44px] transition-colors hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+          className="w-full rounded-lg bg-primary px-4 py-2.5 text-sm font-medium text-primary-foreground min-h-[44px] transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
         >
           Decode Label
         </button>

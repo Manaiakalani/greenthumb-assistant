@@ -147,19 +147,19 @@ export function SeedCalculator() {
             autoComplete="off"
             className="flex-1 text-sm"
           />
-          {profile.lawnSizeSqFt && !manualSize && (
+          {profile.lawnSizeSqFt != null && profile.lawnSizeSqFt > 0 && !manualSize ? (
             <span className="shrink-0 text-xs text-muted-foreground">
               Using profile
             </span>
-          )}
+          ) : null}
         </div>
-        {!profile.lawnSizeSqFt && !manualSize && (
+        {!profile.lawnSizeSqFt && !manualSize ? (
           <p className="text-[10px] text-muted-foreground">
             Estimated from your profile lawn size ({profile.lawnSize} ≈{" "}
             {LAWN_SIZE_ESTIMATES[profile.lawnSize]?.toLocaleString()} sq ft).
             Enter a value above for a precise calculation.
           </p>
-        )}
+        ) : null}
       </div>
 
       {/* Sod-only warning */}

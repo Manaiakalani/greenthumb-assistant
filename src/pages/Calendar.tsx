@@ -36,6 +36,13 @@ const LEGEND: { type: CalendarEvent["type"]; label: string; color: string }[] = 
   { type: "task", label: "Tasks", color: "bg-orange-500" },
 ];
 
+// Hoisted outside component to avoid re-creation on every render
+const SLIDE_VARIANTS = {
+  enter: (dir: number) => ({ x: dir > 0 ? 80 : -80, opacity: 0 }),
+  center: { x: 0, opacity: 1 },
+  exit: (dir: number) => ({ x: dir > 0 ? -80 : 80, opacity: 0 }),
+};
+
 const Calendar = () => {
   const now = new Date();
   const [year, setYear] = useState(now.getFullYear());
@@ -125,12 +132,6 @@ const Calendar = () => {
     return eventsMap.get(key) ?? [];
   }, [selectedDate, eventsMap]);
 
-  const slideVariants = {
-    enter: (dir: number) => ({ x: dir > 0 ? 80 : -80, opacity: 0 }),
-    center: { x: 0, opacity: 1 },
-    exit: (dir: number) => ({ x: dir > 0 ? -80 : 80, opacity: 0 }),
-  };
-
   return (
     <div className="min-h-screen bg-background pb-24">
       <AppHeader />
@@ -202,7 +203,7 @@ const Calendar = () => {
               <motion.div
                 key={`${year}-${month}`}
                 custom={direction}
-                variants={slideVariants}
+                variants={SLIDE_VARIANTS}
                 initial="enter"
                 animate="center"
                 exit="exit"

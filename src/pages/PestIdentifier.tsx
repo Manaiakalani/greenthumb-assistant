@@ -441,6 +441,29 @@ function computeMatches(
 // Component
 // ---------------------------------------------------------------------------
 
+// Hoisted outside component to avoid re-creation on every render
+const SLIDE_VARIANTS = {
+  enter: (d: number) => ({ x: d > 0 ? 80 : -80, opacity: 0 }),
+  center: { x: 0, opacity: 1 },
+  exit: (d: number) => ({ x: d > 0 ? -80 : 80, opacity: 0 }),
+};
+
+const TYPE_BADGE_COLORS: Record<string, string> = {
+  pest: "bg-destructive/10 text-destructive",
+  disease: "bg-lawn-caution/20 text-foreground",
+  weed: "bg-primary/10 text-primary",
+};
+
+function TypeBadge({ type }: { type: PestDisease["type"] }) {
+  return (
+    <span
+      className={`text-xs font-medium px-2 py-0.5 rounded-full ${TYPE_BADGE_COLORS[type] ?? ""}`}
+    >
+      {type.charAt(0).toUpperCase() + type.slice(1)}
+    </span>
+  );
+}
+
 const PestIdentifier = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [primary, setPrimary] = useState<string | null>(null);
@@ -533,27 +556,6 @@ const PestIdentifier = () => {
     stepOptions = SEASON_OPTIONS;
   }
 
-  const variants = {
-    enter: (d: number) => ({ x: d > 0 ? 80 : -80, opacity: 0 }),
-    center: { x: 0, opacity: 1 },
-    exit: (d: number) => ({ x: d > 0 ? -80 : 80, opacity: 0 }),
-  };
-
-  const typeBadge = (type: PestDisease["type"]) => {
-    const colors: Record<string, string> = {
-      pest: "bg-destructive/10 text-destructive",
-      disease: "bg-lawn-caution/20 text-foreground",
-      weed: "bg-primary/10 text-primary",
-    };
-    return (
-      <span
-        className={`text-xs font-medium px-2 py-0.5 rounded-full ${colors[type] ?? ""}`}
-      >
-        {type.charAt(0).toUpperCase() + type.slice(1)}
-      </span>
-    );
-  };
-
   return (
     <div className="min-h-screen bg-background pb-24">
       <AppHeader />
@@ -606,7 +608,7 @@ const PestIdentifier = () => {
             <motion.div
               key={`step-${currentStep}`}
               custom={direction}
-              variants={variants}
+              variants={SLIDE_VARIANTS}
               initial="enter"
               animate="center"
               exit="exit"
@@ -679,7 +681,7 @@ const PestIdentifier = () => {
             <motion.div
               key="results"
               custom={direction}
-              variants={variants}
+              variants={SLIDE_VARIANTS}
               initial="enter"
               animate="center"
               exit="exit"
@@ -717,7 +719,7 @@ const PestIdentifier = () => {
                               <p className="font-display font-semibold text-foreground">
                                 {i === 0 ? "Best Match" : i === 1 ? "Runner-up" : "Possible"}
                               </p>
-                              {typeBadge(r.pest.type)}
+                              <TypeBadge type={r.pest.type} />
                             </div>
                             <p className="text-lg font-bold text-primary">
                               {r.pest.name}

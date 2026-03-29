@@ -141,7 +141,7 @@ const Glossary = () => {
             </div>
           ) : (
             grouped.map(([letter, terms]) => (
-              <div key={letter} className="mb-6">
+              <div key={letter} className="mb-6" style={{ contentVisibility: "auto", containIntrinsicSize: "auto 200px" }}>
                 <h2 className="sticky top-14 z-10 mb-2 border-b border-border bg-background/90 py-1 font-display text-lg font-bold text-primary backdrop-blur-sm">
                   {letter}
                 </h2>
@@ -165,7 +165,7 @@ const Glossary = () => {
                       <p className="mt-1 text-sm text-muted-foreground">
                         {t.definition}
                       </p>
-                      {t.related && t.related.length > 0 && (
+                      {t.related && t.related.length > 0 ? (
                         <div className="mt-2 flex flex-wrap gap-1.5">
                           <span className="text-[10px] font-medium text-muted-foreground">
                             Related:
@@ -188,7 +188,7 @@ const Glossary = () => {
                             </button>
                           ))}
                         </div>
-                      )}
+                      ) : null}
                     </div>
                   ))}
                 </div>

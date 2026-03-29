@@ -264,7 +264,7 @@ function StepView({ tutorial, completed, onBack, onComplete }: StepViewProps) {
           </p>
 
           {/* Pro tip */}
-          {current.tip && (
+          {current.tip ? (
             <div className="mt-4 rounded-lg border border-amber-200 bg-amber-50 p-3 dark:border-amber-800 dark:bg-amber-900/20">
               <div className="flex items-start gap-2">
                 <Lightbulb
@@ -276,7 +276,7 @@ function StepView({ tutorial, completed, onBack, onComplete }: StepViewProps) {
                 </p>
               </div>
             </div>
-          )}
+          ) : null}
         </motion.div>
       </AnimatePresence>
 
@@ -321,6 +321,9 @@ export function GuidedTutorial() {
   const [activeFilter, setActiveFilter] = useState<Category | "all">("all");
   const [selected, setSelected] = useState<Tutorial | null>(null);
 
+  // O(1) lookup Set derived from completedIds array
+  const completedSet = useMemo(() => new Set(completedIds), [completedIds]);
+
   const filtered = useMemo(
     () =>
       activeFilter === "all"
@@ -343,7 +346,7 @@ export function GuidedTutorial() {
     return (
       <StepView
         tutorial={selected}
-        completed={completedIds.includes(selected.id)}
+        completed={completedSet.has(selected.id)}
         onBack={() => setSelected(null)}
         onComplete={handleComplete}
       />
@@ -383,17 +386,17 @@ export function GuidedTutorial() {
           <TutorialCard
             key={t.id}
             tutorial={t}
-            completed={completedIds.includes(t.id)}
+            completed={completedSet.has(t.id)}
             onSelect={setSelected}
             index={i}
           />
         ))}
 
-        {filtered.length === 0 && (
+        {filtered.length === 0 ? (
           <p className="text-center text-sm text-muted-foreground py-8">
             No tutorials in this category yet.
           </p>
-        )}
+        ) : null}
       </div>
     </div>
   );

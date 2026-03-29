@@ -480,11 +480,11 @@ const LawnReportCard = React.memo(function LawnReportCard() {
                 })}
               </div>
 
-              {soilTest.testDate && (
+              {soilTest.testDate ? (
                 <p className="mt-2 text-right text-xs text-muted-foreground">
                   Tested: {fmtDate(new Date(soilTest.testDate))}
                 </p>
-              )}
+              ) : null}
             </div>
           </section>
         )}

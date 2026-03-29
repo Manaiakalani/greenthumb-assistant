@@ -143,7 +143,7 @@ function generateAlerts(weather: WeatherData): WeatherAlert[] {
 
 export function WeatherAlerts({ weather }: WeatherAlertsProps) {
   const allAlerts = useMemo(() => generateAlerts(weather), [weather]);
-  const [dismissed, setDismissed] = useState<Set<string>>(new Set());
+  const [dismissed, setDismissed] = useState<Set<string>>(() => new Set());
 
   const dismiss = useCallback((type: string) => {
     setDismissed((prev) => new Set(prev).add(type));

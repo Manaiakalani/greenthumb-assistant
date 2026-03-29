@@ -124,11 +124,11 @@ export function SharePlanButton() {
             <div style={{ fontSize: 22, fontWeight: 700 }}>
               {plan.region} Lawn Plan
             </div>
-            {profile.grassType && (
+            {profile.grassType ? (
               <div style={{ fontSize: 13, opacity: 0.85, marginTop: 4 }}>
                 🌿 {profile.grassType} · Zone {profile.zone}
               </div>
-            )}
+            ) : null}
           </div>
 
           {/* Divider */}

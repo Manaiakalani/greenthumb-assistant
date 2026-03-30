@@ -1,10 +1,11 @@
-import { useSyncExternalStore } from "react";
+import { useSyncExternalStore, useState } from "react";
 import { motion } from "motion/react";
-import { Leaf, Moon, Sun, User } from "lucide-react";
+import { Leaf, Moon, Sun, User, Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useTheme } from "next-themes";
 import { useProfile } from "@/context/ProfileContext";
 import { useTranslation } from "react-i18next";
+import { CommandPalette } from "@/components/CommandPalette";
 
 function GrasswiseLogo({ className }: { className?: string }) {
   const { t } = useTranslation();
@@ -51,8 +52,11 @@ function ThemeToggle() {
 export function AppHeader() {
   const { profile } = useProfile();
   const { t } = useTranslation();
+  const [searchOpen, setSearchOpen] = useState(false);
+  const isMac = typeof navigator !== "undefined" && /Mac|iPod|iPhone|iPad/.test(navigator.userAgent);
 
   return (
+    <>
     <motion.header
       initial={{ opacity: 0, y: -10 }}
       animate={{ opacity: 1, y: 0 }}
@@ -64,6 +68,16 @@ export function AppHeader() {
           <span className="text-xs text-muted-foreground font-medium px-2.5 py-1 rounded-full bg-primary/10 border border-primary/20 truncate max-w-[160px] hidden sm:inline-block">
             {t("common.zone", { zone: profile.zone })} · {profile.region}
           </span>
+          <button
+            onClick={() => setSearchOpen(true)}
+            className="rounded-full p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center gap-1.5 text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+            aria-label={`Search (${isMac ? "⌘K" : "Ctrl+K"})`}
+          >
+            <Search aria-hidden="true" className="h-4 w-4" />
+            <kbd className="hidden sm:inline-flex items-center text-[10px] font-mono text-muted-foreground bg-muted border border-border rounded px-1 py-0.5">
+              {isMac ? "⌘K" : "Ctrl+K"}
+            </kbd>
+          </button>
           <ThemeToggle />
           <Link
             to="/profile"
@@ -75,5 +89,7 @@ export function AppHeader() {
         </div>
       </div>
     </motion.header>
+    <CommandPalette open={searchOpen} onOpenChange={setSearchOpen} />
+    </>
   );
 }

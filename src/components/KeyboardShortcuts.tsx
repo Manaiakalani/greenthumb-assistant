@@ -114,6 +114,7 @@ function HelpOverlay({
                 <ShortcutRow keys={["?"]} description="Toggle this help" />
                 <ShortcutRow keys={["Esc"]} description="Close overlay / modal" />
                 <ShortcutRow keys={["/"]} description="Focus search (Glossary page)" />
+                <ShortcutRow keys={["Ctrl+K"]} description="Open command palette" />
               </div>
             </div>
 

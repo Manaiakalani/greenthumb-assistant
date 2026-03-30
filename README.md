@@ -407,6 +407,17 @@ The Docker image uses a multi-stage build (Node 22 Alpine -> Nginx Alpine) with:
 
 ---
 
+## 🚀 Deploy
+
+Deploy your own Grasswise instance with one click:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2FManaiakalani%2Fgreenthumb-assistant)
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/Manaiakalani/greenthumb-assistant)
+
+Both platforms auto-detect Vite and configure the build. The included `vercel.json` and `netlify.toml` handle SPA routing, security headers, and asset caching.
+
+---
+
 ## Privacy
 
 All data is stored **locally in your browser** using localStorage. No data is sent to any server except weather API requests to [Open-Meteo](https://open-meteo.com/) (which only receives your coordinates, not your name or profile). The app includes a full [Privacy Policy](/privacy) page. You can export and delete your data at any time.

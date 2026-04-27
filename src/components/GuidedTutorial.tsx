@@ -223,7 +223,7 @@ function StepView({ tutorial, completed, onBack, onComplete }: StepViewProps) {
             aria-selected={i === step}
             aria-label={`Step ${i + 1}: ${s.title}`}
             onClick={() => setStep(i)}
-            className={`h-2 rounded-full transition-all focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none ${
+            className={`h-2 rounded-full transition-[width,background-color] duration-200 ease-out focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none ${
               i === step
                 ? "w-6 bg-primary"
                 : i < step

@@ -32,15 +32,24 @@ function ThemeToggle() {
     () => false,
   );
 
-  if (!mounted) return <div className="w-7 h-7" />;
+  // Render the button at full size always to avoid layout shift; show a
+  // neutral Sun icon until mounted, then swap to the resolved-theme icon.
+  const isDark = mounted && resolvedTheme === "dark";
+  const label = !mounted
+    ? t("common.switchToDark")
+    : isDark
+      ? t("common.switchToLight")
+      : t("common.switchToDark");
 
   return (
     <button
-      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+      onClick={() => mounted && setTheme(isDark ? "light" : "dark")}
       className="rounded-full p-2.5 min-h-[44px] min-w-[44px] flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
-      aria-label={resolvedTheme === "dark" ? t("common.switchToLight") : t("common.switchToDark")}
+      aria-label={label}
+      aria-hidden={!mounted}
+      tabIndex={mounted ? 0 : -1}
     >
-      {resolvedTheme === "dark" ? (
+      {isDark ? (
         <Sun aria-hidden="true" className="h-4 w-4" />
       ) : (
         <Moon aria-hidden="true" className="h-4 w-4" />

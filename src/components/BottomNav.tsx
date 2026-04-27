@@ -26,7 +26,7 @@ export function BottomNav() {
               key={to}
               to={to}
               aria-current={active ? "page" : undefined}
-              className="relative flex flex-col items-center gap-0.5 px-3 py-3 min-w-[44px] min-h-[44px] rounded-lg transition-colors"
+              className="relative flex flex-col items-center gap-0.5 px-3 py-3 min-w-[44px] min-h-[44px] rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
             >
               {active && (
                 <motion.div

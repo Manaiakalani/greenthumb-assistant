@@ -27,10 +27,11 @@ import { formatShortDate } from "@/lib/dateFormat";
 const LAST_BACKUP_KEY = "grasswise-last-backup";
 
 export function DataBackupCard() {
-  const { updateProfile } = useProfile();
+  const { profile, updateProfile } = useProfile();
   const journal = useGrassStore((s) => s.journal);
   const photos = useGrassStore((s) => s.photos);
   const achievements = useGrassStore((s) => s.achievements);
+  const weeklyGoals = useGrassStore((s) => s.weeklyGoals);
 
   const [exporting, setExporting] = useState(false);
   const [lastBackup, setLastBackup] = useState<string | null>(
@@ -43,15 +44,17 @@ export function DataBackupCard() {
 
   const fileRef = useRef<HTMLInputElement>(null);
 
-  // Derive size estimate from current data — no effect needed
+  // Derive size estimate from current data — no effect needed.
+  // Deps are intentional triggers: exportAllData() reads from useGrassStore
+  // and localStorage, so eslint can't see them in the closure.
   const sizeEstimate = useMemo(() => {
     try {
-      const data = exportAllData();
-      return formatBytes(estimateBackupSize(data));
+      return formatBytes(estimateBackupSize(exportAllData()));
     } catch {
       return null;
     }
-  }, [journal.length, photos.length, achievements.length]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [journal, photos, achievements, weeklyGoals, profile]);
 
   // ---- Export ----
   const handleExport = useCallback(async () => {

@@ -1,4 +1,3 @@
-import { useState, useCallback } from "react";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
 import {
@@ -6,13 +5,11 @@ import {
   Droplets, Moon, Snowflake, Sun, Thermometer, Wind, LocateFixed,
   type LucideIcon,
 } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
-import { useProfile } from "@/context/ProfileContext";
 import { Skeleton } from "@/components/ui/skeleton";
-import { safeGetRaw, safeSetItem } from "@/lib/safeStorage";
+import { useWeather } from "@/hooks/useWeather";
 import {
-  fetchWeather, getLawnInsight,
-  type WeatherData, type WeatherIcon,
+  getLawnInsight,
+  type WeatherIcon,
 } from "@/lib/weather";
 
 // Map weather icon keys → lucide components
@@ -80,83 +77,37 @@ function WeatherError() {
   );
 }
 
-/** Hook to request browser geolocation */
-function useGeolocation() {
-  const [coords, setCoords] = useState<{ latitude: number; longitude: number } | null>(() => {
-    const saved = safeGetRaw("grasswise-geolocation");
-    if (saved) {
-      try { return JSON.parse(saved); } catch { return null; }
-    }
-    return null;
-  });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-
-  const requestLocation = useCallback(() => {
-    if (!navigator.geolocation) {
-      setError("Geolocation is not supported by this browser. Set your location in Profile settings.");
-      return;
-    }
-    setLoading(true);
-    setError(null);
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        const loc = { latitude: pos.coords.latitude, longitude: pos.coords.longitude };
-        setCoords(loc);
-        safeSetItem("grasswise-geolocation", JSON.stringify(loc));
-        setLoading(false);
-      },
-      (err) => {
-        setError(err.message);
-        setLoading(false);
-      },
-      { enableHighAccuracy: false, timeout: 10000, maximumAge: 300000 }
-    );
-  }, []);
-
-  return { coords, loading, error, requestLocation };
-}
-
 export function WeatherCard() {
-  const { profile } = useProfile();
-  const geo = useGeolocation();
+  const {
+    data: weather,
+    isLoading,
+    isError,
+    hasLocation,
+    coords,
+    geoLoading,
+    geoError,
+    requestLocation,
+    profileLocation,
+  } = useWeather();
 
-  // Prefer browser geolocation, fall back to profile location
-  const lat = geo.coords?.latitude ?? profile.latitude;
-  const lng = geo.coords?.longitude ?? profile.longitude;
-  const hasLocation = !!(lat != null || profile.location);
-  const locationLabel = geo.coords
-    ? `📍 ${lat!.toFixed(2)}°, ${lng!.toFixed(2)}°`
-    : profile.location || "Unknown";
+  const locationLabel = coords
+    ? `📍 ${coords.latitude.toFixed(2)}°, ${coords.longitude.toFixed(2)}°`
+    : profileLocation || "Unknown";
 
-  const { data: weather, isLoading, isError } = useQuery<WeatherData>({
-    queryKey: ["weather", lat, lng, profile.location],
-    queryFn: () =>
-      fetchWeather({
-        latitude: lat,
-        longitude: lng,
-        location: profile.location,
-      }),
-    enabled: hasLocation,
-    staleTime: 15 * 60 * 1000,
-    refetchInterval: 30 * 60 * 1000,
-    retry: 2,
-  });
-
-  if (!hasLocation && !geo.loading) {
+  if (!hasLocation && !geoLoading) {
     return (
       <div className="rounded-xl border border-primary/15 bg-card p-6 shadow-card text-center text-sm text-muted-foreground">
         <Cloud aria-hidden="true" className="h-8 w-8 mx-auto mb-2 opacity-40" />
         <p className="mb-3">Enable location for live weather.</p>
         <button
           type="button"
-          onClick={geo.requestLocation}
+          onClick={requestLocation}
           className="inline-flex items-center gap-1.5 px-4 py-2.5 rounded-md bg-primary text-primary-foreground text-xs font-medium hover:bg-primary/90 transition-colors min-h-[44px]"
         >
           <LocateFixed aria-hidden="true" className="h-3.5 w-3.5" />
           Use my location
         </button>
-        {geo.error && <p className="text-xs text-destructive mt-2" aria-live="polite">{geo.error}</p>}
+        {geoError && <p className="text-xs text-destructive mt-2" aria-live="polite">{geoError}</p>}
         <p className="text-xs mt-2">
           Or set it in <Link to="/profile" className="text-primary hover:underline">profile settings</Link>.
         </p>
@@ -164,7 +115,7 @@ export function WeatherCard() {
     );
   }
 
-  if (isLoading || geo.loading) return <WeatherSkeleton />;
+  if (isLoading || geoLoading) return <WeatherSkeleton />;
   if (isError || !weather) return <WeatherError />;
 
   const { current, daily } = weather;
@@ -181,10 +132,10 @@ export function WeatherCard() {
       <div className="flex items-center justify-between mb-4">
         <h3 className="font-display text-base font-semibold text-foreground">Weather</h3>
         <div className="flex items-center gap-1.5">
-          {!geo.coords && (
+          {!coords && (
             <button
               type="button"
-              onClick={geo.requestLocation}
+              onClick={requestLocation}
               aria-label="Use my location"
               title="Use my location"
               className="p-1 rounded hover:bg-primary/10 transition-colors"

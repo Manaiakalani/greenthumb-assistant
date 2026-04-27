@@ -1,4 +1,4 @@
-import { lazy, Suspense, useCallback, useEffect, useState, useSyncExternalStore } from "react";
+import { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Link, useNavigate } from "react-router-dom";
 import {
@@ -37,21 +37,6 @@ const CommunityStats = lazy(() => import("@/components/CommunityStats").then(m =
 
 const ONBOARDING_KEY = "grasswise-onboarding-done";
 
-function DashboardSkeleton() {
-  return (
-    <div className="space-y-6 animate-pulse">
-      <Skeleton className="h-24 rounded-xl" />
-      <div className="grid grid-cols-3 gap-3">
-        <Skeleton className="h-20 rounded-xl" />
-        <Skeleton className="h-20 rounded-xl" />
-        <Skeleton className="h-20 rounded-xl" />
-      </div>
-      <Skeleton className="h-48 rounded-xl" />
-      <Skeleton className="h-32 rounded-xl" />
-    </div>
-  );
-}
-
 const Index = () => {
   const { profile, hasCompletedSetup } = useProfile();
   const navigate = useNavigate();
@@ -76,13 +61,6 @@ const Index = () => {
     setShowOnboarding(false);
   }, []);
 
-  // Hydration-safe mount check for skeleton
-  const ready = useSyncExternalStore(
-    () => () => {},
-    () => true,
-    () => false,
-  );
-
   return (
     <div className="min-h-screen bg-background pb-24">
       <AppHeader />
@@ -98,17 +76,13 @@ const Index = () => {
       </AnimatePresence>
 
       <main id="main-content" className="max-w-2xl mx-auto px-4">
-        {!ready ? (
-          <div className="mt-6"><DashboardSkeleton /></div>
-        ) : (
-          <>
-            <HeroSection />
+        <HeroSection />
 
-            <InstallBanner />
-            <ReminderBanner />
+        <InstallBanner />
+        <ReminderBanner />
 
-            {/* First-time setup prompt */}
-            {!hasCompletedSetup && (
+        {/* First-time setup prompt */}
+        {!hasCompletedSetup && (
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -226,8 +200,6 @@ const Index = () => {
                 <SeasonalTimeline />
               </motion.div>
             </Suspense>
-          </>
-        )}
       </main>
 
       <BottomNav />

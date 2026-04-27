@@ -1,5 +1,4 @@
 import { useMemo } from "react";
-import { motion } from "motion/react";
 import { CalendarDays } from "lucide-react";
 import type { JournalEntry } from "@/types/journal";
 
@@ -96,15 +95,12 @@ export function ActivityHeatmap({ entries }: ActivityHeatmapProps) {
         {/* Weeks */}
         {weeks.map((week, wi) => (
           <div key={wi} className="flex flex-col gap-0.5" role="row">
-            {week.map((day, di) => (
-              <motion.div
+            {week.map((day) => (
+              <div
                 key={day.date}
                 role="gridcell"
                 tabIndex={0}
                 aria-label={day.count >= 0 ? `${day.date}: ${day.count} ${day.count === 1 ? "activity" : "activities"}` : day.date}
-                initial={{ opacity: 0, scale: 0.5 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: wi * 0.02 + di * 0.005 }}
                 className={`h-3 w-3 rounded-[2px] ${getColor(day.count)} transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-1`}
                 title={day.count >= 0 ? `${day.date}: ${day.count} ${day.count === 1 ? "activity" : "activities"}` : ""}
               />

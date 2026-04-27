@@ -3,6 +3,7 @@ import {
   useCallback,
   useContext,
   useEffect,
+  useMemo,
   useState,
   type ReactNode,
 } from "react";
@@ -72,8 +73,13 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
     return () => window.removeEventListener("storage", onStorage);
   }, []);
 
+  const value = useMemo(
+    () => ({ profile, updateProfile, hasCompletedSetup }),
+    [profile, updateProfile, hasCompletedSetup],
+  );
+
   return (
-    <ProfileContext.Provider value={{ profile, updateProfile, hasCompletedSetup }}>
+    <ProfileContext.Provider value={value}>
       {children}
     </ProfileContext.Provider>
   );

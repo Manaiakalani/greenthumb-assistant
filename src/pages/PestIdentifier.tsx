@@ -89,6 +89,8 @@ interface FollowUp {
   options: SymptomOption[];
 }
 
+const EMPTY_FOLLOWUPS: FollowUp[] = [];
+
 const FOLLOW_UPS: Record<string, FollowUp[]> = {
   "brown-patches": [
     {
@@ -471,7 +473,10 @@ const PestIdentifier = () => {
   const [season, setSeason] = useState<Season | null>(null);
   const [direction, setDirection] = useState(1);
 
-  const followUps = primary ? (FOLLOW_UPS[primary] ?? []) : [];
+  const followUps = useMemo(
+    () => (primary ? (FOLLOW_UPS[primary] ?? EMPTY_FOLLOWUPS) : EMPTY_FOLLOWUPS),
+    [primary],
+  );
   // Steps: 0 = primary, 1..N = follow-ups, N+1 = season, N+2 = results
   const totalQuestions = 1 + followUps.length + 1; // primary + follow-ups + season
   const totalSteps = totalQuestions + 1; // +1 for results screen

@@ -1,5 +1,6 @@
 import { useMemo } from "react";
 import { useGrassStore } from "@/stores/useGrassStore";
+import type { JournalEntry } from "@/types/journal";
 import type { WeatherData } from "@/lib/weather";
 
 export interface SmartReminder {
@@ -19,21 +20,40 @@ export function useSmartReminders(
   const journal = useGrassStore((s) => s.journal);
   const photos = useGrassStore((s) => s.photos);
 
+  // Recompute when the calendar day changes so day-counting stays correct.
+  const today = new Date().toDateString();
+
   return useMemo(() => {
     const reminders: SmartReminder[] = [];
     const now = new Date();
 
-    // Helper: days since last activity of a given type
+    // Helper: pick the latest journal entry matching `activity` (by ISO date).
+    const latest = (activity: string): JournalEntry | null =>
+      journal.reduce<JournalEntry | null>(
+        (acc, e) =>
+          e.activity === activity && (!acc || e.date > acc.date) ? e : acc,
+        null,
+      );
+
     const daysSince = (activity: string): number | null => {
-      const last = journal.find((e) => e.activity === activity);
+      const last = latest(activity);
       if (!last) return null;
       return Math.floor(
-        (now.getTime() - new Date(last.date + "T12:00:00").getTime()) / (1000 * 60 * 60 * 24),
+        (now.getTime() - new Date(last.date + "T12:00:00").getTime()) /
+          (1000 * 60 * 60 * 24),
       );
     };
 
-    const daysSinceAny = journal.length > 0
-      ? Math.floor((now.getTime() - new Date(journal[0].date + "T12:00:00").getTime()) / (1000 * 60 * 60 * 24))
+    // Latest entry of any kind (true latest, not first in array)
+    const latestAny = journal.reduce<JournalEntry | null>(
+      (acc, e) => (!acc || e.date > acc.date ? e : acc),
+      null,
+    );
+    const daysSinceAny = latestAny
+      ? Math.floor(
+          (now.getTime() - new Date(latestAny.date + "T12:00:00").getTime()) /
+            (1000 * 60 * 60 * 24),
+        )
       : null;
 
     const month = now.getMonth(); // 0-based
@@ -168,5 +188,7 @@ export function useSmartReminders(
     reminders.sort((a, b) => order[a.priority] - order[b.priority]);
 
     return reminders.slice(0, 4); // Max 4 reminders
-  }, [weather, journal, photos]);
+    // `today` is intentional: forces recomputation across calendar days.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [weather, journal, photos, today]);
 }

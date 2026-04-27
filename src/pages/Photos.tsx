@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Camera, Plus, Trash2, ImageIcon, X, ArrowLeftRight } from "lucide-react";
 import { toast } from "sonner";
@@ -29,6 +29,11 @@ const Photos = () => {
   const [uploading, setUploading] = useState(false);
   const [lightbox, setLightbox] = useState<string | null>(null);
   const fileRef = useRef<HTMLInputElement>(null);
+  const lightboxRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (lightbox) lightboxRef.current?.focus();
+  }, [lightbox]);
 
   const handleFileChange = useCallback(async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -209,7 +214,7 @@ const Photos = () => {
                           key={photo.id}
                           initial={{ opacity: 0, scale: 0.9 }}
                           animate={{ opacity: 1, scale: 1 }}
-                          transition={{ delay: i * 0.05 }}
+                          transition={{ delay: Math.min(i, 12) * 0.03 }}
                           role="button"
                           tabIndex={0}
                           className="relative group rounded-lg overflow-hidden aspect-square cursor-pointer focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
@@ -267,7 +272,7 @@ const Photos = () => {
                 onClick={() => setLightbox(null)}
                 onKeyDown={(e) => { if (e.key === 'Escape') setLightbox(null); }}
                 tabIndex={-1}
-                ref={(el) => el?.focus()}
+                ref={lightboxRef}
               >
                 <motion.img
                   initial={{ scale: 0.8 }}

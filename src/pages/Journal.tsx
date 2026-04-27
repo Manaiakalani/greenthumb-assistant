@@ -221,7 +221,7 @@ const Journal = () => {
                             key={entry.id}
                             initial={{ opacity: 0, x: -8 }}
                             animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: i * 0.03 }}
+                            transition={{ delay: Math.min(i, 12) * 0.03 }}
                             className="flex items-center gap-3 rounded-lg border border-primary/10 bg-card p-3 group"
                           >
                             <div className={`h-9 w-9 rounded-lg ${meta.color} flex items-center justify-center text-white text-lg shrink-0`}>

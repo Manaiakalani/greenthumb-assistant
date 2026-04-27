@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useMemo, useRef, useState } from "react";
 import { ArrowLeftRight, ImageIcon } from "lucide-react";
 import { useGrassStore } from "@/stores/useGrassStore";
 import { formatShortDate } from "@/lib/dateFormat";
@@ -14,12 +14,19 @@ export const PhotoCompare = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const dragging = useRef(false);
 
-  const sorted = [...photos].sort(
-    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+  const sorted = useMemo(
+    () => [...photos].sort((a, b) => a.date.localeCompare(b.date)),
+    [photos],
   );
+  const byId = useMemo(
+    () => new Map(sorted.map((p) => [p.id, p])),
+    [sorted],
+  );
+  const beforePhoto = byId.get(beforeId);
+  const afterPhoto = byId.get(afterId);
 
-  const beforePhoto = sorted.find((p) => p.id === beforeId);
-  const afterPhoto = sorted.find((p) => p.id === afterId);
+  // TODO(perf-audit): migrate drag to ref-based DOM writes (clipPath via style)
+  // to avoid re-render per pointer move; deferred from this PR.
 
   const updatePosition = useCallback((clientX: number) => {
     const rect = containerRef.current?.getBoundingClientRect();

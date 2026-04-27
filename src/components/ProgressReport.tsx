@@ -1,14 +1,12 @@
 import React, { useMemo, useState } from "react";
-import {
-  BarChart3,
-  Calendar,
-  Camera,
-  DollarSign,
-  Printer,
-  Trophy,
-  Activity,
-  Heart,
-} from "lucide-react";
+import BarChart3 from "lucide-react/dist/esm/icons/bar-chart-3";
+import Calendar from "lucide-react/dist/esm/icons/calendar";
+import Camera from "lucide-react/dist/esm/icons/camera";
+import DollarSign from "lucide-react/dist/esm/icons/dollar-sign";
+import Printer from "lucide-react/dist/esm/icons/printer";
+import Trophy from "lucide-react/dist/esm/icons/trophy";
+import Activity from "lucide-react/dist/esm/icons/activity";
+import Heart from "lucide-react/dist/esm/icons/heart";
 import { useGrassStore } from "@/stores/useGrassStore";
 import { loadCosts, getTotalSpend } from "@/lib/costTracker";
 import { useLawnHealth } from "@/hooks/useLawnHealth";

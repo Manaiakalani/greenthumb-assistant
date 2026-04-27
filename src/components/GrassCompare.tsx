@@ -1,5 +1,5 @@
 import { useMemo, useState } from "react";
-import { Scale } from "lucide-react";
+import Scale from "lucide-react/dist/esm/icons/scale";
 import { useProfile } from "@/context/ProfileContext";
 import {
   grassTypes,

@@ -1,6 +1,9 @@
 import { useCallback, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { FlaskConical, Leaf, Info, Check } from "lucide-react";
+import FlaskConical from "lucide-react/dist/esm/icons/flask-conical";
+import Leaf from "lucide-react/dist/esm/icons/leaf";
+import Info from "lucide-react/dist/esm/icons/info";
+import Check from "lucide-react/dist/esm/icons/check";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

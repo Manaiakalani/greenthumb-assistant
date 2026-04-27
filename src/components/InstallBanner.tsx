@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
-import { Download, X } from "lucide-react";
+import Download from "lucide-react/dist/esm/icons/download";
+import X from "lucide-react/dist/esm/icons/x";
 import { useInstallPrompt } from "@/hooks/useInstallPrompt";
 
 export function InstallBanner() {

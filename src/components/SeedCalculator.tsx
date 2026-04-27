@@ -1,6 +1,11 @@
 import { useCallback, useMemo, useState } from "react";
 import { motion } from "motion/react";
-import { Sprout, Calculator, Package, Clock, CalendarDays, Info } from "lucide-react";
+import Sprout from "lucide-react/dist/esm/icons/sprout";
+import Calculator from "lucide-react/dist/esm/icons/calculator";
+import Package from "lucide-react/dist/esm/icons/package";
+import Clock from "lucide-react/dist/esm/icons/clock";
+import CalendarDays from "lucide-react/dist/esm/icons/calendar-days";
+import Info from "lucide-react/dist/esm/icons/info";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

@@ -1,6 +1,10 @@
 import { useCallback, useMemo, useState } from "react";
 import { motion } from "motion/react";
-import { Ruler, Save, Leaf, Sprout, ShieldCheck } from "lucide-react";
+import Ruler from "lucide-react/dist/esm/icons/ruler";
+import Save from "lucide-react/dist/esm/icons/save";
+import Leaf from "lucide-react/dist/esm/icons/leaf";
+import Sprout from "lucide-react/dist/esm/icons/sprout";
+import ShieldCheck from "lucide-react/dist/esm/icons/shield-check";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import {

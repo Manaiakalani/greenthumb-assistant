@@ -1,6 +1,11 @@
 import { useCallback, useState, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Target, Plus, Minus, Check, ChevronDown, ChevronUp } from "lucide-react";
+import Target from "lucide-react/dist/esm/icons/target";
+import Plus from "lucide-react/dist/esm/icons/plus";
+import Minus from "lucide-react/dist/esm/icons/minus";
+import Check from "lucide-react/dist/esm/icons/check";
+import ChevronDown from "lucide-react/dist/esm/icons/chevron-down";
+import ChevronUp from "lucide-react/dist/esm/icons/chevron-up";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import {

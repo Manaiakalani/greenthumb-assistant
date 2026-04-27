@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { BookOpen } from "lucide-react";
+import BookOpen from "lucide-react/dist/esm/icons/book-open";
 import { Link } from "react-router-dom";
 import { AppHeader } from "@/components/AppHeader";
 import { BottomNav } from "@/components/BottomNav";

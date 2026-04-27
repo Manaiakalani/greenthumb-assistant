@@ -1,14 +1,12 @@
 import { useState, useMemo, useCallback } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import {
-  Snowflake,
-  Thermometer,
-  CloudRain,
-  Droplets,
-  Wind,
-  CheckCircle2,
-  X,
-} from "lucide-react";
+import Snowflake from "lucide-react/dist/esm/icons/snowflake";
+import Thermometer from "lucide-react/dist/esm/icons/thermometer";
+import CloudRain from "lucide-react/dist/esm/icons/cloud-rain";
+import Droplets from "lucide-react/dist/esm/icons/droplets";
+import Wind from "lucide-react/dist/esm/icons/wind";
+import CheckCircle2 from "lucide-react/dist/esm/icons/check-circle-2";
+import X from "lucide-react/dist/esm/icons/x";
 import type { WeatherData } from "@/lib/weather";
 
 // ---------------------------------------------------------------------------

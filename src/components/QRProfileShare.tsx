@@ -1,5 +1,11 @@
 import { useCallback, useMemo, useRef, useState } from "react";
-import { QrCode, Download, Share2, User, MapPin, Sprout, Ruler } from "lucide-react";
+import QrCode from "lucide-react/dist/esm/icons/qr-code";
+import Download from "lucide-react/dist/esm/icons/download";
+import Share2 from "lucide-react/dist/esm/icons/share-2";
+import User from "lucide-react/dist/esm/icons/user";
+import MapPin from "lucide-react/dist/esm/icons/map-pin";
+import Sprout from "lucide-react/dist/esm/icons/sprout";
+import Ruler from "lucide-react/dist/esm/icons/ruler";
 import { useProfile } from "@/context/ProfileContext";
 import { generateQRCodeURL } from "@/lib/qrcode";
 import { Button } from "@/components/ui/button";

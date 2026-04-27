@@ -1,17 +1,15 @@
 import { useCallback, useMemo, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
-import {
-  ArrowLeft,
-  ArrowRight,
-  Check,
-  Flower2,
-  Leaf,
-  MapPin,
-  Sprout,
-  Sun,
-  Wheat,
-} from "lucide-react";
+import ArrowLeft from "lucide-react/dist/esm/icons/arrow-left";
+import ArrowRight from "lucide-react/dist/esm/icons/arrow-right";
+import Check from "lucide-react/dist/esm/icons/check";
+import Flower2 from "lucide-react/dist/esm/icons/flower-2";
+import Leaf from "lucide-react/dist/esm/icons/leaf";
+import MapPin from "lucide-react/dist/esm/icons/map-pin";
+import Sprout from "lucide-react/dist/esm/icons/sprout";
+import Sun from "lucide-react/dist/esm/icons/sun";
+import Wheat from "lucide-react/dist/esm/icons/wheat";
 import { toast } from "sonner";
 import { useProfile } from "@/context/ProfileContext";
 import { AppHeader } from "@/components/AppHeader";

@@ -1,6 +1,10 @@
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
-import { Shield, MapPin, HardDrive, Cloud, ArrowLeft } from "lucide-react";
+import Shield from "lucide-react/dist/esm/icons/shield";
+import MapPin from "lucide-react/dist/esm/icons/map-pin";
+import HardDrive from "lucide-react/dist/esm/icons/hard-drive";
+import Cloud from "lucide-react/dist/esm/icons/cloud";
+import ArrowLeft from "lucide-react/dist/esm/icons/arrow-left";
 import { AppHeader } from "@/components/AppHeader";
 import { BottomNav } from "@/components/BottomNav";
 import { formatLongDate } from "@/lib/dateFormat";

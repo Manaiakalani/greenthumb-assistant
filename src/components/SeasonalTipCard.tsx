@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Heart, RefreshCw, Check } from "lucide-react";
+import Heart from "lucide-react/dist/esm/icons/heart";
+import RefreshCw from "lucide-react/dist/esm/icons/refresh-cw";
+import Check from "lucide-react/dist/esm/icons/check";
 import { cn } from "@/lib/utils";
 import { safeGetItem, safeSetItem } from "@/lib/safeStorage";
 import { useProfile } from "@/context/ProfileContext";

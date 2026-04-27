@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { motion } from "motion/react";
-import { BarChart3 } from "lucide-react";
+import BarChart3 from "lucide-react/dist/esm/icons/bar-chart-3";
 import { useGrassStore } from "@/stores/useGrassStore";
 import { ACTIVITY_META, type ActivityType, type JournalEntry } from "@/types/journal";
 import { formatShortMonth } from "@/lib/dateFormat";

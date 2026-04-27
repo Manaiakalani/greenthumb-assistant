@@ -1,6 +1,15 @@
 import { lazy, Suspense } from "react";
 import { motion } from "motion/react";
-import { Wrench, ClipboardList, ChevronRight, ChevronDown, Bug, BookOpen, Scissors, Calculator, CalendarDays, BookA } from "lucide-react";
+import Wrench from "lucide-react/dist/esm/icons/wrench";
+import ClipboardList from "lucide-react/dist/esm/icons/clipboard-list";
+import ChevronRight from "lucide-react/dist/esm/icons/chevron-right";
+import ChevronDown from "lucide-react/dist/esm/icons/chevron-down";
+import Bug from "lucide-react/dist/esm/icons/bug";
+import BookOpen from "lucide-react/dist/esm/icons/book-open";
+import Scissors from "lucide-react/dist/esm/icons/scissors";
+import Calculator from "lucide-react/dist/esm/icons/calculator";
+import CalendarDays from "lucide-react/dist/esm/icons/calendar-days";
+import BookA from "lucide-react/dist/esm/icons/book-a";
 import { Link } from "react-router-dom";
 import { AppHeader } from "@/components/AppHeader";
 import { BottomNav } from "@/components/BottomNav";

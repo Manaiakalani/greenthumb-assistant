@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useRef, useState } from "react";
-import { ArrowLeftRight, ImageIcon } from "lucide-react";
+import ArrowLeftRight from "lucide-react/dist/esm/icons/arrow-left-right";
+import ImageIcon from "lucide-react/dist/esm/icons/image";
 import { useGrassStore } from "@/stores/useGrassStore";
 import { formatShortDate } from "@/lib/dateFormat";
 

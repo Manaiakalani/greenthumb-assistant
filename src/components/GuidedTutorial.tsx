@@ -1,44 +1,42 @@
 import { useState, useCallback, useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import {
-  BookOpen,
-  Clock,
-  ChevronRight,
-  ChevronLeft,
-  CheckCircle2,
-  Lightbulb,
-  ArrowLeft,
-  Ruler,
-  Route,
-  CalendarDays,
-  Recycle,
-  Scissors,
-  Sunrise,
-  Timer,
-  ArrowDownToLine,
-  CloudRain,
-  FlaskConical,
-  Shovel,
-  FileSearch,
-  Beaker,
-  RefreshCw,
-  Wind,
-  Sprout,
-  Leaf,
-  ArrowDown,
-  Trash2,
-  Shield,
-  Flower2,
-  Search,
-  SearchCheck,
-  Droplets,
-  Mountain,
-  Bug,
-  TreePine,
-  Snowflake,
-  Warehouse,
-  NotebookPen,
-} from "lucide-react";
+import BookOpen from "lucide-react/dist/esm/icons/book-open";
+import Clock from "lucide-react/dist/esm/icons/clock";
+import ChevronRight from "lucide-react/dist/esm/icons/chevron-right";
+import ChevronLeft from "lucide-react/dist/esm/icons/chevron-left";
+import CheckCircle2 from "lucide-react/dist/esm/icons/check-circle-2";
+import Lightbulb from "lucide-react/dist/esm/icons/lightbulb";
+import ArrowLeft from "lucide-react/dist/esm/icons/arrow-left";
+import Ruler from "lucide-react/dist/esm/icons/ruler";
+import Route from "lucide-react/dist/esm/icons/route";
+import CalendarDays from "lucide-react/dist/esm/icons/calendar-days";
+import Recycle from "lucide-react/dist/esm/icons/recycle";
+import Scissors from "lucide-react/dist/esm/icons/scissors";
+import Sunrise from "lucide-react/dist/esm/icons/sunrise";
+import Timer from "lucide-react/dist/esm/icons/timer";
+import ArrowDownToLine from "lucide-react/dist/esm/icons/arrow-down-to-line";
+import CloudRain from "lucide-react/dist/esm/icons/cloud-rain";
+import FlaskConical from "lucide-react/dist/esm/icons/flask-conical";
+import Shovel from "lucide-react/dist/esm/icons/shovel";
+import FileSearch from "lucide-react/dist/esm/icons/file-search";
+import Beaker from "lucide-react/dist/esm/icons/beaker";
+import RefreshCw from "lucide-react/dist/esm/icons/refresh-cw";
+import Wind from "lucide-react/dist/esm/icons/wind";
+import Sprout from "lucide-react/dist/esm/icons/sprout";
+import Leaf from "lucide-react/dist/esm/icons/leaf";
+import ArrowDown from "lucide-react/dist/esm/icons/arrow-down";
+import Trash2 from "lucide-react/dist/esm/icons/trash-2";
+import Shield from "lucide-react/dist/esm/icons/shield";
+import Flower2 from "lucide-react/dist/esm/icons/flower-2";
+import Search from "lucide-react/dist/esm/icons/search";
+import SearchCheck from "lucide-react/dist/esm/icons/search-check";
+import Droplets from "lucide-react/dist/esm/icons/droplets";
+import Mountain from "lucide-react/dist/esm/icons/mountain";
+import Bug from "lucide-react/dist/esm/icons/bug";
+import TreePine from "lucide-react/dist/esm/icons/tree-pine";
+import Snowflake from "lucide-react/dist/esm/icons/snowflake";
+import Warehouse from "lucide-react/dist/esm/icons/warehouse";
+import NotebookPen from "lucide-react/dist/esm/icons/notebook-pen";
 import type { LucideIcon } from "lucide-react";
 import { tutorials, type Tutorial } from "@/data/tutorials";
 

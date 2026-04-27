@@ -1,6 +1,8 @@
 import React from "react";
 import { motion } from "motion/react";
-import { ArrowUp, Leaf, Settings } from "lucide-react";
+import ArrowUp from "lucide-react/dist/esm/icons/arrow-up";
+import Leaf from "lucide-react/dist/esm/icons/leaf";
+import Settings from "lucide-react/dist/esm/icons/settings";
 import { Link } from "react-router-dom";
 import { useProfile } from "@/context/ProfileContext";
 import { getGrowthMessage } from "@/data/lawn-profile";

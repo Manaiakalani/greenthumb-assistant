@@ -1,6 +1,9 @@
 import React, { useState, useCallback, useRef, useEffect } from "react";
 import { cn } from "@/lib/utils";
-import { Timer, Play, Pause, RotateCcw } from "lucide-react";
+import Timer from "lucide-react/dist/esm/icons/timer";
+import Play from "lucide-react/dist/esm/icons/play";
+import Pause from "lucide-react/dist/esm/icons/pause";
+import RotateCcw from "lucide-react/dist/esm/icons/rotate-ccw";
 
 interface Preset {
   label: string;

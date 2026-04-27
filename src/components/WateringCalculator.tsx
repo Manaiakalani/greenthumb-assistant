@@ -1,6 +1,9 @@
 import { useCallback, useMemo, useState } from "react";
 import { motion } from "motion/react";
-import { Calculator, CloudRain, Droplets, Sun } from "lucide-react";
+import Calculator from "lucide-react/dist/esm/icons/calculator";
+import CloudRain from "lucide-react/dist/esm/icons/cloud-rain";
+import Droplets from "lucide-react/dist/esm/icons/droplets";
+import Sun from "lucide-react/dist/esm/icons/sun";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import {

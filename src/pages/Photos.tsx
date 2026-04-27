@@ -1,6 +1,11 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Camera, Plus, Trash2, ImageIcon, X, ArrowLeftRight } from "lucide-react";
+import Camera from "lucide-react/dist/esm/icons/camera";
+import Plus from "lucide-react/dist/esm/icons/plus";
+import Trash2 from "lucide-react/dist/esm/icons/trash-2";
+import ImageIcon from "lucide-react/dist/esm/icons/image";
+import X from "lucide-react/dist/esm/icons/x";
+import ArrowLeftRight from "lucide-react/dist/esm/icons/arrow-left-right";
 import { toast } from "sonner";
 import { AppHeader } from "@/components/AppHeader";
 import { BottomNav } from "@/components/BottomNav";

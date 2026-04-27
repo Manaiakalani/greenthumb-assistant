@@ -1,6 +1,8 @@
 import React from "react";
 import { motion } from "motion/react";
-import { Heart, TrendingUp, Info } from "lucide-react";
+import Heart from "lucide-react/dist/esm/icons/heart";
+import TrendingUp from "lucide-react/dist/esm/icons/trending-up";
+import Info from "lucide-react/dist/esm/icons/info";
 import { useLawnHealth } from "@/hooks/useLawnHealth";
 import { useProfile } from "@/context/ProfileContext";
 import { useGrassStore } from "@/stores/useGrassStore";

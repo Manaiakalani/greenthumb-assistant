@@ -1,5 +1,7 @@
 import { useCallback, useRef, useState } from "react";
-import { Download, Share2, Loader2 } from "lucide-react";
+import Download from "lucide-react/dist/esm/icons/download";
+import Share2 from "lucide-react/dist/esm/icons/share-2";
+import Loader2 from "lucide-react/dist/esm/icons/loader-2";
 import { toast } from "sonner";
 
 import { Button } from "@/components/ui/button";

@@ -1,6 +1,11 @@
 import React, { useState, useMemo } from "react";
 import { motion } from "motion/react";
-import { FlaskConical, Leaf, TreePine, Shield, AlertTriangle, ChevronDown } from "lucide-react";
+import FlaskConical from "lucide-react/dist/esm/icons/flask-conical";
+import Leaf from "lucide-react/dist/esm/icons/leaf";
+import TreePine from "lucide-react/dist/esm/icons/tree-pine";
+import Shield from "lucide-react/dist/esm/icons/shield";
+import AlertTriangle from "lucide-react/dist/esm/icons/alert-triangle";
+import ChevronDown from "lucide-react/dist/esm/icons/chevron-down";
 import { cn } from "@/lib/utils";
 import { useProfile } from "@/context/ProfileContext";
 import { fertilizerPresets, type FertilizerPreset } from "@/data/fertilizerPresets";

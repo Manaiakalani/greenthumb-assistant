@@ -1,6 +1,8 @@
 import { useMemo, useState, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { CalendarDays, ChevronLeft, ChevronRight } from "lucide-react";
+import CalendarDays from "lucide-react/dist/esm/icons/calendar-days";
+import ChevronLeft from "lucide-react/dist/esm/icons/chevron-left";
+import ChevronRight from "lucide-react/dist/esm/icons/chevron-right";
 import { AppHeader } from "@/components/AppHeader";
 import { BottomNav } from "@/components/BottomNav";
 import { PageTransition } from "@/components/PageTransition";

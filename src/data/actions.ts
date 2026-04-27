@@ -1,4 +1,13 @@
-import { Scissors, Flower2, Droplets, AlertTriangle, Shovel, Leaf, Bug, Snowflake, Thermometer, Wind } from "lucide-react";
+import Scissors from "lucide-react/dist/esm/icons/scissors";
+import Flower2 from "lucide-react/dist/esm/icons/flower-2";
+import Droplets from "lucide-react/dist/esm/icons/droplets";
+import AlertTriangle from "lucide-react/dist/esm/icons/alert-triangle";
+import Shovel from "lucide-react/dist/esm/icons/shovel";
+import Leaf from "lucide-react/dist/esm/icons/leaf";
+import Bug from "lucide-react/dist/esm/icons/bug";
+import Snowflake from "lucide-react/dist/esm/icons/snowflake";
+import Thermometer from "lucide-react/dist/esm/icons/thermometer";
+import Wind from "lucide-react/dist/esm/icons/wind";
 import type { ActionItem } from "@/types/lawn";
 import type { ClimateRegion } from "@/types/profile";
 import { getSeason, type Season } from "@/data/stats";

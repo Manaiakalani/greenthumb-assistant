@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "motion/react";
-import { Bell, ChevronRight } from "lucide-react";
+import Bell from "lucide-react/dist/esm/icons/bell";
+import ChevronRight from "lucide-react/dist/esm/icons/chevron-right";
 import { Link } from "react-router-dom";
 import { useSmartReminders, type SmartReminder } from "@/hooks/useSmartReminders";
 import type { WeatherData } from "@/lib/weather";

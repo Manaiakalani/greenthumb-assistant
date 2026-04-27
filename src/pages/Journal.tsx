@@ -1,6 +1,10 @@
 import { useCallback, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { BookOpen, Plus, Trash2, Flame, Calendar } from "lucide-react";
+import BookOpen from "lucide-react/dist/esm/icons/book-open";
+import Plus from "lucide-react/dist/esm/icons/plus";
+import Trash2 from "lucide-react/dist/esm/icons/trash-2";
+import Flame from "lucide-react/dist/esm/icons/flame";
+import Calendar from "lucide-react/dist/esm/icons/calendar";
 import { toast } from "sonner";
 import { AppHeader } from "@/components/AppHeader";
 import { BottomNav } from "@/components/BottomNav";

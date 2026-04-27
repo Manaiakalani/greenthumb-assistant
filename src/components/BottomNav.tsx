@@ -1,6 +1,11 @@
 import { useLocation, Link } from "react-router-dom";
 import { motion } from "motion/react";
-import { Home, BookOpen, Camera, Wrench, Trophy, ClipboardList } from "lucide-react";
+import Home from "lucide-react/dist/esm/icons/home";
+import BookOpen from "lucide-react/dist/esm/icons/book-open";
+import Camera from "lucide-react/dist/esm/icons/camera";
+import Wrench from "lucide-react/dist/esm/icons/wrench";
+import Trophy from "lucide-react/dist/esm/icons/trophy";
+import ClipboardList from "lucide-react/dist/esm/icons/clipboard-list";
 import { useTranslation } from "react-i18next";
 
 const NAV_KEYS = [

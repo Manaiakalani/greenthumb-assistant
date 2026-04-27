@@ -1,9 +1,16 @@
 import { forwardRef } from "react";
-import {
-  Globe, Leaf, MapPin, Maximize, User, Wheat,
-  Shield, Star, Crown, Sparkles, Gem,
-  type LucideIcon,
-} from "lucide-react";
+import Globe from "lucide-react/dist/esm/icons/globe";
+import Leaf from "lucide-react/dist/esm/icons/leaf";
+import MapPin from "lucide-react/dist/esm/icons/map-pin";
+import Maximize from "lucide-react/dist/esm/icons/maximize";
+import User from "lucide-react/dist/esm/icons/user";
+import Wheat from "lucide-react/dist/esm/icons/wheat";
+import Shield from "lucide-react/dist/esm/icons/shield";
+import Star from "lucide-react/dist/esm/icons/star";
+import Crown from "lucide-react/dist/esm/icons/crown";
+import Sparkles from "lucide-react/dist/esm/icons/sparkles";
+import Gem from "lucide-react/dist/esm/icons/gem";
+import type { LucideIcon } from "lucide-react";
 import type { UserProfile } from "@/types/profile";
 import type { Achievement } from "@/types/journal";
 

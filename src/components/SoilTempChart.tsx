@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { motion } from "motion/react";
 /* useMemo kept for activeRange only */
-import { Thermometer } from "lucide-react";
+import Thermometer from "lucide-react/dist/esm/icons/thermometer";
 
 interface SoilTempChartProps {
   /** Current soil temperature in °F (from Open-Meteo soil_temperature_6cm) */

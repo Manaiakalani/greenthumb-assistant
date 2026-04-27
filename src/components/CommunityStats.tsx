@@ -1,6 +1,9 @@
 import React from "react";
 import { motion } from "motion/react";
-import { Users, TrendingUp, Scissors, Droplets } from "lucide-react";
+import Users from "lucide-react/dist/esm/icons/users";
+import TrendingUp from "lucide-react/dist/esm/icons/trending-up";
+import Scissors from "lucide-react/dist/esm/icons/scissors";
+import Droplets from "lucide-react/dist/esm/icons/droplets";
 import { useProfile } from "@/context/ProfileContext";
 import { getSeason } from "@/data/stats";
 import type { ClimateRegion } from "@/types/profile";

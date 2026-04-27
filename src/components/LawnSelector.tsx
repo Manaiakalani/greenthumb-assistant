@@ -19,7 +19,11 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Plus, Pencil, Trash2, Grass } from "lucide-react";
+import Plus from "lucide-react/dist/esm/icons/plus";
+import Pencil from "lucide-react/dist/esm/icons/pencil";
+import Trash2 from "lucide-react/dist/esm/icons/trash-2";
+import Sprout from "lucide-react/dist/esm/icons/sprout";
+const Grass = Sprout; // alias: lucide has no Grass icon (preserve existing behavior)
 
 interface LawnSelectorProps {
   onLawnChange?: (lawnId: string) => void;

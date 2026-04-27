@@ -1,5 +1,9 @@
 import { useCallback, useRef, useState } from "react";
-import { Download, Share2, Sparkles, Loader2, Copy } from "lucide-react";
+import Download from "lucide-react/dist/esm/icons/download";
+import Share2 from "lucide-react/dist/esm/icons/share-2";
+import Sparkles from "lucide-react/dist/esm/icons/sparkles";
+import Loader2 from "lucide-react/dist/esm/icons/loader-2";
+import Copy from "lucide-react/dist/esm/icons/copy";
 import { toast } from "sonner";
 
 import {

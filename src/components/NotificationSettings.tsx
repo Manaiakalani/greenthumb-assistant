@@ -1,8 +1,11 @@
 import { useCallback, useState, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import {
-  Bell, BellOff, Shield, Droplets, Scissors, Leaf,
-} from "lucide-react";
+import Bell from "lucide-react/dist/esm/icons/bell";
+import BellOff from "lucide-react/dist/esm/icons/bell-off";
+import Shield from "lucide-react/dist/esm/icons/shield";
+import Droplets from "lucide-react/dist/esm/icons/droplets";
+import Scissors from "lucide-react/dist/esm/icons/scissors";
+import Leaf from "lucide-react/dist/esm/icons/leaf";
 import {
   loadNotificationPrefs,
   saveNotificationPrefs,

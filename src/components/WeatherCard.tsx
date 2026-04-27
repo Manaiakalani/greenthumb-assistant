@@ -1,10 +1,19 @@
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
-import {
-  Cloud, CloudDrizzle, CloudFog, CloudLightning, CloudRain, CloudSun,
-  Droplets, Moon, Snowflake, Sun, Thermometer, Wind, LocateFixed,
-  type LucideIcon,
-} from "lucide-react";
+import Cloud from "lucide-react/dist/esm/icons/cloud";
+import CloudDrizzle from "lucide-react/dist/esm/icons/cloud-drizzle";
+import CloudFog from "lucide-react/dist/esm/icons/cloud-fog";
+import CloudLightning from "lucide-react/dist/esm/icons/cloud-lightning";
+import CloudRain from "lucide-react/dist/esm/icons/cloud-rain";
+import CloudSun from "lucide-react/dist/esm/icons/cloud-sun";
+import Droplets from "lucide-react/dist/esm/icons/droplets";
+import Moon from "lucide-react/dist/esm/icons/moon";
+import Snowflake from "lucide-react/dist/esm/icons/snowflake";
+import Sun from "lucide-react/dist/esm/icons/sun";
+import Thermometer from "lucide-react/dist/esm/icons/thermometer";
+import Wind from "lucide-react/dist/esm/icons/wind";
+import LocateFixed from "lucide-react/dist/esm/icons/locate-fixed";
+import type { LucideIcon } from "lucide-react";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useWeather } from "@/hooks/useWeather";
 import {

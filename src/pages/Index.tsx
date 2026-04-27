@@ -1,15 +1,13 @@
 import { lazy, Suspense, useCallback, useEffect, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  MapPin,
-  ClipboardList,
-  ChevronRight,
-  CloudSun,
-  TrendingUp,
-  Zap,
-  Users,
-} from "lucide-react";
+import MapPin from "lucide-react/dist/esm/icons/map-pin";
+import ClipboardList from "lucide-react/dist/esm/icons/clipboard-list";
+import ChevronRight from "lucide-react/dist/esm/icons/chevron-right";
+import CloudSun from "lucide-react/dist/esm/icons/cloud-sun";
+import TrendingUp from "lucide-react/dist/esm/icons/trending-up";
+import Zap from "lucide-react/dist/esm/icons/zap";
+import Users from "lucide-react/dist/esm/icons/users";
 import { useProfile } from "@/context/ProfileContext";
 import { useWeather } from "@/hooks/useWeather";
 import { AppHeader } from "@/components/AppHeader";

@@ -1,6 +1,13 @@
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Search, X, Home, Wrench, BookA, GraduationCap, BookOpen, Zap } from "lucide-react";
+import Search from "lucide-react/dist/esm/icons/search";
+import X from "lucide-react/dist/esm/icons/x";
+import Home from "lucide-react/dist/esm/icons/home";
+import Wrench from "lucide-react/dist/esm/icons/wrench";
+import BookA from "lucide-react/dist/esm/icons/book-a";
+import GraduationCap from "lucide-react/dist/esm/icons/graduation-cap";
+import BookOpen from "lucide-react/dist/esm/icons/book-open";
+import Zap from "lucide-react/dist/esm/icons/zap";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "next-themes";
 import { useGrassStore } from "@/stores/useGrassStore";

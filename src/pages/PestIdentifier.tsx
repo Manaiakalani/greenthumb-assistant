@@ -1,22 +1,20 @@
 import { useCallback, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion, AnimatePresence } from "motion/react";
-import {
-  ArrowLeft,
-  ArrowRight,
-  Bug,
-  Check,
-  Flower2,
-  Leaf,
-  RefreshCcw,
-  Search,
-  Shield,
-  Snowflake,
-  Sprout,
-  Sun,
-  TreeDeciduous,
-  Wheat,
-} from "lucide-react";
+import ArrowLeft from "lucide-react/dist/esm/icons/arrow-left";
+import ArrowRight from "lucide-react/dist/esm/icons/arrow-right";
+import Bug from "lucide-react/dist/esm/icons/bug";
+import Check from "lucide-react/dist/esm/icons/check";
+import Flower2 from "lucide-react/dist/esm/icons/flower-2";
+import Leaf from "lucide-react/dist/esm/icons/leaf";
+import RefreshCcw from "lucide-react/dist/esm/icons/refresh-ccw";
+import Search from "lucide-react/dist/esm/icons/search";
+import Shield from "lucide-react/dist/esm/icons/shield";
+import Snowflake from "lucide-react/dist/esm/icons/snowflake";
+import Sprout from "lucide-react/dist/esm/icons/sprout";
+import Sun from "lucide-react/dist/esm/icons/sun";
+import TreeDeciduous from "lucide-react/dist/esm/icons/tree-deciduous";
+import Wheat from "lucide-react/dist/esm/icons/wheat";
 import { AppHeader } from "@/components/AppHeader";
 import { BottomNav } from "@/components/BottomNav";
 import { Button } from "@/components/ui/button";

@@ -1,6 +1,8 @@
 import React, { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { DollarSign, Trash2, Plus } from "lucide-react";
+import DollarSign from "lucide-react/dist/esm/icons/dollar-sign";
+import Trash2 from "lucide-react/dist/esm/icons/trash-2";
+import Plus from "lucide-react/dist/esm/icons/plus";
 import {
   loadCosts,
   addCost,

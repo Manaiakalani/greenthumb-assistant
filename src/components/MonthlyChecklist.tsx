@@ -9,13 +9,11 @@ import {
   CATEGORY_LABELS,
   type MonthlyTask,
 } from "@/data/monthlyTasks";
-import {
-  ChevronLeft,
-  ChevronRight,
-  CheckCircle2,
-  Circle,
-  ClipboardList,
-} from "lucide-react";
+import ChevronLeft from "lucide-react/dist/esm/icons/chevron-left";
+import ChevronRight from "lucide-react/dist/esm/icons/chevron-right";
+import CheckCircle2 from "lucide-react/dist/esm/icons/check-circle-2";
+import Circle from "lucide-react/dist/esm/icons/circle";
+import ClipboardList from "lucide-react/dist/esm/icons/clipboard-list";
 
 type Category = MonthlyTask["category"];
 

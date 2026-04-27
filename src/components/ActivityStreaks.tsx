@@ -6,7 +6,10 @@ import {
   type FormEvent,
 } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Flame, Plus, Trophy, X } from "lucide-react";
+import Flame from "lucide-react/dist/esm/icons/flame";
+import Plus from "lucide-react/dist/esm/icons/plus";
+import Trophy from "lucide-react/dist/esm/icons/trophy";
+import X from "lucide-react/dist/esm/icons/x";
 import { cn } from "@/lib/utils";
 import { useGrassStore } from "@/stores/useGrassStore";
 import { getWeekStart, getWeeklyProgress } from "@/lib/journal";

@@ -1,13 +1,11 @@
 import { useCallback, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import {
-  AlertTriangle,
-  CheckCircle2,
-  Download,
-  HardDrive,
-  Loader2,
-  Upload,
-} from "lucide-react";
+import AlertTriangle from "lucide-react/dist/esm/icons/alert-triangle";
+import CheckCircle2 from "lucide-react/dist/esm/icons/check-circle-2";
+import Download from "lucide-react/dist/esm/icons/download";
+import HardDrive from "lucide-react/dist/esm/icons/hard-drive";
+import Loader2 from "lucide-react/dist/esm/icons/loader-2";
+import Upload from "lucide-react/dist/esm/icons/upload";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { useProfile } from "@/context/ProfileContext";

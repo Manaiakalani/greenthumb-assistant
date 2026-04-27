@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { motion } from "motion/react";
-import { MapPin, Leaf, Sparkles, ArrowRight, Check } from "lucide-react";
+import MapPin from "lucide-react/dist/esm/icons/map-pin";
+import Leaf from "lucide-react/dist/esm/icons/leaf";
+import Sparkles from "lucide-react/dist/esm/icons/sparkles";
+import ArrowRight from "lucide-react/dist/esm/icons/arrow-right";
+import Check from "lucide-react/dist/esm/icons/check";
 import { Button } from "@/components/ui/button";
 
 const STEPS = [

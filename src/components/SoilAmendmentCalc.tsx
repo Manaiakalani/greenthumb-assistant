@@ -1,6 +1,11 @@
 import React, { useState, useMemo } from "react";
 import { motion } from "motion/react";
-import { Pipette, ChevronDown, ArrowUp, ArrowDown, Clock, Package } from "lucide-react";
+import Pipette from "lucide-react/dist/esm/icons/pipette";
+import ChevronDown from "lucide-react/dist/esm/icons/chevron-down";
+import ArrowUp from "lucide-react/dist/esm/icons/arrow-up";
+import ArrowDown from "lucide-react/dist/esm/icons/arrow-down";
+import Clock from "lucide-react/dist/esm/icons/clock";
+import Package from "lucide-react/dist/esm/icons/package";
 import { cn } from "@/lib/utils";
 import { useProfile } from "@/context/ProfileContext";
 

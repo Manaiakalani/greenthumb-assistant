@@ -1,6 +1,9 @@
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Scissors, ChevronDown, Info, AlertTriangle } from "lucide-react";
+import Scissors from "lucide-react/dist/esm/icons/scissors";
+import ChevronDown from "lucide-react/dist/esm/icons/chevron-down";
+import Info from "lucide-react/dist/esm/icons/info";
+import AlertTriangle from "lucide-react/dist/esm/icons/alert-triangle";
 import { useProfile } from "@/context/ProfileContext";
 import { getMowingHeight, mowingHeights } from "@/data/mowingHeights";
 import type { SeasonalHeight } from "@/data/mowingHeights";

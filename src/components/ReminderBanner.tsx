@@ -1,7 +1,8 @@
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Link } from "react-router-dom";
-import { Bell, X } from "lucide-react";
+import Bell from "lucide-react/dist/esm/icons/bell";
+import X from "lucide-react/dist/esm/icons/x";
 import { useProfile } from "@/context/ProfileContext";
 import { getPlanForRegion } from "@/data/soilPlans";
 import {

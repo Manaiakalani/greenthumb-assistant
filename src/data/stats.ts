@@ -1,4 +1,7 @@
-import { Calendar, Scissors, Droplets, TrendingUp } from "lucide-react";
+import Calendar from "lucide-react/dist/esm/icons/calendar";
+import Scissors from "lucide-react/dist/esm/icons/scissors";
+import Droplets from "lucide-react/dist/esm/icons/droplets";
+import TrendingUp from "lucide-react/dist/esm/icons/trending-up";
 import type { QuickStatItem } from "@/types/lawn";
 import type { ClimateRegion } from "@/types/profile";
 

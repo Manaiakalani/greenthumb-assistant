@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
-import { Trophy, Lock } from "lucide-react";
+import Trophy from "lucide-react/dist/esm/icons/trophy";
+import Lock from "lucide-react/dist/esm/icons/lock";
 import { ACHIEVEMENTS } from "@/lib/achievements";
 import { useEarnedBadges } from "@/hooks/useEarnedBadges";
 import { formatShortDate } from "@/lib/dateFormat";

@@ -1,6 +1,10 @@
 import { useSyncExternalStore, useState } from "react";
 import { motion } from "motion/react";
-import { Leaf, Moon, Sun, User, Search } from "lucide-react";
+import Leaf from "lucide-react/dist/esm/icons/leaf";
+import Moon from "lucide-react/dist/esm/icons/moon";
+import Sun from "lucide-react/dist/esm/icons/sun";
+import User from "lucide-react/dist/esm/icons/user";
+import Search from "lucide-react/dist/esm/icons/search";
 import { Link } from "react-router-dom";
 import { useTheme } from "next-themes";
 import { useProfile } from "@/context/ProfileContext";

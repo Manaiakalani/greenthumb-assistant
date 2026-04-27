@@ -1,6 +1,8 @@
 import React, { useRef, useCallback, useMemo } from "react";
 import html2canvas from "html2canvas";
-import { Printer, Download, Share2 } from "lucide-react";
+import Printer from "lucide-react/dist/esm/icons/printer";
+import Download from "lucide-react/dist/esm/icons/download";
+import Share2 from "lucide-react/dist/esm/icons/share-2";
 import { useProfile } from "@/context/ProfileContext";
 import { useLawnHealth } from "@/hooks/useLawnHealth";
 import { useGrassStore } from "@/stores/useGrassStore";

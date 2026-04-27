@@ -1,21 +1,19 @@
 import { useCallback, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Link } from "react-router-dom";
-import {
-  ArrowLeft,
-  Calendar,
-  Check,
-  ChevronDown,
-  ChevronUp,
-  ClipboardList,
-  Download,
-  Leaf,
-  MapPin,
-  Printer,
-  Snowflake,
-  Sparkles,
-  Info,
-} from "lucide-react";
+import ArrowLeft from "lucide-react/dist/esm/icons/arrow-left";
+import Calendar from "lucide-react/dist/esm/icons/calendar";
+import Check from "lucide-react/dist/esm/icons/check";
+import ChevronDown from "lucide-react/dist/esm/icons/chevron-down";
+import ChevronUp from "lucide-react/dist/esm/icons/chevron-up";
+import ClipboardList from "lucide-react/dist/esm/icons/clipboard-list";
+import Download from "lucide-react/dist/esm/icons/download";
+import Leaf from "lucide-react/dist/esm/icons/leaf";
+import MapPin from "lucide-react/dist/esm/icons/map-pin";
+import Printer from "lucide-react/dist/esm/icons/printer";
+import Snowflake from "lucide-react/dist/esm/icons/snowflake";
+import Sparkles from "lucide-react/dist/esm/icons/sparkles";
+import Info from "lucide-react/dist/esm/icons/info";
 import { toast } from "sonner";
 import { AppHeader } from "@/components/AppHeader";
 import { BottomNav } from "@/components/BottomNav";

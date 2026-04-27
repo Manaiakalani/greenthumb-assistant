@@ -3,7 +3,8 @@ import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
 import { useProfile } from "@/context/ProfileContext";
 import { phaseColors, phaseLabels, getTimelineForRegion } from "@/data/timeline";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import ChevronLeft from "lucide-react/dist/esm/icons/chevron-left";
+import ChevronRight from "lucide-react/dist/esm/icons/chevron-right";
 import type { GrowthPhase } from "@/types/lawn";
 
 const VISIBLE_COUNT = 5;

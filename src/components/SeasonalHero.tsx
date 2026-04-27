@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Leaf } from "lucide-react";
+import Leaf from "lucide-react/dist/esm/icons/leaf";
 import { getSeasonalBackground } from "@/data/seasonalBackgrounds";
 
 interface SeasonalHeroProps {

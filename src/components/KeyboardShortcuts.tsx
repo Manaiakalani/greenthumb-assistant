@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "motion/react";
-import { Keyboard, X } from "lucide-react";
+import Keyboard from "lucide-react/dist/esm/icons/keyboard";
+import X from "lucide-react/dist/esm/icons/x";
 import { useKeyboardShortcuts, NAV_SHORTCUTS } from "@/hooks/useKeyboardShortcuts";
 import { cn } from "@/lib/utils";
 

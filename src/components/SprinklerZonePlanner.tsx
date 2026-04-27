@@ -1,6 +1,10 @@
 import React, { useState, useMemo, useCallback } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { Droplets, Plus, Pencil, Trash2, CalendarDays } from "lucide-react";
+import Droplets from "lucide-react/dist/esm/icons/droplets";
+import Plus from "lucide-react/dist/esm/icons/plus";
+import Pencil from "lucide-react/dist/esm/icons/pencil";
+import Trash2 from "lucide-react/dist/esm/icons/trash-2";
+import CalendarDays from "lucide-react/dist/esm/icons/calendar-days";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";

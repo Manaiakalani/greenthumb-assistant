@@ -1,5 +1,6 @@
 import { motion } from "motion/react";
-import { Trophy, Images } from "lucide-react";
+import Trophy from "lucide-react/dist/esm/icons/trophy";
+import Images from "lucide-react/dist/esm/icons/images";
 import { Link } from "react-router-dom";
 import { AppHeader } from "@/components/AppHeader";
 import { BottomNav } from "@/components/BottomNav";

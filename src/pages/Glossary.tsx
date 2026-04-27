@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useRef, useState } from "react";
-import { BookOpen, Search } from "lucide-react";
+import BookOpen from "lucide-react/dist/esm/icons/book-open";
+import Search from "lucide-react/dist/esm/icons/search";
 import { AppHeader } from "@/components/AppHeader";
 import { BottomNav } from "@/components/BottomNav";
 import { PageTransition } from "@/components/PageTransition";

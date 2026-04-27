@@ -1,10 +1,22 @@
 import { useCallback, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
 import { motion } from "motion/react";
-import {
-  Activity, ArrowLeft, CalendarDays, Camera, Globe, HelpCircle, Leaf, Loader2, LocateFixed, MapPin,
-  Ruler, Sprout, Trophy, Wheat, User, Maximize,
-} from "lucide-react";
+import Activity from "lucide-react/dist/esm/icons/activity";
+import ArrowLeft from "lucide-react/dist/esm/icons/arrow-left";
+import CalendarDays from "lucide-react/dist/esm/icons/calendar-days";
+import Camera from "lucide-react/dist/esm/icons/camera";
+import Globe from "lucide-react/dist/esm/icons/globe";
+import HelpCircle from "lucide-react/dist/esm/icons/help-circle";
+import Leaf from "lucide-react/dist/esm/icons/leaf";
+import Loader2 from "lucide-react/dist/esm/icons/loader-2";
+import LocateFixed from "lucide-react/dist/esm/icons/locate-fixed";
+import MapPin from "lucide-react/dist/esm/icons/map-pin";
+import Ruler from "lucide-react/dist/esm/icons/ruler";
+import Sprout from "lucide-react/dist/esm/icons/sprout";
+import Trophy from "lucide-react/dist/esm/icons/trophy";
+import Wheat from "lucide-react/dist/esm/icons/wheat";
+import User from "lucide-react/dist/esm/icons/user";
+import Maximize from "lucide-react/dist/esm/icons/maximize";
 import { toast } from "sonner";
 import { detectLocation } from "@/lib/geolocation";
 import { useProfile } from "@/context/ProfileContext";

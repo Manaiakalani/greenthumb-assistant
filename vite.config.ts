@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import { VitePWA } from "vite-plugin-pwa";
+import { compression } from "vite-plugin-compression2";
 import path from "path";
 
 // https://vitejs.dev/config/
@@ -58,16 +59,45 @@ export default defineConfig({
         cleanupOutdatedCaches: true,
       },
     }),
+    // Pre-compress dist assets so nginx can serve via gzip_static (no per-request CPU).
+    // Brotli skipped: official nginx:alpine image lacks ngx_brotli; gzip is the safe win.
+    compression({
+      algorithm: "gzip",
+      threshold: 1024,
+      include: [/\.(js|mjs|css|html|svg|json|webmanifest|ico)$/i],
+      deleteOriginalAssets: false,
+    }),
   ],
   build: {
     rollupOptions: {
       output: {
         manualChunks(id: string) {
-          if (id.includes('node_modules/react-dom') || id.includes('node_modules/react/') || id.includes('node_modules/react-router-dom')) return 'vendor-react';
-          if (id.includes('node_modules/recharts')) return 'vendor-charts';
-          if (id.includes('node_modules/motion') || id.includes('node_modules/framer-motion')) return 'vendor-motion';
-          if (id.includes('node_modules/@tanstack/react-query')) return 'vendor-query';
-          if (id.includes('node_modules/lucide-react') || id.includes('node_modules/sonner') || id.includes('node_modules/next-themes')) return 'vendor-ui';
+          if (!id.includes("node_modules")) return;
+          // React core — listed first so its files don't accidentally land in
+          // other vendor chunks via CJS interop.
+          if (
+            id.includes("/react-dom/") ||
+            id.includes("/react/") ||
+            id.includes("/react-router/") ||
+            id.includes("/react-router-dom/") ||
+            id.includes("/react-is/") ||
+            id.includes("/scheduler/")
+          ) return "vendor-react";
+          if (id.includes("/motion/") || id.includes("/framer-motion/")) return "vendor-motion";
+          if (id.includes("/@tanstack/react-query/")) return "vendor-query";
+          if (id.includes("/i18next") || id.includes("/react-i18next/")) return "vendor-i18n";
+          if (id.includes("/@radix-ui/")) return "vendor-radix";
+          if (id.includes("/lucide-react/")) return "vendor-icons";
+          if (
+            id.includes("/clsx/") ||
+            id.includes("/tailwind-merge/") ||
+            id.includes("/class-variance-authority/") ||
+            id.includes("/sonner/") ||
+            id.includes("/next-themes/") ||
+            id.includes("/zustand/")
+          ) return "vendor-utils";
+          // recharts + d3 deliberately not chunked manually; rolldown's auto-split
+          // attaches them to lazy chart chunks so the dashboard route never loads them.
         },
       },
     },

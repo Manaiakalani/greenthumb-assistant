@@ -53,8 +53,7 @@ export function AchievementBadges() {
                 return (
                   <motion.div
                     key={achievement.id}
-                    whileHover={{ scale: 1.03 }}
-                    className={`rounded-xl border p-3 text-center transition-colors ${
+                    className={`rounded-xl border p-3 text-center transition-[transform,background-color,border-color] duration-150 ease-out [@media(hover:hover)]:hover:scale-[1.03] ${
                       earnedIds.has(achievement.id)
                         ? "border-primary/25 bg-primary/5"
                         : "border-border bg-card opacity-50"

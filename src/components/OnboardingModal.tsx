@@ -72,9 +72,9 @@ export function OnboardingModal({ onComplete, onGoToProfile }: OnboardingModalPr
           {/* Icon */}
           <motion.div
             key={`icon-${step}`}
-            initial={{ scale: 0.5, opacity: 0 }}
+            initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: 0.1 }}
+            transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
             className={`mx-auto w-14 h-14 rounded-2xl ${current.color} flex items-center justify-center mb-4`}
           >
             <Icon className="h-7 w-7 text-white" />

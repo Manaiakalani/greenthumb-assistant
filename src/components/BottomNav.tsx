@@ -23,7 +23,7 @@ export function BottomNav() {
 
   return (
     <nav aria-label={t("nav.mainNavigation")} className="fixed bottom-0 left-0 right-0 z-50 border-t border-border bg-background/90 backdrop-blur-md safe-area-bottom">
-      <div className="max-w-2xl mx-auto flex items-center justify-around px-2 py-1">
+      <div className="max-w-2xl mx-auto flex items-center justify-around px-2 py-1.5">
         {NAV_KEYS.map(({ to, icon: Icon, i18nKey }) => {
           const active = to === "/" ? pathname === "/" : pathname.startsWith(to);
           return (

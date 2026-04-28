@@ -323,10 +323,10 @@ const GrassQuiz = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="min-h-screen bg-background pb-28">
       <AppHeader />
 
-      <main id="main-content" className="max-w-2xl mx-auto px-4 pb-12">
+      <main id="main-content" className="max-w-2xl mx-auto px-5 sm:px-8 pb-12">
         {/* Back button */}
         <motion.div
           initial={{ opacity: 0, x: -8 }}

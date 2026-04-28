@@ -237,10 +237,10 @@ const SoilPlan = () => {
   );
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="min-h-screen bg-background pb-28">
       <AppHeader />
       <PageTransition>
-        <main id="main-content" className="max-w-2xl mx-auto px-4">
+        <main id="main-content" className="max-w-2xl mx-auto px-5 sm:px-8">
           {/* Back link */}
           <Link
             to="/tools"

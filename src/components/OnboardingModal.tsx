@@ -72,14 +72,14 @@ export function OnboardingModal({ onComplete, onGoToProfile }: OnboardingModalPr
           ))}
         </div>
 
-        <div className="p-6 text-center">
+        <div className="p-7 sm:p-8 text-center">
           {/* Icon */}
           <motion.div
             key={`icon-${step}`}
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.25, ease: [0.23, 1, 0.32, 1] }}
-            className={`mx-auto w-14 h-14 rounded-2xl ${current.color} flex items-center justify-center mb-4`}
+            className={`mx-auto w-14 h-14 rounded-2xl ${current.color} flex items-center justify-center mb-5`}
           >
             <Icon className="h-7 w-7 text-white" />
           </motion.div>
@@ -87,7 +87,7 @@ export function OnboardingModal({ onComplete, onGoToProfile }: OnboardingModalPr
           <h2 className="font-display text-xl font-bold text-foreground mb-2">
             {current.title}
           </h2>
-          <p className="text-sm text-muted-foreground leading-relaxed mb-6">
+          <p className="text-sm text-muted-foreground leading-relaxed mb-7">
             {current.description}
           </p>
 

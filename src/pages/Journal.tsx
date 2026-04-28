@@ -86,12 +86,12 @@ const Journal = () => {
   }, [entries]);
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="min-h-screen bg-background pb-28">
       <AppHeader />
       <PageTransition>
-        <main id="main-content" className="max-w-2xl mx-auto px-4">
+        <main id="main-content" className="max-w-2xl mx-auto px-5 sm:px-8">
           {/* Header */}
-          <div className="mt-4 mb-6 flex items-center justify-between">
+          <div className="mt-6 mb-8 flex items-center justify-between">
             <div>
               <h1 className="font-display text-2xl font-bold text-foreground flex items-center gap-2">
                 <BookOpen aria-hidden="true" className="h-6 w-6 text-primary" />
@@ -137,7 +137,7 @@ const Journal = () => {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -8 }}
-                className="mb-6 rounded-xl border border-primary/20 bg-card p-5 shadow-card space-y-4"
+                className="mb-8 rounded-xl border border-primary/20 bg-card p-6 shadow-card space-y-5"
               >
                 <div className="grid grid-cols-2 gap-3">
                   <div className="space-y-1.5">

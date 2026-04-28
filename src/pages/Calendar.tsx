@@ -135,12 +135,12 @@ const Calendar = () => {
   }, [selectedDate, eventsMap]);
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="min-h-screen bg-background pb-28">
       <AppHeader />
       <PageTransition>
-        <main id="main-content" className="max-w-2xl mx-auto px-4">
+        <main id="main-content" className="max-w-2xl mx-auto px-5 sm:px-8">
           {/* Heading */}
-          <div className="mt-4 mb-4">
+          <div className="mt-6 mb-6">
             <h1 className="font-display text-2xl font-bold text-foreground flex items-center gap-2 [text-wrap:balance]">
               <CalendarDays aria-hidden="true" className="h-6 w-6 text-primary" />
               Calendar

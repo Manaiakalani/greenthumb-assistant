@@ -93,10 +93,10 @@ const Gallery = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="min-h-screen bg-background pb-28">
       <AppHeader />
       <PageTransition>
-        <main id="main-content" className="max-w-2xl mx-auto px-4">
+        <main id="main-content" className="max-w-2xl mx-auto px-5 sm:px-8">
           {/* Header */}
           <div className="mt-4 mb-6">
             <h1 className="font-display text-2xl font-bold text-foreground flex items-center gap-2">

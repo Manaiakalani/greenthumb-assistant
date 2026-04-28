@@ -11,9 +11,9 @@ import { formatLongDate } from "@/lib/dateFormat";
 
 export default function Privacy() {
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="min-h-screen bg-background pb-28">
       <AppHeader />
-      <main id="main-content" className="max-w-2xl mx-auto px-4 pt-6">
+      <main id="main-content" className="max-w-2xl mx-auto px-5 sm:px-8 pt-6">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}

@@ -75,7 +75,7 @@ export function AppHeader() {
       animate={{ opacity: 1, y: 0 }}
       className="sticky top-0 z-50 backdrop-blur-md bg-background/80 border-b border-border"
     >
-      <div className="max-w-2xl mx-auto px-4 py-3 flex items-center justify-between">
+      <div className="max-w-2xl mx-auto px-5 sm:px-8 py-3.5 flex items-center justify-between">
         <GrasswiseLogo />
         <div className="flex items-center gap-2">
           <span className="text-xs text-muted-foreground font-medium px-2.5 py-1 rounded-full bg-primary/10 border border-primary/20 truncate max-w-[160px] hidden sm:inline-block">

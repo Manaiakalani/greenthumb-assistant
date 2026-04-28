@@ -47,7 +47,7 @@ export function HeroSection() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3, ease: [0.23, 1, 0.32, 1] }}
-      className="relative rounded-2xl overflow-hidden mt-4 mb-8"
+      className="relative rounded-2xl overflow-hidden mt-6 mb-10"
     >
       <picture>
         <source srcSet={heroLawnWebp} type="image/webp" />
@@ -63,7 +63,7 @@ export function HeroSection() {
         />
       </picture>
       <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 via-foreground/20 to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 p-5">
+      <div className="absolute bottom-0 left-0 right-0 p-6">
         <div className="flex items-center justify-between">
           <div>
             <p className="text-primary-foreground/80 text-sm font-body mb-0.5">

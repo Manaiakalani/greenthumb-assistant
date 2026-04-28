@@ -60,7 +60,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="min-h-screen bg-background pb-28">
       <AppHeader />
 
       {/* Onboarding overlay */}
@@ -73,7 +73,7 @@ const Index = () => {
         )}
       </AnimatePresence>
 
-      <main id="main-content" className="max-w-2xl mx-auto px-4">
+      <main id="main-content" className="max-w-2xl mx-auto px-5 sm:px-8">
         <HeroSection />
 
         <InstallBanner />
@@ -84,7 +84,7 @@ const Index = () => {
               <motion.div
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="mb-6 rounded-xl border border-primary/30 bg-primary/5 p-4 flex items-center gap-3"
+                className="mb-6 rounded-xl border border-primary/30 bg-primary/5 p-5 flex items-center gap-3"
               >
                 <div className="rounded-lg bg-primary/10 p-2">
                   <MapPin aria-hidden="true" className="h-5 w-5 text-primary" />
@@ -109,7 +109,7 @@ const Index = () => {
             <QuickStats />
 
             {/* — Your Progress — */}
-            <h2 className="font-display text-lg font-semibold text-foreground mt-8 mb-3 flex items-center gap-2">
+            <h2 className="font-display text-lg font-semibold text-foreground mt-10 mb-4 flex items-center gap-2">
               <TrendingUp aria-hidden="true" className="h-5 w-5 text-primary" />
               Your Progress
             </h2>
@@ -119,7 +119,7 @@ const Index = () => {
             </div>
 
             {/* — Weather & Alerts — */}
-            <h2 className="font-display text-lg font-semibold text-foreground mt-8 mb-3 flex items-center gap-2">
+            <h2 className="font-display text-lg font-semibold text-foreground mt-10 mb-4 flex items-center gap-2">
               <CloudSun aria-hidden="true" className="h-5 w-5 text-primary" />
               Weather & Alerts
             </h2>
@@ -129,7 +129,7 @@ const Index = () => {
             </div>
 
             {weather && (
-              <div className="mt-4">
+              <div className="mt-5">
                 <WeatherAlerts weather={weather} />
               </div>
             )}
@@ -139,14 +139,14 @@ const Index = () => {
             </div>
 
             {/* — Quick Actions — */}
-            <h2 className="font-display text-lg font-semibold text-foreground mt-8 mb-3 flex items-center gap-2">
+            <h2 className="font-display text-lg font-semibold text-foreground mt-10 mb-4 flex items-center gap-2">
               <Zap aria-hidden="true" className="h-5 w-5 text-primary" />
               Quick Actions
             </h2>
 
             <ActionsSection />
 
-            <div className="mt-4">
+            <div className="mt-5">
               <SeasonalTipCard />
             </div>
 
@@ -156,7 +156,7 @@ const Index = () => {
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.25 }}
-                className="mt-4 rounded-xl border border-primary/20 bg-gradient-to-r from-primary/5 via-card to-card p-4 shadow-card flex items-center gap-3 hover:border-primary/40 transition-colors group"
+                className="mt-6 rounded-xl border border-primary/20 bg-gradient-to-r from-primary/5 via-card to-card p-5 shadow-card flex items-center gap-3 hover:border-primary/40 transition-colors group"
               >
                 <div className="rounded-lg bg-primary/15 p-2.5">
                   <ClipboardList aria-hidden="true" className="h-5 w-5 text-primary" />
@@ -174,7 +174,7 @@ const Index = () => {
             </Link>
 
             {/* — Community & Timeline — */}
-            <h2 className="font-display text-lg font-semibold text-foreground mt-8 mb-3 flex items-center gap-2">
+            <h2 className="font-display text-lg font-semibold text-foreground mt-10 mb-4 flex items-center gap-2">
               <Users aria-hidden="true" className="h-5 w-5 text-primary" />
               Community & Timeline
             </h2>
@@ -188,12 +188,12 @@ const Index = () => {
             </Suspense>
 
             {/* Seasonal Timeline */}
-            <Suspense fallback={<Skeleton className="h-48 rounded-xl mt-6" />}>
+            <Suspense fallback={<Skeleton className="h-48 rounded-xl mt-8" />}>
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.5 }}
-                className="mt-6 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
+                className="mt-8 rounded-xl border border-primary/15 bg-card p-6 shadow-card"
               >
                 <SeasonalTimeline />
               </motion.div>

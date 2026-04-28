@@ -65,12 +65,12 @@ const Tools = () => {
   const { data: weather } = useWeather();
 
   return (
-    <div className="min-h-screen bg-background pb-24">
+    <div className="min-h-screen bg-background pb-28">
       <AppHeader />
       <PageTransition>
-        <main id="main-content" className="max-w-2xl mx-auto px-4">
+        <main id="main-content" className="max-w-2xl mx-auto px-5 sm:px-8">
           {/* Header */}
-          <div className="mt-4 mb-6">
+          <div className="mt-6 mb-8">
             <h1 className="font-display text-2xl font-bold text-foreground flex items-center gap-2">
               <Wrench aria-hidden="true" className="h-6 w-6 text-primary" />
               Lawn Tools
@@ -85,7 +85,7 @@ const Tools = () => {
             <motion.div
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mb-6 rounded-xl border border-primary/20 bg-gradient-to-r from-primary/5 via-card to-card p-4 shadow-card flex items-center gap-3 hover:border-primary/40 transition-colors group"
+              className="mb-8 rounded-xl border border-primary/20 bg-gradient-to-r from-primary/5 via-card to-card p-5 shadow-card flex items-center gap-3 hover:border-primary/40 transition-colors group"
             >
               <div className="rounded-lg bg-primary/15 p-2.5">
                 <ClipboardList aria-hidden="true" className="h-5 w-5 text-primary" />
@@ -103,38 +103,38 @@ const Tools = () => {
           </Link>
 
           {/* Quick Links to Feature Pages */}
-          <div className="grid grid-cols-2 gap-3 mb-6">
+          <div className="grid grid-cols-2 gap-4 mb-8">
             <Link to="/pest-identifier" className="focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none rounded-xl">
               <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-                className="rounded-xl border border-primary/15 bg-card p-4 shadow-card hover:border-primary/40 transition-colors flex items-center gap-3">
+                className="rounded-xl border border-primary/15 bg-card p-5 shadow-card hover:border-primary/40 transition-colors flex items-center gap-3">
                 <div className="rounded-lg bg-red-500/15 p-2"><Bug aria-hidden="true" className="h-5 w-5 text-red-500" /></div>
                 <div><h3 className="text-sm font-display font-semibold text-foreground">Pest ID</h3><p className="text-xs text-muted-foreground">Identify issues</p></div>
               </motion.div>
             </Link>
             <Link to="/tutorials" className="focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none rounded-xl">
               <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-                className="rounded-xl border border-primary/15 bg-card p-4 shadow-card hover:border-primary/40 transition-colors flex items-center gap-3">
+                className="rounded-xl border border-primary/15 bg-card p-5 shadow-card hover:border-primary/40 transition-colors flex items-center gap-3">
                 <div className="rounded-lg bg-purple-500/15 p-2"><BookOpen aria-hidden="true" className="h-5 w-5 text-purple-500" /></div>
                 <div><h3 className="text-sm font-display font-semibold text-foreground">Tutorials</h3><p className="text-xs text-muted-foreground">Learn techniques</p></div>
               </motion.div>
             </Link>
             <Link to="/grass-quiz" className="focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none rounded-xl">
               <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-                className="rounded-xl border border-primary/15 bg-card p-4 shadow-card hover:border-primary/40 transition-colors flex items-center gap-3">
+                className="rounded-xl border border-primary/15 bg-card p-5 shadow-card hover:border-primary/40 transition-colors flex items-center gap-3">
                 <div className="rounded-lg bg-green-500/15 p-2"><Scissors aria-hidden="true" className="h-5 w-5 text-green-500" /></div>
                 <div><h3 className="text-sm font-display font-semibold text-foreground">Grass Quiz</h3><p className="text-xs text-muted-foreground">ID your grass</p></div>
               </motion.div>
             </Link>
             <Link to="/calendar" className="focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none rounded-xl">
               <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-                className="rounded-xl border border-primary/15 bg-card p-4 shadow-card hover:border-primary/40 transition-colors flex items-center gap-3">
+                className="rounded-xl border border-primary/15 bg-card p-5 shadow-card hover:border-primary/40 transition-colors flex items-center gap-3">
                 <div className="rounded-lg bg-blue-500/15 p-2"><CalendarDays aria-hidden="true" className="h-5 w-5 text-blue-500" /></div>
                 <div><h3 className="text-sm font-display font-semibold text-foreground">Calendar</h3><p className="text-xs text-muted-foreground">Monthly view</p></div>
               </motion.div>
             </Link>
             <Link to="/glossary" className="focus-visible:ring-2 focus-visible:ring-primary focus-visible:outline-none rounded-xl">
               <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
-                className="rounded-xl border border-primary/15 bg-card p-4 shadow-card hover:border-primary/40 transition-colors flex items-center gap-3">
+                className="rounded-xl border border-primary/15 bg-card p-5 shadow-card hover:border-primary/40 transition-colors flex items-center gap-3">
                 <div className="rounded-lg bg-teal-500/15 p-2"><BookA aria-hidden="true" className="h-5 w-5 text-teal-500" /></div>
                 <div><h3 className="text-sm font-display font-semibold text-foreground">Glossary</h3><p className="text-xs text-muted-foreground">80+ terms</p></div>
               </motion.div>

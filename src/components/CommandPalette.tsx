@@ -108,7 +108,9 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
   // Reset state when opening
   useEffect(() => {
     if (open) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional reset on open
       setQuery("");
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- intentional reset on open
       setActiveIndex(0);
       requestAnimationFrame(() => inputRef.current?.focus());
     }
@@ -116,6 +118,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
 
   // Keep activeIndex in bounds
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- reset selection when query changes
     setActiveIndex(0);
   }, [query]);
 
@@ -217,6 +220,7 @@ export function CommandPalette({ open, onOpenChange }: CommandPaletteProps) {
   // Map flat results index to grouped display
   let flatIdx = 0;
   const renderGrouped = () => {
+    // eslint-disable-next-line react-hooks/immutability -- counter scoped to this render-time helper, intentional
     flatIdx = 0;
     const sections: React.ReactNode[] = [];
     for (const [type, items] of groups) {
